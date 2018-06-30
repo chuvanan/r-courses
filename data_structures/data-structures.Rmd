@@ -1,0 +1,961 @@
+---
+title: ".giant[Data structures]"
+subtitle: ".giant[in R]"
+author: ".superhuge[An Chu]"
+date: ".superhuge[12/2017]"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my_theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
+```
+
+# Recall
+
+- .huge[Values are stored by *assigning* them a name]
+
+<br>
+
+- .huge[The resulting name-value pair is called *variable* (or *object*)]
+
+<br>
+
+- .huge[Everything that happens is a *function* call]
+
+---
+background-image: url(lego.jpeg)
+background-size: contain
+class: center, top
+
+# Data structures
+
+
+---
+
+# Data seen by
+
+--
+
+- .large[Humans:]
+
+```r
+Numeric values: 1, 2, 3, 4, ...
+    
+Texts: "Good", "Bad", "Ugly", ...
+    
+Tabular data: excel tables, ...
+```
+
+--
+
+- .large[Computers:]
+
+```r
+# bits:
+0101010101001
+```
+
+---
+
+# A broad definition
+
+.large[Data structure is a particular way of *organising* and *storing* data that
+is readable by humans and interpretable by computers]
+
+
+![](data_comp.png)
+
+
+
+---
+
+# ...
+
+.huge[R’s data structures can be organised by:]
+
+<br>
+
+- .huge[their dimensionality]
+
+<br>
+
+- .huge[and whether their contents of the same data type or of different types]
+
+---
+background-image: url(demo.png)
+background-size: contain
+
+
+---
+
+# Your turn
+
+.huge[With your neighbour, try and recall a list of statistical data types]
+
+.huge[You have one minute starting now.]
+
+---
+name: stat-data-types
+
+# Statistical data types
+
+--
+
+- .large[Binary (yes/no)]
+
+--
+
+<br>
+- .large[Categorical (blood types: A, B, O, AB)]
+
+--
+
+<br>
+- .large[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)]
+
+--
+
+<br>
+- .large[Count (housing census, number of click, views, likes)]
+
+--
+
+<br>
+- .large[Real-valued (temperature, height)]
+
+
+---
+
+# Data types in R
+
+--
+.pull-left[
+- .large[Logical]
+
+<br>
+
+- .large[Integer]
+
+<br>
+
+- .large[Double]
+
+<br>
+
+- .large[Character]
+]
+
+
+--
+
+.pull-right[
+- .large[Complex]
+
+<br>
+
+- .large[Raw]
+]
+
+---
+
+# `str()`
+
+- .huge[`str()` (**str**ucture) is the go-to way to inspect data structure of
+your variables]
+
+- .huge[`help("str")`]
+
+---
+class: inverse, center, middle
+
+.h0[Atomic vectors]
+
+
+---
+
+# Atomic vectors
+
+```{r, eval=FALSE}
+x <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y <- c(1L, 2L, 5L, 4L, 3L)
+z <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w <- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+![](atomic_vec.png)
+
+
+---
+
+# Properties
+
+--
+
+- .huge[`typeof()`: what it is]
+
+--
+
+<br>
+- .huge[`length()`: how many elements it stores]
+
+--
+
+<br>
+- .huge[`names()`: tell names (if any) of each elements ]
+
+
+---
+
+```{r}
+x <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+{{typeof(x)}}
+
+```
+
+```{r}
+z <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+names(z) <- c("a", "b", "c", "d", "e", "f")
+z
+
+{{length(z)}}
+
+{{names(z)}}
+```
+
+
+---
+
+# Checking:
+
+```{r}
+x <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y <- c(1L, 2L, 5L, 4L, 3L)
+z <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w <- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+
+- .large[character]
+
+```{r}
+{{is.character(w)}}
+```
+
+- .large[double]
+
+```{r}
+{{is.double(z)}}
+```
+]
+
+.pull-right[
+- .large[integer]
+
+```{r}
+{{is.integer(y)}}
+```
+
+- .large[logical]
+
+```{r}
+{{is.logical(x)}}
+```
+]
+
+---
+
+# Coercion:
+
+```{r}
+x <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y <- c(1L, 2L, 5L, 4L, 3L)
+z <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w <- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+
+- .large[logical]
+
+```{r}
+{{as.logical(y)}}
+```
+
+- .large[double]
+
+```{r}
+{{as.double(x)}}
+```
+]
+
+.pull-right[
+
+- .large[integer]
+
+```{r}
+{{as.integer(z)}}
+```
+
+- .large[character]
+
+```{r}
+{{as.character(x)}}
+```
+]
+
+---
+
+# Your turn
+
+.large[Experiment with automatic coercion.]
+
+.large[What is happening in the following cases?]
+
+```r
+sum(c(TRUE, FALSE, TRUE))
+c(TRUE, FALSE, TRUE, TRUE, "FALSE")
+c(1, 2, 3, 4, FALSE)
+c(10L, 11L, 12)
+```
+
+---
+
+# Rules
+
+--
+
+- .huge[All elements of an atomic vector must be the same type]
+
+--
+
+- .huge[Coercion often happens automatically, from least to most flexible types:
+logical < integer < double < character]
+
+--
+
+- .huge[When in doubt, do coercion explicitly]
+
+
+---
+class: inverse, center, middle
+
+.h0[Matrices & arrays]
+
+---
+
+# Matrix
+
+```{r, eval=FALSE}
+mat <- cbind(c(1L, 2L, 3L, 4L, 5L),
+             c(6L, 7L, 8L, 9L, 10L),
+             c(11L, 12L, 13L, 14L, 15L))
+```
+
+![](matrix.png)
+
+---
+
+# Matrix
+
+```{r, eval=FALSE}
+mat <- rbind(c(1L, 6L, 11L),
+             c(2L, 7L, 12L),
+             c(3L, 8L, 13L),
+             c(4L, 9L, 14L),
+             c(5L, 10L, 15L))
+```
+
+![](matrix.png)
+
+---
+
+# Matrix
+
+```{r, eval=FALSE}
+mat <- matrix(1L:15L, ncol = 3)
+```
+
+![](matrix.png)
+
+---
+
+# Properties
+
+- .huge[typeof(), class()]
+
+<br>
+
+- .huge[colnames(), rownames()]
+
+<br>
+
+- .huge[nrow(), ncol()]
+
+---
+
+
+```{r}
+mat <- matrix(1L:15L, ncol = 3, 
+              dimnames = list(c("R1", "R2", "R3", "R4", "R5"),
+                              c("A", "B", "C")))
+```
+
+.pull-left[
+```{r}
+mat
+{{typeof(mat)}}
+{{class(mat)}}
+```
+]
+
+.pull-right[
+```{r}
+{{nrow(mat)}}
+
+{{ncol(mat)}}
+
+{{colnames(mat)}}
+
+{{rownames(mat)}}
+```
+]
+
+---
+
+# Array
+
+```{r, eval=FALSE}
+arr <- array(1L:45L, dim = c(5, 3, 3))
+```
+
+![](array.png)
+
+
+---
+class: inverse, center, middle
+
+.h0[Lists]
+
+---
+
+# List
+
+```{r, eval=FALSE}
+lt <- list(c("a", "b", "c", "d", "e", "f", "g", "h"),
+           c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56),
+           c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE))
+```
+
+![](list.png)
+
+---
+
+# Properties
+
+--
+
+- .huge[List has the same properties as atomic vectors (`typeof()`, `length()`, `names()`)]
+
+<br>
+
+--
+
+- .huge[New property: each element of a list can be of different types (even another list)]
+
+---
+
+# Creation: `list()`
+
+```{r}
+my_list <- list(c(1L, 2L, 3L), 
+                text = c("a", "b"), 
+                boolean = c(TRUE, FALSE, FALSE, TRUE))
+str(my_list)
+```
+
+---
+
+# Combination: `c()`
+
+```{r}
+your_list <- list(num = c(12.34, 34.45, 45.56))
+new_list <- c(my_list, your_list)
+str(new_list)
+```
+
+---
+
+# Conversion & checking:
+
+.large[`as.list()` & `unlist()` & `is.list()`]
+
+.pull-left[
+```{r}
+strings <- c("a", "b", "c", "e")
+{{strings_list <- as.list(strings)}}; 
+print(strings_list)
+```
+]
+
+.pull-right[
+```{r}
+{{unlist(strings_list)}}
+```
+
+```{r}
+{{is.list(strings_list)}}
+```
+]
+
+
+---
+
+# Why lists
+
+.large[Lists are used to build up many of the more complicated data structures 
+in R (e.g. linear models)]
+
+```{r}
+reg_lm <- lm(dist ~ speed, data = cars)
+is.list(reg_lm)
+str(reg_lm)
+```
+
+---
+class: inverse, center, middle
+
+.h0[Data frames]
+
+---
+
+# Data frame
+
+```{r}
+dtf <- data.frame(x = c("a", "b", "c", "d", "e", "f", "g", "h"),
+                  z = c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56, 2.13, 4.56),
+                  w = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+                  y = c(1L, 2L, 5L, 4L, 3L, 4L, 3L, 4L),
+                  stringsAsFactors = FALSE)
+```
+
+![](dataframe.png)
+
+
+---
+
+# Properties
+
+--
+
+- .huge[A cross between matrix and list: 2-dimensional structure + 
+Each column can have a different type]
+
+--
+
+<br>
+- .huge[names() ~ colnames(), and rownames()]
+
+--
+
+<br>
+- .huge[length() ~ ncol(), nrow()]
+
+---
+
+```{r}
+dtf <- data.frame(x = c("a", "b", "c", "d", "e", "f", "g", "h"),
+                  z = c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56, 2.13, 4.56),
+                  w = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+                  y = c(1L, 2L, 5L, 4L, 3L, 4L, 3L, 4L),
+                  stringsAsFactors = FALSE)
+{{str(dtf)}}
+```
+
+---
+
+```{r}
+{{summary(dtf)}}
+```
+
+.pull-left[
+```{r}
+{{head(dtf)}}
+```
+]
+
+.pull-right[
+```{r}
+{{tail(dtf)}}
+```
+]
+
+---
+class: inverse, center, middle
+
+.h0[Factors]
+
+---
+
+# Your turn
+
+.large[Run the following codes, try to figure out the behavior of
+the following vectors:]
+
+
+```{r, eval=FALSE}
+month_chr <- c("Jan", "Dec", "Apr", "November", "May")
+month_fac <- factor(month_chr,
+                    levels = c("Jan", "Feb", "Mar", "Apr", "May",
+                               "Jun", "Jul","Aug", "Sep", "Oct",
+                               "Nov", "Dec"))
+
+typeof(month_chr)
+typeof(month_fac)
+class(month_fac)
+levels(month_fac)
+unclass(month_fac)
+sum(month_fac)
+sort(month_chr)
+sort(month_fac)
+```
+
+---
+
+# Factors
+
+- .large[A factor is a vector that can contain only predefined values, and is used to store categorical data]
+
+<br>
+
+- .large[Factors are built on top of integer vectors]
+
+<br>
+
+- .large[Factors look like strings, but behave differently]
+
+
+---
+
+# Factors
+
+- .large[Count observations]
+
+```{r, echo=FALSE}
+month_chr <- c("Jan", "Dec", "Apr", "November", "May")
+
+month_fac <- factor(month_chr,
+                    levels = c("Jan", "Feb", "Mar", "Apr", "May",
+                               "Jun", "Jul","Aug", "Sep", "Oct",
+                               "Nov", "Dec"))
+```
+
+
+```{r}
+table(month_chr)
+
+# count elements of each group even has no observations
+table(month_fac) 
+```
+
+---
+
+# Factors
+
+- .large[Create groups from continuous variables]
+
+```{r}
+cont_var <- rnorm(100)
+cont_grp <- cut(cont_var, breaks = 8)
+table(cont_grp)
+```
+
+---
+class: inverse, center, middle
+
+.h0[Dates & Times]
+
+---
+class: center, middle
+
+.giant[What is time?]
+
+
+---
+
+# ...
+
+- .huge[Time is a measurement system]
+
+<br>
+
+- .huge[Time can be arranged on a time line]
+
+![](timeline.png)
+
+---
+
+# ...
+
+- .huge[A date-time is a specific instant of time, a point in time line]
+
+<br>
+
+- .huge[For example: 27/12/2017 21:32:00]
+
+![](instants.png)
+
+
+---
+
+# Identifying instants
+
+
+.huge[1 - By reference: as the number of seconds since a reference time]
+
+<br>
+
+.huge[2 - By description: a unique combination of year, month, day, hour, minute, second, and time zones]
+
+
+![](instants_identifying.png)
+
+---
+
+# 'Date-time' objects
+
+
+.large[date-times are stored as either POSIXct or POSIXlt objects]
+
+--
+
+<br>
+
+- .large[POSIXct objects are stored as the number of seconds since a reference time
+(default: 1970-01-01 00:00:00)]
+
+--
+
+<br>
+
+- .large[POSIXct objects are stored as a unique combination of year, month, day, hour,
+minute, second, and time zone values]
+
+
+---
+
+.pull-left[
+```{r}
+now <- Sys.time()
+class(now)
+typeof(now)
+unclass(now)
+```
+]
+
+.pull-right[
+```{r}
+now_lt <- as.POSIXlt(now)
+typeof(now_lt)
+unclass(now_lt)
+```
+]
+
+
+---
+
+# 'Date' objects
+
+.large[R uses 'Date' object to store instants that have only dates, but no times]
+
+.large[Dates are stored internally as the number of days from a reference date
+(default: 1970-01-01)]
+
+```{r}
+today <- Sys.Date()
+class(today)
+typeof(today)
+unclass(today)
+```
+
+
+
+---
+
+# Parsing dates
+
+- .large[standard format: yyyy-mm-dd]
+
+```{r}
+
+dt1 <- as.Date("2012-07-22")
+dt1
+```
+
+- .large[non-standard format]
+
+```{r}
+
+dt2 <- as.Date("03/20/2012", format = "%m/%d/%Y")
+dt2
+
+dt3 <- as.Date("November 6, 2011", format = "%B %d, %Y")
+dt3
+```
+
+
+???
+
+Sources:
+
+http://www.thertrader.com/2014/04/18/date-formating-in-r/
+http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
+
+
+---
+
+# Your turn
+
+.large[Consult `?strptime` and parse the following vectors to 'Date' objects]
+
+```{r}
+date1 <- "6aug2005"
+
+date2 <- "aug061999"
+
+date3 <- "12-05-2001"
+
+date4 <- "May 27 1984"
+
+date5 <- "1998-22-07"
+
+date6 <- "20041024"
+
+date7 <- "22.10.2004"
+```
+
+---
+background-image: url(wakeup.gif)
+background-size: contain
+class: inverse, center, middle
+
+# Are you still awake?
+
+---
+background-image: url(https://media.giphy.com/media/h4Z6RfuQycdiM/giphy.gif)
+background-size: cover
+class: inverse, middle, center
+
+# How is this useful?
+
+---
+
+# Return to statistical data types
+
+- .large[Binary (yes/no)]
+
+<br>
+
+- .large[Categorical (blood types: A, B, O, AB)]
+
+<br>
+
+- .large[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)]
+
+<br>
+
+- .large[Count (housing census, number of click, views, likes)]
+
+<br>
+
+- .large[Real-valued (temperature, height)]
+
+---
+
+# Represented in R
+
+--
+
+.pull-left[
+- .large[Binary]
+
+<br>
+
+- .large[Categorical]
+
+<br>
+
+- .large[Ordinal]
+
+<br>
+
+- .large[Count]
+
+<br>
+
+- .large[Real-valued]
+]
+
+--
+
+.pull-right[
+- .large[Logical]
+
+<br>
+
+- .large[Factor]
+
+<br>
+
+- .large[Ordered factor]
+
+<br>
+
+- .large[Integer]
+
+<br>
+
+- .large[Double]
+]
+
+---
+
+# Functions behave differently depending on the data structure of the input
+
+```{r}
+num_vect <- c(1, 2, 3, 4, 5)
+lgl_vect <- c(TRUE, FALSE, TRUE, FALSE)
+chr_vect <- c("a", "b", "c", "d", "e")
+dat_vect <- as.Date(c("2017-12-02", "2017-12-16", "2017-12-28"))
+```
+
+.pull-left[
+```{r}
+{{mean(num_vect)}}
+{{mean(lgl_vect)}}
+```
+]
+
+.pull-right[
+```{r}
+{{mean(chr_vect)}}
+{{mean(dat_vect)}}
+```
+]
+
+---
+class: inverse, center, middle
+
+.h0[Wrap-up]
+
+---
+background-image: url(simple_view_object.png)
+background-size: contain

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>.giant[Data visualisation]</title>
+    <meta charset="utf-8">
+    <meta name="author" content=".superhuge[An Chu]" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# .giant[Data visualisation]
+## .giant[with ggplot2]
+### .superhuge[An Chu]
+### .superhuge[12/2017]
+
+---
+
+
+
+
+background-image: url(hex-ggplot2.png)
+background-size: contain
+
+---
+background-image: url(facebook.jpg)
+background-size: contain
+
+???
+
+https://www.facebook.com/notes/facebook-engineering/visualizing-friendships/469716398919
+
+---
+background-image: url(ggplot2_thematicmap.png)
+background-size: contain
+
+???
+
+https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/
+
+
+---
+background-image: url(population_lines_sml.jpg)
+background-size: contain
+
+???
+
+http://spatial.ly/2014/08/population-lines/
+http://spatial.ly/2017/04/population-lines-how-and-why-i-created-it/
+
+---
+background-image: url(ggplot2_qz.png)
+background-size: contain
+
+???
+
+https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/
+
+---
+background-image: url(ggplot2_FT.png)
+background-size: contain
+
+???
+
+http://johnburnmurdoch.github.io/slides/r-ggplot/#/
+
+
+---
+class: center, middle
+
+&lt;iframe src="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/FiveThirtyEights-data-journalism-workflow-with-R/player" width="960" height="540" allowFullScreen frameBorder="0"&gt;&lt;/iframe&gt;
+
+---
+
+# Your turn
+
+.large[Discuss with your colleagues:]
+
+.large[What's your current/favorite tool of data visualisation?]
+
+
+---
+class: inverse, center, middle
+
+.h0[ggplot2 background]
+
+---
+
+# Grammar of graphics
+
+.pull-left[
+
+- .large[Leland Wilkinson, 1999]
+
+- .large[Plotting framework]
+
+- .large[Statistical graphics are composed of different grammatical layers]
+]
+
+.pull-right[
+![](grammar_graphics.jpeg)
+]
+
+---
+
+# ggplot2
+
+.pull-left[
+
+- .large[Hadley Wickham, 2007]
+
+- .large[Implementation of grammar of graphics in R]
+
+- .large[A mini-language specifically tailored for producing graphics]
+
+]
+
+.pull-right[
+
+![](ggplot2.jpg)
+
+]
+
+---
+background-image: url(ggplot2_layers.jpg)
+background-size: 60%
+
+# Grammartical elements
+
+
+---
+class: inverse, center, middle
+
+.h0[Demo]
+
+---
+class: center, middle
+
+.h9[Data sets]
+
+.h9[http://bit.ly/2lqjv5r]
+
+---
+
+# Hanoi Air Quality Data
+
+
+```r
+air_quality &lt;- read_csv("air-quality.csv")
+weather &lt;- read_csv("hanoi_weather_history.csv")
+
+air_quality &lt;- air_quality %&gt;%
+    group_by(date, year, month, day) %&gt;%
+    summarise(avg_aqi = mean(aqi, na.rm = TRUE)) %&gt;%
+    ungroup() %&gt;%
+    left_join(
+        select(weather, date, min_temp, max_temp, 
+               max_steady_wind, description)
+        )
+
+air_quality &lt;- air_quality %&gt;%
+    mutate(month = factor(month),
+           year = factor(year),
+           day = factor(day))
+```
+
+---
+
+
+```r
+air_quality
+```
+
+```
+# A tibble: 744 x 9
+   date       year  month day   avg_aqi min_temp max_temp max_steady_wind
+   &lt;date&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;           &lt;int&gt;
+ 1 2015-12-09 2015  12    9        89.1       16       22              11
+ 2 2015-12-10 2015  12    10       52.6       17       21              16
+ 3 2015-12-11 2015  12    11       63.0       17       21              15
+ 4 2015-12-12 2015  12    12      116         18       23              11
+ 5 2015-12-13 2015  12    13       86.9       20       28              22
+ 6 2015-12-14 2015  12    14       43.1       17       22              22
+ 7 2015-12-15 2015  12    15       42.0       16       18              24
+ 8 2015-12-16 2015  12    16       32.9       13       16              24
+ 9 2015-12-17 2015  12    17       37.7       14       17              21
+10 2015-12-18 2015  12    18       74.6       14       16              15
+# ... with 734 more rows, and 1 more variable: description &lt;chr&gt;
+```
+
+
+---
+
+# Your turn
+
+.large[Discuss with your colleagues:]
+
+.large[What questions do you want to answer from this data set?]
+
+.large[Open `ggplot2_vis.R`]
+
+
+---
+
+# ggplot2 layers - Data
+
+.large[The **data** being plotted.]
+
+.large[ggplot2 loves tidy data.]
+
+![](ggplot2_layers_data.bmp)
+
+---
+
+
+```r
+ggplot(data = air_quality)
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-4-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ggplot2 layers - Aesthetics
+
+.large[A mapping that describes how variables in the data are linked to 
+**aes**thetic attributes, such as position, color, size, shape, ...]
+
+![](ggplot2_layers_aes.png)
+
+---
+
+
+```r
+ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi))
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-6-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+```r
+p1 &lt;- ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi))
+p1
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-8-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ggplot2 layers - Geometries
+
+.large[Geometric shapes, **geom** for short, represent what you actually see on
+the plot: points, lines, polygons, ...]
+
+![](ggplot2_layers_geom.png)
+
+---
+
+
+```r
+p2 &lt;- p1 + geom_point(alpha = 0.6)
+p2
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-10-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ggplot2 layers - Facets
+
+.large[A **face**ting specification describes how to visualise the data into subsets.]
+
+![](ggplot2_layers_facet.png)
+
+---
+
+
+```r
+p3 &lt;- p2 + facet_wrap(~ month)
+p3
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-12-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url(https://media1.tenor.com/images/e51d16dd6ad5a5762631a3dddff7c6e9/tenor.gif?itemid=7561108)
+background-size: contain
+class: inverse, center, top
+
+
+# How about that?
+
+---
+
+# ggplot2 layers - Statistics
+
+.large[Statistical transformations, **stat** for short, of the data that can
+be plotted such as quantiles, fitted curves,...]
+
+![](ggplot2_layers_stats.png)
+
+---
+
+
+```r
+p4 &lt;- p3 + geom_smooth(method = "lm", se = FALSE, color = "red")
+p4
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-14-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url(https://media1.tenor.com/images/9b2e7fd615836d4d684f46957b2ff7ac/tenor.gif?itemid=9085691)
+background-size: contain
+class: inverse, center, top
+
+# Awesome?
+
+---
+
+# ggplot2 layers - Coordinates
+
+.large[A coordinate system, **coord** for short, describes how data coordinates are
+mapped to the plane of the graphic.]
+
+![](ggplot2_layers_coord.png)
+
+---
+
+
+```r
+p5 &lt;- p4 + coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200))
+p5
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-16-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# ggplot2 layers - Themes
+
+.large[A **theme** which controls the finer points of display, like the font size and
+background colour, ...]
+
+![](ggplot2_layers_theme.png)
+
+---
+
+
+```r
+p6 &lt;- p5 + theme_minimal() + labs(x = "Min temp (C)", y = "AQI") +
+    theme(strip.text = element_text(face = "bold"))
+p6
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-18-1.svg" width="67%" height="67%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Wrap-up
+
+
+```r
+ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(alpha = 0.6) +
+    facet_wrap(~ month) +
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200)) +
+    theme_minimal() + 
+    labs(x = "Min temp (C)", y = "AQI") +
+    theme(strip.text = element_text(face = "bold"))
+```
+
+---
+background-image: url(roeder-wine-5.png)
+background-size: contain
+
+???
+
+https://fivethirtyeight.com/features/the-weird-world-of-expensive-wine/
+
+
+---
+class: inverse, center, middle
+
+.h0[Mappings]
+
+
+---
+
+# Recall
+
+
+```r
+# position mapping
+ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-21-1.svg" width="55%" height="55%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Typical aesthetics
+
+- .large[**color**: color of dots, outlines of other shapes]
+
+- .large[**size**: diameter of points, thickness of lines]
+
+- .large[**shape**: shape]
+
+- .large[**alpha**: transparency]
+
+- .large[**fill**: fill color]
+
+- .large[**linetype**: line dash pattern]
+
+
+---
+background-image: url(common-aesthetics.png)
+background-size: contain
+class: center, middle
+
+---
+
+# Color/Fill
+
+
+```r
+head(colors(), 30) # print out the first 30 colors
+```
+
+```
+ [1] "white"          "aliceblue"      "antiquewhite"   "antiquewhite1" 
+ [5] "antiquewhite2"  "antiquewhite3"  "antiquewhite4"  "aquamarine"    
+ [9] "aquamarine1"    "aquamarine2"    "aquamarine3"    "aquamarine4"   
+[13] "azure"          "azure1"         "azure2"         "azure3"        
+[17] "azure4"         "beige"          "bisque"         "bisque1"       
+[21] "bisque2"        "bisque3"        "bisque4"        "black"         
+[25] "blanchedalmond" "blue"           "blue1"          "blue2"         
+[29] "blue3"          "blue4"         
+```
+
+.large[Google "colors in R"]
+
+---
+
+# Shape
+
+![](pch.png)
+
+---
+
+# Linetype
+
+![](linetype.png)
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(color = "#CC3300")
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-24-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(size = 3, alpha = 0.6, color = "#003366", shape = 19)
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-26-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Your turn
+
+.large[Add color, size, alpha, and shape aesthetics to the following code chunk:]
+
+&lt;br&gt;
+
+
+```r
+ggplot(air_quality, aes(max_steady, avg_aqi)) +
+    geom_point(
+        # your code goes here
+        ......
+        )
+```
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point(alpha = 0.5, size = 4, shape = 21,
+               color = "white", fill = "#993399")
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-29-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+.h9[Set vs. Map]
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(color = "#001A57")
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-31-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+    geom_point()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-33-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Set vs. Map
+
+- .large[**outside of aes()**: sets an aesthetic to a value]
+
+
+```r
+ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(color = "#001A57")
+```
+
+- .large[**inside of aes()**: maps an aesthetic to a variable]
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+    geom_point()
+```
+
+---
+
+# Set
+
+![](aes_set.png)
+
+---
+
+# Map
+
+![](aes_map.png)
+
+---
+
+# Common mistake
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi, color = "#001A57")) + 
+    geom_point()
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-37-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Your turn
+
+.large[Add color, size, alpha, and shape aesthetics to the following code chunk. 
+For this time, try to map visual aesthetics to discrete and/or continuous variables.]
+
+.large[What happens?]
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi, 
+                        # your code goes here
+                        .........
+                        )) +
+    geom_point()
+```
+
+---
+
+# Mappings - categorical variables
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+    geom_point()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-40-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Mappings - continuous variables
+
+
+```r
+air_quality %&gt;% mutate(year = as.numeric(as.character(year))) %&gt;% 
+    ggplot(aes(min_temp, avg_aqi, color = year) + geom_point()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-42-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center, middle
+
+.h0[Geoms]
+
+
+---
+background-image: url(cheasheet.png)
+background-size: contain
+
+# ggplot2 cheatsheet
+
+---
+
+# Your turn
+
+.large[With your colleagues, discuss how to draw the scatterplot and boxplot of
+two variables `month` and `avg_aqi`?]
+
+.large[You can use the cheatsheet.]
+
+---
+
+
+```r
+ggplot(air_quality, aes(month, avg_aqi)) +
+    geom_point()
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-44-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(month, avg_aqi)) +
+    geom_boxplot()
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-46-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+exclude: TRUE
+
+
+
+```r
+ggplot(air_quality, aes(month, avg_aqi)) +
+    geom_violin()
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-48-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Your turn
+
+.large[With your colleague, make the histogram of `avg_aqi`?]
+
+.large[You can use the cheatsheet.]
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi)) +
+    geom_histogram(color = "white")
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-50-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi)) +
+    geom_histogram(color = "white", bins = 50) # default  =30
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-52-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi)) +
+    geom_histogram(color = "white", binwidth = 3)
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-54-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Your turn
+
+.large[Make the density plot of `avg_aqi` colored by `month`.]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-55-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi)) +
+    geom_density()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-57-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi, color = month)) +
+    geom_density()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-59-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+exclude: true
+
+
+```r
+ggplot(air_quality, aes(x = avg_aqi, group = month)) +
+    geom_density()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-61-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: center, middle
+
+.h9[global vs. local]
+
+
+---
+
+# Your turn
+
+.large[Predict what this code will do]
+
+.large[Then run it]
+
+
+```r
+ggplot(air_quality) +
+    geom_point(aes(min_temp, avg_aqi)) +
+    geom_line(aes(min_temp, avg_aqi))
+```
+
+---
+
+
+```r
+ggplot(air_quality) +
+    geom_point(aes(min_temp, avg_aqi)) +
+    geom_line(aes(min_temp, avg_aqi))
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-64-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point() +
+    geom_line()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-66-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point(aes(color = month)) +
+    geom_line()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-68-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point(aes(color = month)) +
+    geom_line(data = filter(air_quality, min_temp &lt; 20))
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-70-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Your turn
+
+.large[Draw two time series plots of the following variables:]
+
+.large[From air quality data]
+
+- .large[aqi]
+
+.large[From weather history data]
+
+- .large[min_temp]
+
+---
+
+
+```r
+ggplot(air_quality, aes(date, avg_aqi)) +
+    geom_line()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-72-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(weather, aes(date, min_temp)) +
+    geom_line()
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-74-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+exclude: true
+
+# Heatmap
+
+
+```r
+ggplot(air_quality, aes(day, month, fill = avg_aqi)) +
+    geom_tile()
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-76-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# A graph template
+
+&lt;hr&gt;
+.huge[.scp[ ggplot(data = .greenfont[{DATA}]) + ]]
+&lt;br&gt;
+.huge[.scp[ .greenfont[{GEOM_FUNCTION}](aes(.greenfont[{MAPPINGS}])) ]]
+&lt;hr&gt;
+
+--
+
+.huge[1 - Pick a .bold[.greenfont[data]] set]
+
+--
+
+.huge[2 - Choose a .bold[.greenfont[geom]] to display cases]
+
+--
+
+.huge[3 - .bold[.greenfont[Map]] aesthetic properties to variables]
+
+
+---
+class: inverse, center, middle
+
+.h0[Facets]
+
+
+---
+
+# Facetting
+
+--
+
+- .large[Another way of visualising **multi-dimensional** data set]
+
+--
+
+&lt;br&gt;
+
+- .large[By generating **small multiples** showing different subset of the data]
+
+
+--
+
+&lt;br&gt;
+
+- .large[*Visualization of Quantitative Information, Edward Tufte, 1983*]
+
+
+---
+
+# Facets
+
+![](facets.png)
+
+---
+
+
+```r
+# facet_wrap(~ categ_variable) - 1d 
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point() + facet_wrap(~ description)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-78-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+
+```r
+# facet_wrap(~ categ_variable) - 1d 
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point() + facet_wrap(~ description, nrow = 3)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-80-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+
+```r
+# facet_wrap(row ~ col) - 2d 
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point() + facet_grid(year ~ month)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-82-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Your turn
+
+.large[With your colleague,]
+
+.large[Explore the relationship of `aqi` and `max_steady_wind`:]
+
+- .large[across `month` (hint: facet_wrap())] 
+
+- .large[across `year` and `month` (hint: facet_grid())]
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point() + facet_wrap(~ month)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-84-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point() + facet_grid(year ~ month)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-86-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Your turn
+
+.large[With your colleague,]
+
+.large[Explore the relationship of `aqi` and `max_steady_wind`:]
+
+- .large[across `month` (this time, use **facet_grid()**)] 
+
+- .large[across `year` and `month` (this time, use **facet_wrap()**)]
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point() + facet_grid(. ~ month)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-88-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+```
+List of 1
+ $ text:List of 11
+  ..$ family       : NULL
+  ..$ face         : NULL
+  ..$ colour       : NULL
+  ..$ size         : num 16
+  ..$ hjust        : NULL
+  ..$ vjust        : NULL
+  ..$ angle        : NULL
+  ..$ lineheight   : NULL
+  ..$ margin       : NULL
+  ..$ debug        : NULL
+  ..$ inherit.blank: logi FALSE
+  ..- attr(*, "class")= chr [1:2] "element_text" "element"
+ - attr(*, "class")= chr [1:2] "theme" "gg"
+ - attr(*, "complete")= logi FALSE
+ - attr(*, "validate")= logi TRUE
+```
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point() + facet_grid(month ~ .)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-90-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+```r
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point() + facet_wrap(year ~ month)
+```
+
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-92-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+class: inverse, center, middle
+
+.h0[Annotation]
+
+---
+
+# Annotation
+
+- .large[Title]
+
+- .large[Subtitle]
+
+- .large[Axis labels]
+
+- .large[Source]
+
+- .large[Caption]
+
+- .large[User guide]
+
+
+---
+background-image: url(share-world-population-in-extreme-poverty-absolute.png)
+background-size: contain
+
+---
+
+
+```r
+p + labs(title = "Scatter plot of AQI and Temperature in Hanoi",
+         subtitle = "Daily measurement from 2015 to 2017",
+         x = "Min Temperature (Ceilcus)",
+         y = "Air Quality Index")
+```
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-94-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: inverse, center, middle
+
+.h0[Saving graphs]
+
+
+---
+
+# Manually saving plots
+
+![](save_plot.png)
+
+
+---
+
+# Saving plots
+
+- .large[`ggsave()` saves the last plot.]
+
+- .large[if the plot is on your screen]
+
+
+```r
+ggsave(filename = "~/path/to/figures/plot.pdf")
+```
+
+- .large[If your plot is assigned to an object (e.g. my_plot)]
+
+
+```r
+ggsave(my_plot, filename = "~/path/to/figures/plot.pdf")
+```
+
+---
+
+# Saving plots
+
+- .large[Specify a size:]
+
+
+```r
+ggsave("~/path/to/figures/plot.pdf",
+       width = 6, height = 6, units = "in") # others: cm, mm
+```
+
+- .large[Pick any format for your plot:]
+
+
+```r
+ggsave(filename = "~/path/to/figures/plot.png")
+ggsave(filename = "~/path/to/figures/plot.jpg")
+ggsave(filename = "~/path/to/figures/plot.eps")
+```
+
+
+---
+
+# Your turn
+
+&lt;br&gt;
+
+.large[Save your last plot and then open it from your `Files` pane]
+
+
+---
+
+# [aqivn.org](http://www.aqivn.org/vi/)
+
+![](aqivn-org.png)
+
+
+---
+
+# Your turn
+
+.large[Replicate the following graph:]
+
+![](alltime.png)
+
+---
+class: inverse, center, middle
+
+
+.h0[What else?]
+
+
+---
+exclude: TRUE
+
+
+```r
+categorise_aqi &lt;- function(x, impute) {
+    x[is.na(x)] &lt;- impute
+    x &lt;- ceiling(x)
+    if (x &lt;= 50) return("Good")
+    if (x &gt;= 51 &amp; x &lt;= 100) return("Moderate")
+    if (x &gt;= 101 &amp; x &lt;= 150) return("Unhealthy for sensitive groups")
+    if (x &gt;= 151 &amp; x &lt;= 200) return("Unhealthy")
+    if (x &gt;= 201 &amp; x &lt;= 300) return("Very unhealthy")
+    if (x &gt; 300) return("Hazardous")
+}
+air_quality &lt;- air_quality %&gt;%
+    mutate(aqi_categ = sapply(avg_aqi, categorise_aqi, median(air_quality$avg_aqi, na.rm = TRUE)))
+
+air_quality &lt;- air_quality %&gt;%
+    mutate(aqi_categ = factor(aqi_categ))
+```
+
+
+---
+
+# Position adjustments
+
+.large[How overlapping objects are arranged]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-100-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Position adjustments
+
+.large[How overlapping objects are arranged]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-101-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Themes
+
+.large[Visual appearance of non-data elements]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-102-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Scales
+
+.large[Customise color scales and other mappings]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-103-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Coordinate systems
+
+.large[Control the space of data points]
+
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-104-1.svg" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
+
+![](ggplot2_website.png)
+
+
+---
+background-image: url(ggplot2.jpg)
+background-size: contain
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

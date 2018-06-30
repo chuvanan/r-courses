@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Installation guide for R and RStudio</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R Workshop 01/2018</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="install_guide.html">Install R/RStudio</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Curriculum
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="./foundations/foundations.html">Foundations</a>
+    </li>
+    <li>
+      <a href="./data_import/data_import.html">Data Import</a>
+    </li>
+    <li>
+      <a href="./data_manipulation/data_manipulation.html">Data Manipulation with dplyr</a>
+    </li>
+    <li>
+      <a href="./data_tidying/data_tidying.html">Data Tidying with tidyr</a>
+    </li>
+    <li>
+      <a href="./data_visualisation/data_visualisation.html">Data Visualisation with ggplot2</a>
+    </li>
+    <li>
+      <a href="./data_structures/data-structures.html">Data Structures</a>
+    </li>
+    <li>
+      <a href="./data_modelling/data_modelling.html">Data Modelling</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Installation guide for R and RStudio</h1>
+
+</div>
+
+
+<hr />
+<div id="step-1-install-r" class="section level3">
+<h3>Step 1: Install R</h3>
+<ul>
+<li><p>Download the R installer from: <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>. The latest version of R is 3.4.3</p></li>
+<li><p>I recommend you install a precompiled binary distribution for your operating system.</p></li>
+</ul>
+<p><br></p>
+<div class="figure">
+<img src="r_installer.png" />
+
+</div>
+<p><br></p>
+<ul>
+<li><p>For Mac and Windows users, just run the installer: <code>R-3.4.3.pkg</code> and <code>R-3.4.3-win.exe</code>. Default settings are fine.</p></li>
+<li><p>For Linux users, you might want to consult this tutorial (<a href="https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2" class="uri">https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2</a>). In case you are using other Linux distros, there’s official installation guide on the R Project website.</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="step-2-install-rstudio" class="section level3">
+<h3>Step 2: Install RStudio</h3>
+<ul>
+<li><p>RStudio is a powerful IDE (stands for <em>integrated development environment</em>) for R. Just like Microsoft Word that helps you write and format texts, RStudio makes it much easier to write and run R codes.</p></li>
+<li><p>I recommend you install the Preview version of RStudio which can be downloaded from: <a href="https://www.rstudio.com/products/rstudio/download/preview/" class="uri">https://www.rstudio.com/products/rstudio/download/preview/</a></p></li>
+</ul>
+<p><br></p>
+<div class="figure">
+<img src="rstudio_installer.png" />
+
+</div>
+<p><br></p>
+<ul>
+<li>If you already installed R and/or RStudio, I highly recommend that you reinstall both and get as current as possible.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="step-3-check-that-r-and-rstudio-are-working" class="section level3">
+<h3>Step 3: Check that R and RStudio are working</h3>
+<ul>
+<li><p>Open RStudio. It should open a window that looks similar to image below. (I am using a Linux machine)</p></li>
+<li><p>If this is not successful, contact us for further support.</p></li>
+</ul>
+<p><br></p>
+<div class="figure">
+<img src="studio_screen.png" />
+
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+---
+title: "Statistical Analysis with R"
+output: html_document
+---
+
+--------------------------------------------------------------------------------
+
+### Course materials
+
+R codes for Biostatistics ([part 1](http://rpubs.com/chidungkt/343295))
+
+R codes for Biostatistics ([part 2](http://rpubs.com/chidungkt/352233))
+
+R codes for Biostatistics ([part 3](http://rpubs.com/chidungkt/352267))
+
+Books and data ([mediafire](http://www.mediafire.com/file/acnfklrr99u15up/Book_Data.rar))
+

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>.giant[Data import in R]</title>
+    <meta charset="utf-8">
+    <meta name="author" content=".superhuge[An Chu]" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# .giant[Data import in R]
+### .superhuge[An Chu]
+### .superhuge[12/2017]
+
+---
+
+
+
+
+
+# Overview
+
+&lt;br&gt;
+
+- .huge[Data formats]
+
+&lt;br&gt;
+
+- .huge[`readr` and its friends]
+
+---
+
+# Common data formats
+
+--
+
+## Rectangualar data
+
+
+- .large[CSV and friends]
+
+
+- .large[Excel (xls, xlsx)]
+
+
+- .large[Proprietary softwares (SPSS, Stata, SAS)]
+
+
+- .large[Databases]
+
+--
+
+## Hierarchical data
+
+
+- .large[JSON, XML]
+
+
+---
+
+# Common data formats
+
+## Rectangualar data
+
+
+- .large[.greenfont[.bold[CSV and friends]]]
+
+
+- .large[.greenfont[.bold[Excel (xls, xlsx)]]]
+
+
+- .large[Proprietary softwares (SPSS, Stata, SAS)]
+
+
+- .large[Databases]
+
+## Hierarchical data
+
+
+- .large[JSON, XML]
+
+
+---
+
+# CSV and friends
+
+
+```r
+# install.pacakges("readr")
+library(readr)
+```
+
+.center[![](readr_logo.png)]
+
+---
+
+# comma-separated files (`,`)
+
+```r
+"mpg","cyl","disp","hp","drat","wt","qsec","vs","am","gear","carb"
+21,6,160,110,3.9,2.62,16.46,0,1,4,4
+21,6,160,110,3.9,2.875,17.02,0,1,4,4
+22.8,4,108,93,3.85,2.32,18.61,1,1,4,1
+21.4,6,258,110,3.08,3.215,19.44,1,0,3,1
+18.7,8,360,175,3.15,3.44,17.02,0,0,3,2
+18.1,6,225,105,2.76,3.46,20.22,1,0,3,1
+14.3,8,360,245,3.21,3.57,15.84,0,0,3,4
+24.4,4,146.7,62,3.69,3.19,20,1,0,4,2
+22.8,4,140.8,95,3.92,3.15,22.9,1,0,4,2
+```
+
+
+---
+
+# semicolon-separated files (`;`)
+
+```r
+"mpg";"cyl";"disp";"hp";"drat";"wt";"qsec";"vs";"am";"gear";"carb"
+21;6;160;110;3.9;2.62;16.46;0;1;4;4
+21;6;160;110;3.9;2.875;17.02;0;1;4;4
+22.8;4;108;93;3.85;2.32;18.61;1;1;4;1
+21.4;6;258;110;3.08;3.215;19.44;1;0;3;1
+18.7;8;360;175;3.15;3.44;17.02;0;0;3;2
+18.1;6;225;105;2.76;3.46;20.22;1;0;3;1
+14.3;8;360;245;3.21;3.57;15.84;0;0;3;4
+24.4;4;146.7;62;3.69;3.19;20;1;0;4;2
+22.8;4;140.8;95;3.92;3.15;22.9;1;0;4;2
+```
+
+---
+
+# tab-separated files (`\t`)
+
+```r
+"mpg"	"cyl"	"disp"	"hp"	"drat"	"wt"	"qsec"	"vs"	"am"	"gear"	"carb"
+21	6	160	110	3.9	2.62	16.46	0	1	4	4
+21	6	160	110	3.9	2.875	17.02	0	1	4	4
+22.8	4	108	93	3.85	2.32	18.61	1	1	4	1
+21.4	6	258	110	3.08	3.215	19.44	1	0	3	1
+18.7	8	360	175	3.15	3.44	17.02	0	0	3	2
+18.1	6	225	105	2.76	3.46	20.22	1	0	3	1
+14.3	8	360	245	3.21	3.57	15.84	0	0	3	4
+24.4	4	146.7	62	3.69	3.19	20	1	0	4	2
+22.8	4	140.8	95	3.92	3.15	22.9	1	0	4	2
+```
+---
+
+# Syntax
+
+
+| Files                     | Special cases        | General solution                  |
+|---------------------------|----------------------|-----------------------------------|
+| comma-separated     | read_csv(file, ...)  | read_delim(file, sep = ",", ...)  |
+| semicolon-separated | read_csv2(file, ...) | read_delim(file, sep = ";", ...)  |
+| tab-separated       | read_tsv(file, ...)  | read_delim(file, sep = "\t", ...) |
+
+### Linux/Mac
+
+.large[`file = "/path/to/your/file.csv"`]
+
+### Windows
+
+.large[`file = "\\\\path\\\\to\\\\your\\\\file.csv"`]
+
+
+---
+class: center, middle
+
+.h9[Data sets]
+
+.h9[http://bit.ly/2lqjv5r]
+
+---
+
+# Working directories
+
+.large[Common new user mistakes:]
+
+
+
+.large[trying to read files that R “can’t find”]
+
+
+---
+
+# Working directories
+
+.large[R “looks” for files on your computer relative to the “working” directory]
+
+----------
+
+
+```r
+getwd() # get working directory
+```
+
+```
+R&gt; [1] "/home/anchu/Dropbox/R-workshop/slides/data_import"
+```
+
+```r
+dir()  # show directory contents
+```
+
+```
+R&gt;  [1] "airline-safety.csv"              "data_import.html"               
+R&gt;  [3] "data_import.Rmd"                 "libs"                           
+R&gt;  [5] "mtcars1.csv"                     "mtcars2.csv"                    
+R&gt;  [7] "mtcars3.csv"                     "my_theme.css"                   
+R&gt;  [9] "no_headings.csv"                 "readr_logo.png"                 
+R&gt; [11] "readxl_logo.png"                 "Rotten_Tomatoes_100_Movies.xlsx"
+R&gt; [13] "View.png"
+```
+
+
+---
+
+
+```r
+# relative path
+airline_safety &lt;- read_csv("airline-safety.csv") 
+```
+
+```
+R&gt; Parsed with column specification:
+R&gt; cols(
+R&gt;   airline = col_character(),
+R&gt;   avail_seat_km_per_week = col_double(),
+R&gt;   incidents_85_99 = col_integer(),
+R&gt;   fatal_accidents_85_99 = col_integer(),
+R&gt;   fatalities_85_99 = col_integer(),
+R&gt;   incidents_00_14 = col_integer(),
+R&gt;   fatal_accidents_00_14 = col_integer(),
+R&gt;   fatalities_00_14 = col_integer()
+R&gt; )
+```
+
+
+```r
+# absolute path
+airline_safety &lt;- read_csv("/home/anchu/Dropbox/R-workshop/slides/data_import/airline-safety.csv")
+```
+
+```
+R&gt; Parsed with column specification:
+R&gt; cols(
+R&gt;   airline = col_character(),
+R&gt;   avail_seat_km_per_week = col_double(),
+R&gt;   incidents_85_99 = col_integer(),
+R&gt;   fatal_accidents_85_99 = col_integer(),
+R&gt;   fatalities_85_99 = col_integer(),
+R&gt;   incidents_00_14 = col_integer(),
+R&gt;   fatal_accidents_00_14 = col_integer(),
+R&gt;   fatalities_00_14 = col_integer()
+R&gt; )
+```
+
+
+---
+
+# Your turn
+
+.large[Try to read the following files:]
+
+
+- .large[`mtcars1.csv`]
+
+- .large[`mtcars2.csv`]
+
+- .large[`mtcars3.csv`]
+
+
+---
+
+# Parsing
+
+.large[`readr` automatically guesses the type of each column]
+
+- .large[col_integer(): natural numbers (1, 2, 3, 4, 5)]
+
+
+- .large[col_double(): real numbers (3.14)]
+
+
+- .large[col_character(): strings ("male", "female")]
+
+
+- .large[col_date(): date formats ('2017-12-31')]
+
+
+- .large[col_datetime(): date-time formats ('2017-12-31 12:15:00')]
+
+
+---
+
+# Column names
+
+
+- .large[By default, `readr` uses the first row as column names]
+
+---
+
+# Column names
+
+- .large[Use `col_names = FALSE` when the data does not have column names]
+
+```r
+### no_headings.csv
+21,6,160,110
+21,6,160,110
+22.8,4,108,93
+21.4,6,258,110
+```
+
+
+```r
+read_csv("no_headings.csv", col_names = FALSE)
+```
+
+```
+R&gt; # A tibble: 4 x 4
+R&gt;      X1    X2    X3    X4
+R&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+R&gt; 1  21.0     6   160   110
+R&gt; 2  21.0     6   160   110
+R&gt; 3  22.8     4   108    93
+R&gt; 4  21.4     6   258   110
+```
+
+---
+
+# Column names
+
+- .large[Pass `col_names` a vector of strings to override the default]
+
+```r
+### no_headings.csv
+21,6,160,110
+21,6,160,110
+22.8,4,108,93
+21.4,6,258,110
+```
+
+
+```r
+read_csv("no_headings.csv", 
+         col_names = c("col1", "col2", "col3", "col4"))
+```
+
+```
+R&gt; # A tibble: 4 x 4
+R&gt;    col1  col2  col3  col4
+R&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+R&gt; 1  21.0     6   160   110
+R&gt; 2  21.0     6   160   110
+R&gt; 3  22.8     4   108    93
+R&gt; 4  21.4     6   258   110
+```
+
+---
+
+# Equivalent to base R
+
+
+
+.pull-left[
+
+### base R
+
+- .large[`read.csv()`]
+
+
+- .large[`read.csv2()`]
+
+
+- .large[`read.table()`]
+
+]
+
+.pull-right[
+
+### readr
+
+- .large[`read_csv()`]
+
+- .large[`read_csv2()`]
+
+- .large[`read_delim()`]
+
+]
+
+---
+
+# Compared to base R
+
+
+## readr:
+
+- .large[faster (~10x)]
+
+- .large[better default (don't convert character to factors, use row names, or change column names)]
+
+---
+
+# Quick data exploration
+
+
+```r
+*str(airline_safety)
+```
+
+```r
+R&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    56 obs. of  8 variables:
+R&gt;  $ airline               : chr  "Aer Lingus" "Aeroflot*" "Aerolineas Argentinas" "Aeromexico*" ...
+R&gt;  $ avail_seat_km_per_week: num  3.21e+08 1.20e+09 3.86e+08 5.97e+08 1.87e+09 ...
+R&gt;  $ incidents_85_99       : int  2 76 6 3 2 14 2 3 5 7 ...
+R&gt;  $ fatal_accidents_85_99 : int  0 14 0 1 0 4 1 0 0 2 ...
+R&gt;  $ fatalities_85_99      : int  0 128 0 64 0 79 329 0 0 50 ...
+R&gt;  $ incidents_00_14       : int  0 6 1 5 2 6 4 5 5 4 ...
+R&gt;  $ fatal_accidents_00_14 : int  0 1 0 0 0 2 1 1 1 0 ...
+R&gt;  $ fatalities_00_14      : int  0 88 0 0 0 337 158 7 88 0 ...
+[truncated]
+```
+
+---
+
+
+```r
+*head(airline_safety)
+```
+
+```
+R&gt; # A tibble: 6 x 8
+R&gt;   airline          avail_seat_km_per_… incidents_85_99 fatal_accidents_85…
+R&gt;   &lt;chr&gt;                          &lt;dbl&gt;           &lt;int&gt;               &lt;int&gt;
+R&gt; 1 Aer Lingus                 320906734               2                   0
+R&gt; 2 Aeroflot*                 1197672318              76                  14
+R&gt; 3 Aerolineas Arge…           385803648               6                   0
+R&gt; 4 Aeromexico*                596871813               3                   1
+R&gt; 5 Air Canada                1865253802               2                   0
+R&gt; 6 Air France                3004002661              14                   4
+R&gt; # ... with 4 more variables: fatalities_85_99 &lt;int&gt;,
+R&gt; #   incidents_00_14 &lt;int&gt;, fatal_accidents_00_14 &lt;int&gt;,
+R&gt; #   fatalities_00_14 &lt;int&gt;
+```
+
+```r
+*tail(airline_safety)
+```
+
+```
+R&gt; # A tibble: 6 x 8
+R&gt;   airline           avail_seat_km_per_… incidents_85_99 fatal_accidents_8…
+R&gt;   &lt;chr&gt;                           &lt;dbl&gt;           &lt;int&gt;              &lt;int&gt;
+R&gt; 1 Turkish Airlines           1946098294               8                  3
+R&gt; 2 United / Contine…          7139291291              19                  8
+R&gt; 3 US Airways / Ame…          2455687887              16                  7
+R&gt; 4 Vietnam Airlines            625084918               7                  3
+R&gt; 5 Virgin Atlantic            1005248585               1                  0
+R&gt; 6 Xiamen Airlines             430462962               9                  1
+R&gt; # ... with 4 more variables: fatalities_85_99 &lt;int&gt;,
+R&gt; #   incidents_00_14 &lt;int&gt;, fatal_accidents_00_14 &lt;int&gt;,
+R&gt; #   fatalities_00_14 &lt;int&gt;
+```
+
+---
+
+
+```r
+*summary(airline_safety)
+```
+
+```
+R&gt;    airline          avail_seat_km_per_week incidents_85_99 
+R&gt;  Length:56          Min.   :2.594e+08      Min.   : 0.000  
+R&gt;  Class :character   1st Qu.:4.740e+08      1st Qu.: 2.000  
+R&gt;  Mode  :character   Median :8.029e+08      Median : 4.000  
+R&gt;                     Mean   :1.385e+09      Mean   : 7.179  
+R&gt;                     3rd Qu.:1.847e+09      3rd Qu.: 8.000  
+R&gt;                     Max.   :7.139e+09      Max.   :76.000  
+R&gt;  fatal_accidents_85_99 fatalities_85_99 incidents_00_14 
+R&gt;  Min.   : 0.000        Min.   :  0.0    Min.   : 0.000  
+R&gt;  1st Qu.: 0.000        1st Qu.:  0.0    1st Qu.: 1.000  
+R&gt;  Median : 1.000        Median : 48.5    Median : 3.000  
+R&gt;  Mean   : 2.179        Mean   :112.4    Mean   : 4.125  
+R&gt;  3rd Qu.: 3.000        3rd Qu.:184.2    3rd Qu.: 5.250  
+R&gt;  Max.   :14.000        Max.   :535.0    Max.   :24.000  
+R&gt;  fatal_accidents_00_14 fatalities_00_14
+R&gt;  Min.   :0.0000        Min.   :  0.00  
+R&gt;  1st Qu.:0.0000        1st Qu.:  0.00  
+R&gt;  Median :0.0000        Median :  0.00  
+R&gt;  Mean   :0.6607        Mean   : 55.52  
+R&gt;  3rd Qu.:1.0000        3rd Qu.: 83.25  
+R&gt;  Max.   :3.0000        Max.   :537.00
+```
+
+---
+
+
+```r
+*View(airline_safety)
+```
+
+![](View.png)
+
+
+---
+
+# Excel 
+
+
+```r
+# install.packages("readxl")
+library(readxl)
+```
+
+.center[![](readxl_logo.png)]
+
+---
+
+# Syntax
+
+.large[`read_xls(file, ...)`]
+
+&lt;br&gt;
+
+.large[`read_xlsx(file, ...)`]
+
+
+---
+
+
+```r
+tomato100 &lt;- read_xlsx("Rotten_Tomatoes_100_Movies.xlsx")
+tomato100
+```
+
+```
+R&gt; # A tibble: 100 x 4
+R&gt;     Rank Rating Title                                `No. of Reviews`
+R&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;                                           &lt;dbl&gt;
+R&gt;  1  1.00 �99%   The Wizard of Oz (1939)                         109  
+R&gt;  2  2.00 �100%  The Third Man (1949)                             76.0
+R&gt;  3  3.00 �100%  Citizen Kane (1941)                              73.0
+R&gt;  4  4.00 �97%   Mad Max: Fury Road (2015)                       357  
+R&gt;  5  5.00 �100%  (The Cabinet of Dr. Caligari) (1920)             48.0
+R&gt;  6  6.00 �100%  All About Eve (1950)                             64.0
+R&gt;  7  7.00 �99%   The Godfather (1972)                             84.0
+R&gt;  8  8.00 �98%   Inside Out (2015)                               318  
+R&gt;  9  9.00 �100%  Modern Times (1936)                              53.0
+R&gt; 10 10.0  �99%   Metropolis (1927)                               115  
+R&gt; # ... with 90 more rows
+```
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

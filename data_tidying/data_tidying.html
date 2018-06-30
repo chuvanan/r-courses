@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>.giant[Data tidying with tidyr]</title>
+    <meta charset="utf-8">
+    <meta name="author" content=".superhuge[An Chu]" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# .giant[Data tidying with tidyr]
+### .superhuge[An Chu]
+### .superhuge[12/2017]
+
+---
+
+
+
+
+
+background-image: url(hex-tidyr.png)
+background-size: contain
+
+---
+
+# What you wish data looked like
+
+![](good_data.png)
+
+---
+
+# What it actually looks like
+
+![](bad_data1.png)
+
+---
+
+# What it actually looks like
+
+![](bad_data2.png)
+
+---
+
+# What it actually looks like
+
+![](bad_data3.png)
+
+---
+
+# What it actually looks like
+
+![](bad_data4.png)
+
+---
+background-image: url(disappointed.gif)
+background-size: 100% 80%
+class: inverse, center, middle
+
+---
+class: left, middle
+
+.h9[Happy families are all alike; every unhappy family is unhappy in its own way]
+
+&gt; .h9[.grayfont[Leo Tolstoy]]
+
+
+---
+class: left, middle
+
+.h9[.greenfont[Tidy] datasets are all alike; every .greenfont[messy] dataset is .greenfont[messy] in its own way]
+
+&gt; .h9[.grayfont[Hadley Wickham]]
+
+---
+background-image: url(tidy_data_paper.png)
+background-size: contain
+
+---
+
+# Tidy data principles
+
+.huge[1 - Each variable forms a column]
+
+&lt;br&gt;
+
+.huge[2 - Each observation forms a row]
+
+&lt;br&gt;
+
+.huge[3 - Each type of observational unit forms a table]
+
+--
+
+.huge[==&gt; A standardized way to link the structure of a dataset (its physical layout)
+with its semantics (its meaning)]
+
+
+---
+class: center, middle
+
+.h9[Data semantics]
+
+---
+background-image: url(data_semantics1.png)
+background-size: contain
+
+
+---
+background-image: url(data_semantics2.png)
+background-size: contain
+
+---
+background-image: url(data_semantics3.png)
+background-size: contain
+
+---
+background-image: url(data_semantics4.png)
+background-size: contain
+
+---
+background-image: url(data_semantics5.png)
+background-size: contain
+
+---
+background-image: url(data_semantics6.png)
+background-size: contain
+
+---
+background-image: url(data_semantics7.png)
+background-size: contain
+
+---
+background-image: url(data_semantics8.png)
+background-size: contain
+
+---
+
+# Data semantics
+
+--
+
+.large[A dataset is a collection of .grayfont[.bold[values]] (numbers or strings)]
+
+--
+
+&lt;br&gt;
+
+.large[Every value belongs to a .grayfont[.bold[variable]] and an .grayfont[.bold[observation]]]
+
+--
+
+&lt;br&gt;
+
+.large[A .grayfont[.bold[variable]] contains all values that measure the same underlying
+attribute across observations]
+
+--
+
+&lt;br&gt;
+
+.large[An .grayfont[.bold[observation]] contains all values measured on the same 
+unit across variables]
+
+---
+class: center, middle
+
+.h9[Data sets]
+
+.h9[http://bit.ly/2lqjv5r]
+
+
+---
+
+# Your turn
+
+.large[Open `data_tidying.R`]
+
+---
+
+# Common problems
+
+
+- .large[Column headers are values, not variable names]
+
+&lt;br&gt;
+
+- .large[Multiple variables are stored in one column]
+
+&lt;br&gt;
+
+- .large[Variables are stored in both rows and columns]
+
+
+???
+
+- Most people aren’t familiar with the principles of tidy data, and it’s hard to
+derive them yourself unless you spend a lot of time working with data.
+
+- Data is often organised to facilitate some use other than analysis. For example,
+data is often organised to make entry as easy as possible.
+
+---
+
+# Solutions
+
+- .huge[`gather()`]
+
+&lt;br&gt;
+
+- .huge[`spread()`]
+
+&lt;br&gt;
+
+- .huge[`separate()`]
+
+&lt;br&gt;
+
+- .huge[`unite()`]
+
+
+---
+
+# Common problems
+
+
+- .large[.greenfont[.bold[Column headers are values, not variable names]]]
+
+&lt;br&gt;
+
+- .large[Multiple variables are stored in one column]
+
+&lt;br&gt;
+
+- .large[Variables are stored in both rows and columns]
+
+&lt;br&gt;
+
+
+---
+
+
+```r
+diemthi &lt;- read_csv("diemthi_tslop10.csv")
+diemthi
+```
+
+```
+R&gt; # A tibble: 5 x 4
+R&gt;     sbd   van ngoaingu  toan
+R&gt;   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+R&gt; 1     1  6.00     5.00 0.500
+R&gt; 2     2  7.25     6.50 4.25 
+R&gt; 3     3  6.00     8.50 4.00 
+R&gt; 4     4  8.00     8.50 3.50 
+R&gt; 5     5  7.75     7.75 7.25
+```
+
+
+---
+background-image: url(gather.png)
+background-size: 75%
+class: center
+
+# gather(data, key, value, ...)
+
+
+---
+
+
+```r
+diemthi &lt;- read_csv("diemthi_tslop10.csv")
+diemthi_tidy &lt;- gather(diemthi, key = "mon", value = "diem",
+                       van, ngoaingu, toan)
+```
+
+.pull-left[
+
+```r
+diemthi
+```
+
+```
+R&gt; # A tibble: 5 x 4
+R&gt;     sbd   van ngoaingu  toan
+R&gt;   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+R&gt; 1     1  6.00     5.00 0.500
+R&gt; 2     2  7.25     6.50 4.25 
+R&gt; 3     3  6.00     8.50 4.00 
+R&gt; 4     4  8.00     8.50 3.50 
+R&gt; 5     5  7.75     7.75 7.25
+```
+]
+
+.pull-right[
+
+```r
+diemthi_tidy
+```
+
+```
+R&gt; # A tibble: 15 x 3
+R&gt;      sbd mon       diem
+R&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
+R&gt;  1     1 van      6.00 
+R&gt;  2     2 van      7.25 
+R&gt;  3     3 van      6.00 
+R&gt;  4     4 van      8.00 
+R&gt;  5     5 van      7.75 
+R&gt;  6     1 ngoaingu 5.00 
+R&gt;  7     2 ngoaingu 6.50 
+R&gt;  8     3 ngoaingu 8.50 
+R&gt;  9     4 ngoaingu 8.50 
+R&gt; 10     5 ngoaingu 7.75 
+R&gt; 11     1 toan     0.500
+R&gt; 12     2 toan     4.25 
+R&gt; 13     3 toan     4.00 
+R&gt; 14     4 toan     3.50 
+R&gt; 15     5 toan     7.25
+```
+]
+
+---
+
+# Your turn
+
+&lt;br&gt;
+
+.huge[Inspect the `forest fire` data (`forest_fires.csv`) and turn it into
+a tidy dataset]
+
+.huge[Hint: read_csv(..., skip = ...)]
+
+---
+
+# Solution
+
+
+```r
+forest_fire &lt;- read_csv("forest_fires.csv", skip = 2)
+
+forest_fire &lt;- gather(forest_fire, key = "year", value = "area", 
+                      Y1995:Y2016)
+
+# clean `year` and `area`
+forest_fire &lt;- mutate(forest_fire, year = gsub("Y", "", year))
+forest_fire &lt;- mutate(forest_fire, 
+                      area = ifelse(area == "..", NA, area))
+
+head(forest_fire)
+```
+
+```
+R&gt; # A tibble: 6 x 3
+R&gt;   X1                  year  area 
+R&gt;   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;
+R&gt; 1 CẢ NƯỚC             1995  7457 
+R&gt; 2 Đồng bằng sông Hồng 1995  0    
+R&gt; 3 Hà Nội              1995  &lt;NA&gt; 
+R&gt; 4 Hà Tây              1995  &lt;NA&gt; 
+R&gt; 5 Vĩnh Phúc           1995  &lt;NA&gt; 
+R&gt; 6 Bắc Ninh            1995  &lt;NA&gt;
+```
+
+---
+
+# Common problems
+
+
+- .large[Column headers are values, not variable names]
+
+&lt;br&gt;
+
+- .large[.greenfont[.bold[Multiple variables are stored in one column]]]
+
+&lt;br&gt;
+
+- .large[Variables are stored in both rows and columns]
+
+
+---
+background-image: url(separate.png)
+background-size: contain
+class: center
+
+# separate(data, col, into, sep, ...)
+
+---
+
+
+```r
+airport_gps &lt;- read_csv("airports_gps.csv")
+head(select(airport_gps, icao, gps, name))
+```
+
+```
+R&gt; # A tibble: 6 x 3
+R&gt;   icao  gps                  name                 
+R&gt;   &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;                
+R&gt; 1 VVBM  108.120272/12.668311 Buon Ma Thuot Airport
+R&gt; 2 VVCI  106.724989/20.819386 Cat Bi Airport       
+R&gt; 3 VVCR  109.219372/11.998153 Cam Ranh Airport     
+R&gt; 4 VVCS  106.632589/8.731831  Co Ong Airport       
+R&gt; 5 VVCT  105.711922/10.085119 Tra Noc Airport      
+R&gt; 6 VVDB  103.007831/21.397481 Dien Bien Phu Airport
+```
+
+```r
+airport_gps_tidy &lt;- separate(airport_gps, 
+                             col = "gps", into = c("lon", "lat"),
+                             sep = "/")
+head(select(airport_gps_tidy, icao, lon, lat, name))
+```
+
+```
+R&gt; # A tibble: 6 x 4
+R&gt;   icao  lon        lat       name                 
+R&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                
+R&gt; 1 VVBM  108.120272 12.668311 Buon Ma Thuot Airport
+R&gt; 2 VVCI  106.724989 20.819386 Cat Bi Airport       
+R&gt; 3 VVCR  109.219372 11.998153 Cam Ranh Airport     
+R&gt; 4 VVCS  106.632589 8.731831  Co Ong Airport       
+R&gt; 5 VVCT  105.711922 10.085119 Tra Noc Airport      
+R&gt; 6 VVDB  103.007831 21.397481 Dien Bien Phu Airport
+```
+
+
+---
+
+
+```r
+airport_gps_tidy$lon &lt;- as.double(airport_gps_tidy$lon)
+airport_gps_tidy$lat &lt;- as.double(airport_gps_tidy$lat)
+
+vnm &lt;- get_map("vietnam", zoom = 5)
+
+ggmap(vnm) +
+    geom_point(data = airport_gps_tidy,
+               aes(lon, lat),
+               color = "brown", size = 3)
+```
+
+---
+background-image: url(airport_map.svg)
+background-size: cover
+class: center, middle
+
+---
+
+# Your turn
+
+.large[Tidy up the OECD Teacher Salary data (`oecd_teacher_salary.csv`)]
+
+---
+
+# Solutioin
+
+
+```r
+salary &lt;- read_csv("oecd_teacher_salary.csv")
+
+salary &lt;- separate(salary, 
+                   col = "subject", 
+                   into = c("school_level", "year_exp"), 
+                   sep = "_")
+
+head(salary)
+```
+
+```
+R&gt; # A tibble: 6 x 8
+R&gt;   location indicator   school_level year_exp measure frequency  time value
+R&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;int&gt;
+R&gt; 1 AUS      TEACHERSAL… PRY          10YREXP  USD     A          2012 51504
+R&gt; 2 AUS      TEACHERSAL… PRY          15YREXP  USD     A          2012 51289
+R&gt; 3 AUS      TEACHERSAL… PRY          START    USD     A          2012 37221
+R&gt; 4 AUS      TEACHERSAL… PRY          TOP      USD     A          2012 51662
+R&gt; 5 AUT      TEACHERSAL… PRY          10YREXP  USD     A          2012 38353
+R&gt; 6 AUT      TEACHERSAL… PRY          15YREXP  USD     A          2012 42994
+```
+
+---
+
+# Common problems
+
+- .large[Column headers are values, not variable names]
+
+&lt;br&gt;
+
+- .large[Multiple variables are stored in one column]
+
+&lt;br&gt;
+
+- .large[.greenfont[.bold[Variables are stored in both rows and columns]]]
+
+
+---
+background-image: url(spread.png)
+background-size: 80%
+class: center
+
+# spread(data, key, value)
+
+---
+background-image: url(unite.png)
+background-size: contain
+class: center
+
+# unite(data, col, ..., sep)
+
+---
+
+
+```r
+sales_kpi &lt;- read_csv("sales_kpi.csv")
+
+sales_kpi
+```
+
+```
+R&gt; # A tibble: 8 x 7
+R&gt;    year month kpi        q1    q2    q3    q4
+R&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+R&gt; 1  2017    12 revenue   125   127   100    98
+R&gt; 2  2017    12 profit     25    27    15     8
+R&gt; 3  2017    11 revenue   132   123   111   100
+R&gt; 4  2017    11 profit     20    20    18     7
+R&gt; 5  2017    10 revenue   178   114   100   100
+R&gt; 6  2017    10 profit     18    14    13     7
+R&gt; 7  2017     9 revenue   135    98    97   100
+R&gt; 8  2017     9 profit     13    21    18     7
+```
+
+
+
+```r
+# Expected output:
+   period   year month quater profit revenue
+   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+ 1 10/2017  2017    10 1          18     178
+ 2 10/2017  2017    10 2          14     114
+ 3 10/2017  2017    10 3          13     100
+ 4 10/2017  2017    10 4           7     100
+ 5 11/2017  2017    11 1          20     132
+ 6 11/2017  2017    11 2          20     123
+```
+
+
+---
+
+
+```r
+sales_kpi &lt;- gather(sales_kpi, 
+                    key = "quater", 
+                    value = "amount", 
+                    q1:q4)
+sales_kpi
+```
+
+```
+R&gt; # A tibble: 32 x 5
+R&gt;     year month kpi     quater amount
+R&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;
+R&gt;  1  2017    12 revenue q1        125
+R&gt;  2  2017    12 profit  q1         25
+R&gt;  3  2017    11 revenue q1        132
+R&gt;  4  2017    11 profit  q1         20
+R&gt;  5  2017    10 revenue q1        178
+R&gt;  6  2017    10 profit  q1         18
+R&gt;  7  2017     9 revenue q1        135
+R&gt;  8  2017     9 profit  q1         13
+R&gt;  9  2017    12 revenue q2        127
+R&gt; 10  2017    12 profit  q2         27
+R&gt; # ... with 22 more rows
+```
+
+---
+
+
+```r
+sales_kpi &lt;- unite(sales_kpi, col = "period",
+                   month, year, sep = "/", remove = FALSE)
+sales_kpi
+```
+
+```
+R&gt; # A tibble: 32 x 6
+R&gt;    period   year month kpi     quater amount
+R&gt;  * &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;
+R&gt;  1 12/2017  2017    12 revenue q1        125
+R&gt;  2 12/2017  2017    12 profit  q1         25
+R&gt;  3 11/2017  2017    11 revenue q1        132
+R&gt;  4 11/2017  2017    11 profit  q1         20
+R&gt;  5 10/2017  2017    10 revenue q1        178
+R&gt;  6 10/2017  2017    10 profit  q1         18
+R&gt;  7 9/2017   2017     9 revenue q1        135
+R&gt;  8 9/2017   2017     9 profit  q1         13
+R&gt;  9 12/2017  2017    12 revenue q2        127
+R&gt; 10 12/2017  2017    12 profit  q2         27
+R&gt; # ... with 22 more rows
+```
+
+
+---
+
+
+```r
+sales_kpi &lt;- spread(sales_kpi, key = "kpi", value = "amount")
+
+sales_kpi
+```
+
+```
+R&gt; # A tibble: 16 x 6
+R&gt;    period   year month quater profit revenue
+R&gt;  * &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+R&gt;  1 10/2017  2017    10 q1         18     178
+R&gt;  2 10/2017  2017    10 q2         14     114
+R&gt;  3 10/2017  2017    10 q3         13     100
+R&gt;  4 10/2017  2017    10 q4          7     100
+R&gt;  5 11/2017  2017    11 q1         20     132
+R&gt;  6 11/2017  2017    11 q2         20     123
+R&gt;  7 11/2017  2017    11 q3         18     111
+R&gt;  8 11/2017  2017    11 q4          7     100
+R&gt;  9 12/2017  2017    12 q1         25     125
+R&gt; 10 12/2017  2017    12 q2         27     127
+R&gt; 11 12/2017  2017    12 q3         15     100
+R&gt; 12 12/2017  2017    12 q4          8      98
+R&gt; 13 9/2017   2017     9 q1         13     135
+R&gt; 14 9/2017   2017     9 q2         21      98
+R&gt; 15 9/2017   2017     9 q3         18      97
+R&gt; 16 9/2017   2017     9 q4          7     100
+```
+
+
+---
+
+
+```r
+sales_kpi &lt;- mutate(sales_kpi, quater = gsub("q", "", quater))
+
+sales_kpi
+```
+
+```
+R&gt; # A tibble: 16 x 6
+R&gt;    period   year month quater profit revenue
+R&gt;    &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+R&gt;  1 10/2017  2017    10 1          18     178
+R&gt;  2 10/2017  2017    10 2          14     114
+R&gt;  3 10/2017  2017    10 3          13     100
+R&gt;  4 10/2017  2017    10 4           7     100
+R&gt;  5 11/2017  2017    11 1          20     132
+R&gt;  6 11/2017  2017    11 2          20     123
+R&gt;  7 11/2017  2017    11 3          18     111
+R&gt;  8 11/2017  2017    11 4           7     100
+R&gt;  9 12/2017  2017    12 1          25     125
+R&gt; 10 12/2017  2017    12 2          27     127
+R&gt; 11 12/2017  2017    12 3          15     100
+R&gt; 12 12/2017  2017    12 4           8      98
+R&gt; 13 9/2017   2017     9 1          13     135
+R&gt; 14 9/2017   2017     9 2          21      98
+R&gt; 15 9/2017   2017     9 3          18      97
+R&gt; 16 9/2017   2017     9 4           7     100
+```
+
+
+---
+
+# Your turn
+
+.large[Inspect the Hanoi Temperature data (`hanoi_temp_wideform.csv`) and reshape
+it into tidy data format]
+
+.large[Expected output:]
+
+
+```r
+   day        year month date  max_temp min_temp
+ * &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;
+ 1 2015-1-1   2015     1 1           24       11
+ 2 2015-1-10  2015     1 10          13       12
+ 3 2015-1-11  2015     1 11          15       12
+ 4 2015-1-12  2015     1 12          20        9
+ 5 2015-1-13  2015     1 13          20        9
+ 6 2015-1-14  2015     1 14          20       10
+```
+
+
+---
+
+# Solution
+
+
+```r
+weather &lt;- read_csv("hanoi_temp_wideform.csv")
+
+weather &lt;- gather(weather, key = "date", value = "temp", d1:d31)
+
+weather &lt;- spread(weather, key = "temp_level", value = "temp")
+
+weather &lt;- mutate(weather, date = gsub("d", "", date))
+
+weather &lt;- unite(weather, col = "day", year, month, date, 
+                 sep = "-", remove = FALSE)
+
+weather
+```
+
+```
+R&gt; # A tibble: 1,116 x 6
+R&gt;    day        year month date  max_temp min_temp
+R&gt;  * &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;
+R&gt;  1 2015-1-1   2015     1 1           24       11
+R&gt;  2 2015-1-10  2015     1 10          13       12
+R&gt;  3 2015-1-11  2015     1 11          15       12
+R&gt;  4 2015-1-12  2015     1 12          20        9
+R&gt;  5 2015-1-13  2015     1 13          20        9
+R&gt;  6 2015-1-14  2015     1 14          20       10
+R&gt;  7 2015-1-15  2015     1 15          21       10
+R&gt;  8 2015-1-16  2015     1 16          22       11
+R&gt;  9 2015-1-17  2015     1 17          23       11
+R&gt; 10 2015-1-18  2015     1 18          23       12
+R&gt; # ... with 1,106 more rows
+```
+
+---
+
+# Final challenge
+
+
+```r
+dat &lt;- read_csv("so3.csv")
+print(dat)
+```
+
+
+```r
+#   Person Time Score1 Score2 Score3
+# 1   greg  Pre     80     78   84.0
+# 2   greg Post     79     80   84.5
+# 3  sally  Pre     75     74   79.5
+# 4  sally Post     78     78   83.0
+# 5    sue  Pre     81     78   84.5
+# 6    sue Post     82     81   86.5
+```
+
+.large[Expected output:]
+
+
+```r
+#   Person Pre.Score1 Pre.Score2 Pre.Score3  Post.Score1 Post.Score2 Post.Score3
+# 1   greg         80         78       84.0           79          80        84.5
+# 2  sally         75         74       79.5           78          78        83.0
+# 3    sue         81         78       84.5           82          81        86.5
+
+# Hint: `?unite`
+```
+
+???
+
+https://stackoverflow.com/questions/29775461/how-can-i-spread-repeated-measures-of-multiple-variables-into-wide-format
+
+---
+
+# Solution
+
+
+```r
+dat %&gt;%
+    gather(temp, score, starts_with("Score")) %&gt;%
+    unite(temp1, Time, temp, sep = ".") %&gt;%
+    spread(temp1, score)
+```
+
+---
+background-image: url(bravo.gif)
+background-size: 100% 80%
+class: inverse, center, middle
+
+---
+background-image: url(so3.png)
+background-size: contain
+
+---
+class: inverse, center, middle
+
+.h0[Wrap-up]
+
+
+---
+
+# Why tidy data
+
+- .large[Well-suited for R's vectorized programming nature]
+
+&lt;br&gt;
+
+- .large[Consistent structure =&gt; easier to reason about data + easier to 
+learn/combine other tools]
+
+???
+
+Non-tidy data:
+
+- Alternative representations may have substantial performance or space advantages.
+
+- Specialised fields have evolved their own conventions for storing data that may 
+be quite different to the conventions of tidy data.
+
+---
+background-image: url(tidytool_manifesto.png)
+background-size: contain
+
+---
+background-image: url(tidyverse.png)
+background-size: contain
+
+---
+
+# Data organization
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+.h9[.center[.grayfont[Analysis vs. Presentation]]]
+
+---
+background-image: url(data_org_excel.png)
+background-size: contain
+
+
+---
+
+# How to share data for collaboration
+
+![](share_data.png)
+
+---
+
+# How to share data for collaboration
+
+&lt;br&gt;
+
+--
+
+.large[1 - The raw data]
+
+--
+
+&lt;br&gt;
+.large[2 - A tidy data set]
+
+--
+
+&lt;br&gt;
+.large[3 - A code book describing each variable and its values in the tidy data set]
+
+--
+
+&lt;br&gt;
+.large[4 - An explicit and exact recipe you used to go from 1 -&gt; 2,3]
+
+---
+class: inverse, center, middle
+
+.h0[Q&amp;A]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

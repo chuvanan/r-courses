@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>.giant[Data structures]</title>
+    <meta charset="utf-8">
+    <meta name="author" content=".superhuge[An Chu]" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# .giant[Data structures]
+## .giant[in R]
+### .superhuge[An Chu]
+### .superhuge[12/2017]
+
+---
+
+
+
+
+# Recall
+
+- .huge[Values are stored by *assigning* them a name]
+
+&lt;br&gt;
+
+- .huge[The resulting name-value pair is called *variable* (or *object*)]
+
+&lt;br&gt;
+
+- .huge[Everything that happens is a *function* call]
+
+---
+background-image: url(lego.jpeg)
+background-size: contain
+class: center, top
+
+# Data structures
+
+
+---
+
+# Data seen by
+
+--
+
+- .large[Humans:]
+
+```r
+Numeric values: 1, 2, 3, 4, ...
+    
+Texts: "Good", "Bad", "Ugly", ...
+    
+Tabular data: excel tables, ...
+```
+
+--
+
+- .large[Computers:]
+
+```r
+# bits:
+0101010101001
+```
+
+---
+
+# A broad definition
+
+.large[Data structure is a particular way of *organising* and *storing* data that
+is readable by humans and interpretable by computers]
+
+
+![](data_comp.png)
+
+
+
+---
+
+# ...
+
+.huge[R’s data structures can be organised by:]
+
+&lt;br&gt;
+
+- .huge[their dimensionality]
+
+&lt;br&gt;
+
+- .huge[and whether their contents of the same data type or of different types]
+
+---
+background-image: url(demo.png)
+background-size: contain
+
+
+---
+
+# Your turn
+
+.huge[With your neighbour, try and recall a list of statistical data types]
+
+.huge[You have one minute starting now.]
+
+---
+name: stat-data-types
+
+# Statistical data types
+
+--
+
+- .large[Binary (yes/no)]
+
+--
+
+&lt;br&gt;
+- .large[Categorical (blood types: A, B, O, AB)]
+
+--
+
+&lt;br&gt;
+- .large[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)]
+
+--
+
+&lt;br&gt;
+- .large[Count (housing census, number of click, views, likes)]
+
+--
+
+&lt;br&gt;
+- .large[Real-valued (temperature, height)]
+
+
+---
+
+# Data types in R
+
+--
+.pull-left[
+- .large[Logical]
+
+&lt;br&gt;
+
+- .large[Integer]
+
+&lt;br&gt;
+
+- .large[Double]
+
+&lt;br&gt;
+
+- .large[Character]
+]
+
+
+--
+
+.pull-right[
+- .large[Complex]
+
+&lt;br&gt;
+
+- .large[Raw]
+]
+
+---
+
+# `str()`
+
+- .huge[`str()` (**str**ucture) is the go-to way to inspect data structure of
+your variables]
+
+- .huge[`help("str")`]
+
+---
+class: inverse, center, middle
+
+.h0[Atomic vectors]
+
+
+---
+
+# Atomic vectors
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y &lt;- c(1L, 2L, 5L, 4L, 3L)
+z &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+![](atomic_vec.png)
+
+
+---
+
+# Properties
+
+--
+
+- .huge[`typeof()`: what it is]
+
+--
+
+&lt;br&gt;
+- .huge[`length()`: how many elements it stores]
+
+--
+
+&lt;br&gt;
+- .huge[`names()`: tell names (if any) of each elements ]
+
+
+---
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+*typeof(x)
+```
+
+```
+R&gt; [1] "logical"
+```
+
+
+```r
+z &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+names(z) &lt;- c("a", "b", "c", "d", "e", "f")
+z
+```
+
+```
+R&gt;    a    b    c    d    e    f 
+R&gt; 1.23 3.21 2.35 2.40 2.13 4.56
+```
+
+```r
+*length(z)
+```
+
+```
+R&gt; [1] 6
+```
+
+```r
+*names(z)
+```
+
+```
+R&gt; [1] "a" "b" "c" "d" "e" "f"
+```
+
+
+---
+
+# Checking:
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y &lt;- c(1L, 2L, 5L, 4L, 3L)
+z &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+
+- .large[character]
+
+
+```r
+*is.character(w)
+```
+
+```
+R&gt; [1] TRUE
+```
+
+- .large[double]
+
+
+```r
+*is.double(z)
+```
+
+```
+R&gt; [1] TRUE
+```
+]
+
+.pull-right[
+- .large[integer]
+
+
+```r
+*is.integer(y)
+```
+
+```
+R&gt; [1] TRUE
+```
+
+- .large[logical]
+
+
+```r
+*is.logical(x)
+```
+
+```
+R&gt; [1] TRUE
+```
+]
+
+---
+
+# Coercion:
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+y &lt;- c(1L, 2L, 5L, 4L, 3L)
+z &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+w &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+
+- .large[logical]
+
+
+```r
+*as.logical(y)
+```
+
+```
+R&gt; [1] TRUE TRUE TRUE TRUE TRUE
+```
+
+- .large[double]
+
+
+```r
+*as.double(x)
+```
+
+```
+R&gt; [1] 1 0 1 0 0 1 1
+```
+]
+
+.pull-right[
+
+- .large[integer]
+
+
+```r
+*as.integer(z)
+```
+
+```
+R&gt; [1] 1 3 2 2 2 4
+```
+
+- .large[character]
+
+
+```r
+*as.character(x)
+```
+
+```
+R&gt; [1] "TRUE"  "FALSE" "TRUE"  "FALSE" "FALSE" "TRUE"  "TRUE"
+```
+]
+
+---
+
+# Your turn
+
+.large[Experiment with automatic coercion.]
+
+.large[What is happening in the following cases?]
+
+```r
+sum(c(TRUE, FALSE, TRUE))
+c(TRUE, FALSE, TRUE, TRUE, "FALSE")
+c(1, 2, 3, 4, FALSE)
+c(10L, 11L, 12)
+```
+
+---
+
+# Rules
+
+--
+
+- .huge[All elements of an atomic vector must be the same type]
+
+--
+
+- .huge[Coercion often happens automatically, from least to most flexible types:
+logical &lt; integer &lt; double &lt; character]
+
+--
+
+- .huge[When in doubt, do coercion explicitly]
+
+
+---
+class: inverse, center, middle
+
+.h0[Matrices &amp; arrays]
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- cbind(c(1L, 2L, 3L, 4L, 5L),
+             c(6L, 7L, 8L, 9L, 10L),
+             c(11L, 12L, 13L, 14L, 15L))
+```
+
+![](matrix.png)
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- rbind(c(1L, 6L, 11L),
+             c(2L, 7L, 12L),
+             c(3L, 8L, 13L),
+             c(4L, 9L, 14L),
+             c(5L, 10L, 15L))
+```
+
+![](matrix.png)
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- matrix(1L:15L, ncol = 3)
+```
+
+![](matrix.png)
+
+---
+
+# Properties
+
+- .huge[typeof(), class()]
+
+&lt;br&gt;
+
+- .huge[colnames(), rownames()]
+
+&lt;br&gt;
+
+- .huge[nrow(), ncol()]
+
+---
+
+
+
+```r
+mat &lt;- matrix(1L:15L, ncol = 3, 
+              dimnames = list(c("R1", "R2", "R3", "R4", "R5"),
+                              c("A", "B", "C")))
+```
+
+.pull-left[
+
+```r
+mat
+```
+
+```
+R&gt;    A  B  C
+R&gt; R1 1  6 11
+R&gt; R2 2  7 12
+R&gt; R3 3  8 13
+R&gt; R4 4  9 14
+R&gt; R5 5 10 15
+```
+
+```r
+*typeof(mat)
+```
+
+```
+R&gt; [1] "integer"
+```
+
+```r
+*class(mat)
+```
+
+```
+R&gt; [1] "matrix"
+```
+]
+
+.pull-right[
+
+```r
+*nrow(mat)
+```
+
+```
+R&gt; [1] 5
+```
+
+```r
+*ncol(mat)
+```
+
+```
+R&gt; [1] 3
+```
+
+```r
+*colnames(mat)
+```
+
+```
+R&gt; [1] "A" "B" "C"
+```
+
+```r
+*rownames(mat)
+```
+
+```
+R&gt; [1] "R1" "R2" "R3" "R4" "R5"
+```
+]
+
+---
+
+# Array
+
+
+```r
+arr &lt;- array(1L:45L, dim = c(5, 3, 3))
+```
+
+![](array.png)
+
+
+---
+class: inverse, center, middle
+
+.h0[Lists]
+
+---
+
+# List
+
+
+```r
+lt &lt;- list(c("a", "b", "c", "d", "e", "f", "g", "h"),
+           c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56),
+           c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE))
+```
+
+![](list.png)
+
+---
+
+# Properties
+
+--
+
+- .huge[List has the same properties as atomic vectors (`typeof()`, `length()`, `names()`)]
+
+&lt;br&gt;
+
+--
+
+- .huge[New property: each element of a list can be of different types (even another list)]
+
+---
+
+# Creation: `list()`
+
+
+```r
+my_list &lt;- list(c(1L, 2L, 3L), 
+                text = c("a", "b"), 
+                boolean = c(TRUE, FALSE, FALSE, TRUE))
+str(my_list)
+```
+
+```
+R&gt; List of 3
+R&gt;  $        : int [1:3] 1 2 3
+R&gt;  $ text   : chr [1:2] "a" "b"
+R&gt;  $ boolean: logi [1:4] TRUE FALSE FALSE TRUE
+```
+
+---
+
+# Combination: `c()`
+
+
+```r
+your_list &lt;- list(num = c(12.34, 34.45, 45.56))
+new_list &lt;- c(my_list, your_list)
+str(new_list)
+```
+
+```
+R&gt; List of 4
+R&gt;  $        : int [1:3] 1 2 3
+R&gt;  $ text   : chr [1:2] "a" "b"
+R&gt;  $ boolean: logi [1:4] TRUE FALSE FALSE TRUE
+R&gt;  $ num    : num [1:3] 12.3 34.5 45.6
+```
+
+---
+
+# Conversion &amp; checking:
+
+.large[`as.list()` &amp; `unlist()` &amp; `is.list()`]
+
+.pull-left[
+
+```r
+strings &lt;- c("a", "b", "c", "e")
+*strings_list &lt;- as.list(strings); 
+print(strings_list)
+```
+
+```
+R&gt; [[1]]
+R&gt; [1] "a"
+R&gt; 
+R&gt; [[2]]
+R&gt; [1] "b"
+R&gt; 
+R&gt; [[3]]
+R&gt; [1] "c"
+R&gt; 
+R&gt; [[4]]
+R&gt; [1] "e"
+```
+]
+
+.pull-right[
+
+```r
+*unlist(strings_list)
+```
+
+```
+R&gt; [1] "a" "b" "c" "e"
+```
+
+
+```r
+*is.list(strings_list)
+```
+
+```
+R&gt; [1] TRUE
+```
+]
+
+
+---
+
+# Why lists
+
+.large[Lists are used to build up many of the more complicated data structures 
+in R (e.g. linear models)]
+
+
+```r
+reg_lm &lt;- lm(dist ~ speed, data = cars)
+is.list(reg_lm)
+```
+
+```
+R&gt; [1] TRUE
+```
+
+```r
+str(reg_lm)
+```
+
+```
+R&gt; List of 12
+R&gt;  $ coefficients : Named num [1:2] -17.58 3.93
+R&gt;   ..- attr(*, "names")= chr [1:2] "(Intercept)" "speed"
+R&gt;  $ residuals    : Named num [1:50] 3.85 11.85 -5.95 12.05 2.12 ...
+R&gt;   ..- attr(*, "names")= chr [1:50] "1" "2" "3" "4" ...
+R&gt;  $ effects      : Named num [1:50] -303.914 145.552 -8.115 9.885 0.194 ...
+R&gt;   ..- attr(*, "names")= chr [1:50] "(Intercept)" "speed" "" "" ...
+R&gt;  $ rank         : int 2
+R&gt;  $ fitted.values: Named num [1:50] -1.85 -1.85 9.95 9.95 13.88 ...
+R&gt;   ..- attr(*, "names")= chr [1:50] "1" "2" "3" "4" ...
+R&gt;  $ assign       : int [1:2] 0 1
+R&gt;  $ qr           :List of 5
+R&gt;   ..$ qr   : num [1:50, 1:2] -7.071 0.141 0.141 0.141 0.141 ...
+R&gt;   .. ..- attr(*, "dimnames")=List of 2
+R&gt;   .. .. ..$ : chr [1:50] "1" "2" "3" "4" ...
+R&gt;   .. .. ..$ : chr [1:2] "(Intercept)" "speed"
+R&gt;   .. ..- attr(*, "assign")= int [1:2] 0 1
+R&gt;   ..$ qraux: num [1:2] 1.14 1.27
+R&gt;   ..$ pivot: int [1:2] 1 2
+R&gt;   ..$ tol  : num 1e-07
+R&gt;   ..$ rank : int 2
+R&gt;   ..- attr(*, "class")= chr "qr"
+R&gt;  $ df.residual  : int 48
+R&gt;  $ xlevels      : Named list()
+R&gt;  $ call         : language lm(formula = dist ~ speed, data = cars)
+R&gt;  $ terms        :Classes 'terms', 'formula'  language dist ~ speed
+R&gt;   .. ..- attr(*, "variables")= language list(dist, speed)
+R&gt;   .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+R&gt;   .. .. ..- attr(*, "dimnames")=List of 2
+R&gt;   .. .. .. ..$ : chr [1:2] "dist" "speed"
+R&gt;   .. .. .. ..$ : chr "speed"
+R&gt;   .. ..- attr(*, "term.labels")= chr "speed"
+R&gt;   .. ..- attr(*, "order")= int 1
+R&gt;   .. ..- attr(*, "intercept")= int 1
+R&gt;   .. ..- attr(*, "response")= int 1
+R&gt;   .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+R&gt;   .. ..- attr(*, "predvars")= language list(dist, speed)
+R&gt;   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+R&gt;   .. .. ..- attr(*, "names")= chr [1:2] "dist" "speed"
+R&gt;  $ model        :'data.frame':	50 obs. of  2 variables:
+R&gt;   ..$ dist : num [1:50] 2 10 4 22 16 10 18 26 34 17 ...
+R&gt;   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
+R&gt;   ..- attr(*, "terms")=Classes 'terms', 'formula'  language dist ~ speed
+R&gt;   .. .. ..- attr(*, "variables")= language list(dist, speed)
+R&gt;   .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+R&gt;   .. .. .. ..- attr(*, "dimnames")=List of 2
+R&gt;   .. .. .. .. ..$ : chr [1:2] "dist" "speed"
+R&gt;   .. .. .. .. ..$ : chr "speed"
+R&gt;   .. .. ..- attr(*, "term.labels")= chr "speed"
+R&gt;   .. .. ..- attr(*, "order")= int 1
+R&gt;   .. .. ..- attr(*, "intercept")= int 1
+R&gt;   .. .. ..- attr(*, "response")= int 1
+R&gt;   .. .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+R&gt;   .. .. ..- attr(*, "predvars")= language list(dist, speed)
+R&gt;   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+R&gt;   .. .. .. ..- attr(*, "names")= chr [1:2] "dist" "speed"
+R&gt;  - attr(*, "class")= chr "lm"
+```
+
+---
+class: inverse, center, middle
+
+.h0[Data frames]
+
+---
+
+# Data frame
+
+
+```r
+dtf &lt;- data.frame(x = c("a", "b", "c", "d", "e", "f", "g", "h"),
+                  z = c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56, 2.13, 4.56),
+                  w = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+                  y = c(1L, 2L, 5L, 4L, 3L, 4L, 3L, 4L),
+                  stringsAsFactors = FALSE)
+```
+
+![](dataframe.png)
+
+
+---
+
+# Properties
+
+--
+
+- .huge[A cross between matrix and list: 2-dimensional structure + 
+Each column can have a different type]
+
+--
+
+&lt;br&gt;
+- .huge[names() ~ colnames(), and rownames()]
+
+--
+
+&lt;br&gt;
+- .huge[length() ~ ncol(), nrow()]
+
+---
+
+
+```r
+dtf &lt;- data.frame(x = c("a", "b", "c", "d", "e", "f", "g", "h"),
+                  z = c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56, 2.13, 4.56),
+                  w = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+                  y = c(1L, 2L, 5L, 4L, 3L, 4L, 3L, 4L),
+                  stringsAsFactors = FALSE)
+*str(dtf)
+```
+
+```
+R&gt; 'data.frame':	8 obs. of  4 variables:
+R&gt;  $ x: chr  "a" "b" "c" "d" ...
+R&gt;  $ z: num  1.23 3.21 2.35 2.4 2.13 4.56 2.13 4.56
+R&gt;  $ w: logi  TRUE FALSE TRUE FALSE FALSE TRUE ...
+R&gt;  $ y: int  1 2 5 4 3 4 3 4
+```
+
+---
+
+
+```r
+*summary(dtf)
+```
+
+```
+R&gt;       x                   z             w                 y       
+R&gt;  Length:8           Min.   :1.230   Mode :logical   Min.   :1.00  
+R&gt;  Class :character   1st Qu.:2.130   FALSE:3         1st Qu.:2.75  
+R&gt;  Mode  :character   Median :2.375   TRUE :5         Median :3.50  
+R&gt;                     Mean   :2.821                   Mean   :3.25  
+R&gt;                     3rd Qu.:3.547                   3rd Qu.:4.00  
+R&gt;                     Max.   :4.560                   Max.   :5.00
+```
+
+.pull-left[
+
+```r
+*head(dtf)
+```
+
+```
+R&gt;   x    z     w y
+R&gt; 1 a 1.23  TRUE 1
+R&gt; 2 b 3.21 FALSE 2
+R&gt; 3 c 2.35  TRUE 5
+R&gt; 4 d 2.40 FALSE 4
+R&gt; 5 e 2.13 FALSE 3
+R&gt; 6 f 4.56  TRUE 4
+```
+]
+
+.pull-right[
+
+```r
+*tail(dtf)
+```
+
+```
+R&gt;   x    z     w y
+R&gt; 3 c 2.35  TRUE 5
+R&gt; 4 d 2.40 FALSE 4
+R&gt; 5 e 2.13 FALSE 3
+R&gt; 6 f 4.56  TRUE 4
+R&gt; 7 g 2.13  TRUE 3
+R&gt; 8 h 4.56  TRUE 4
+```
+]
+
+---
+class: inverse, center, middle
+
+.h0[Factors]
+
+---
+
+# Your turn
+
+.large[Run the following codes, try to figure out the behavior of
+the following vectors:]
+
+
+
+```r
+month_chr &lt;- c("Jan", "Dec", "Apr", "November", "May")
+month_fac &lt;- factor(month_chr,
+                    levels = c("Jan", "Feb", "Mar", "Apr", "May",
+                               "Jun", "Jul","Aug", "Sep", "Oct",
+                               "Nov", "Dec"))
+
+typeof(month_chr)
+typeof(month_fac)
+class(month_fac)
+levels(month_fac)
+unclass(month_fac)
+sum(month_fac)
+sort(month_chr)
+sort(month_fac)
+```
+
+---
+
+# Factors
+
+- .large[A factor is a vector that can contain only predefined values, and is used to store categorical data]
+
+&lt;br&gt;
+
+- .large[Factors are built on top of integer vectors]
+
+&lt;br&gt;
+
+- .large[Factors look like strings, but behave differently]
+
+
+---
+
+# Factors
+
+- .large[Count observations]
+
+
+
+
+
+```r
+table(month_chr)
+```
+
+```
+R&gt; month_chr
+R&gt;      Apr      Dec      Jan      May November 
+R&gt;        1        1        1        1        1
+```
+
+```r
+# count elements of each group even has no observations
+table(month_fac) 
+```
+
+```
+R&gt; month_fac
+R&gt; Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+R&gt;   1   0   0   1   1   0   0   0   0   0   0   1
+```
+
+---
+
+# Factors
+
+- .large[Create groups from continuous variables]
+
+
+```r
+cont_var &lt;- rnorm(100)
+cont_grp &lt;- cut(cont_var, breaks = 8)
+table(cont_grp)
+```
+
+```
+R&gt; cont_grp
+R&gt;  (-3.73,-2.87]  (-2.87,-2.01]  (-2.01,-1.16] (-1.16,-0.305] (-0.305,0.549] 
+R&gt;              1              2             11             25             32 
+R&gt;    (0.549,1.4]     (1.4,2.26]    (2.26,3.12] 
+R&gt;             15              9              5
+```
+
+---
+class: inverse, center, middle
+
+.h0[Dates &amp; Times]
+
+---
+class: center, middle
+
+.giant[What is time?]
+
+
+---
+
+# ...
+
+- .huge[Time is a measurement system]
+
+&lt;br&gt;
+
+- .huge[Time can be arranged on a time line]
+
+![](timeline.png)
+
+---
+
+# ...
+
+- .huge[A date-time is a specific instant of time, a point in time line]
+
+&lt;br&gt;
+
+- .huge[For example: 27/12/2017 21:32:00]
+
+![](instants.png)
+
+
+---
+
+# Identifying instants
+
+
+.huge[1 - By reference: as the number of seconds since a reference time]
+
+&lt;br&gt;
+
+.huge[2 - By description: a unique combination of year, month, day, hour, minute, second, and time zones]
+
+
+![](instants_identifying.png)
+
+---
+
+# 'Date-time' objects
+
+
+.large[date-times are stored as either POSIXct or POSIXlt objects]
+
+--
+
+&lt;br&gt;
+
+- .large[POSIXct objects are stored as the number of seconds since a reference time
+(default: 1970-01-01 00:00:00)]
+
+--
+
+&lt;br&gt;
+
+- .large[POSIXct objects are stored as a unique combination of year, month, day, hour,
+minute, second, and time zone values]
+
+
+---
+
+.pull-left[
+
+```r
+now &lt;- Sys.time()
+class(now)
+```
+
+```
+R&gt; [1] "POSIXct" "POSIXt"
+```
+
+```r
+typeof(now)
+```
+
+```
+R&gt; [1] "double"
+```
+
+```r
+unclass(now)
+```
+
+```
+R&gt; [1] 1517130405
+```
+]
+
+.pull-right[
+
+```r
+now_lt &lt;- as.POSIXlt(now)
+typeof(now_lt)
+```
+
+```
+R&gt; [1] "list"
+```
+
+```r
+unclass(now_lt)
+```
+
+```
+R&gt; $sec
+R&gt; [1] 45.31456
+R&gt; 
+R&gt; $min
+R&gt; [1] 6
+R&gt; 
+R&gt; $hour
+R&gt; [1] 16
+R&gt; 
+R&gt; $mday
+R&gt; [1] 28
+R&gt; 
+R&gt; $mon
+R&gt; [1] 0
+R&gt; 
+R&gt; $year
+R&gt; [1] 118
+R&gt; 
+R&gt; $wday
+R&gt; [1] 0
+R&gt; 
+R&gt; $yday
+R&gt; [1] 27
+R&gt; 
+R&gt; $isdst
+R&gt; [1] 0
+R&gt; 
+R&gt; $zone
+R&gt; [1] "+07"
+R&gt; 
+R&gt; $gmtoff
+R&gt; [1] 25200
+R&gt; 
+R&gt; attr(,"tzone")
+R&gt; [1] ""    "+07" "+07"
+```
+]
+
+
+---
+
+# 'Date' objects
+
+.large[R uses 'Date' object to store instants that have only dates, but no times]
+
+.large[Dates are stored internally as the number of days from a reference date
+(default: 1970-01-01)]
+
+
+```r
+today &lt;- Sys.Date()
+class(today)
+```
+
+```
+R&gt; [1] "Date"
+```
+
+```r
+typeof(today)
+```
+
+```
+R&gt; [1] "double"
+```
+
+```r
+unclass(today)
+```
+
+```
+R&gt; [1] 17559
+```
+
+
+
+---
+
+# Parsing dates
+
+- .large[standard format: yyyy-mm-dd]
+
+
+```r
+dt1 &lt;- as.Date("2012-07-22")
+dt1
+```
+
+```
+R&gt; [1] "2012-07-22"
+```
+
+- .large[non-standard format]
+
+
+```r
+dt2 &lt;- as.Date("03/20/2012", format = "%m/%d/%Y")
+dt2
+```
+
+```
+R&gt; [1] "2012-03-20"
+```
+
+```r
+dt3 &lt;- as.Date("November 6, 2011", format = "%B %d, %Y")
+dt3
+```
+
+```
+R&gt; [1] "2011-11-06"
+```
+
+
+???
+
+Sources:
+
+http://www.thertrader.com/2014/04/18/date-formating-in-r/
+http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
+
+
+---
+
+# Your turn
+
+.large[Consult `?strptime` and parse the following vectors to 'Date' objects]
+
+
+```r
+date1 &lt;- "6aug2005"
+
+date2 &lt;- "aug061999"
+
+date3 &lt;- "12-05-2001"
+
+date4 &lt;- "May 27 1984"
+
+date5 &lt;- "1998-22-07"
+
+date6 &lt;- "20041024"
+
+date7 &lt;- "22.10.2004"
+```
+
+---
+background-image: url(wakeup.gif)
+background-size: contain
+class: inverse, center, middle
+
+# Are you still awake?
+
+---
+background-image: url(https://media.giphy.com/media/h4Z6RfuQycdiM/giphy.gif)
+background-size: cover
+class: inverse, middle, center
+
+# How is this useful?
+
+---
+
+# Return to statistical data types
+
+- .large[Binary (yes/no)]
+
+&lt;br&gt;
+
+- .large[Categorical (blood types: A, B, O, AB)]
+
+&lt;br&gt;
+
+- .large[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)]
+
+&lt;br&gt;
+
+- .large[Count (housing census, number of click, views, likes)]
+
+&lt;br&gt;
+
+- .large[Real-valued (temperature, height)]
+
+---
+
+# Represented in R
+
+--
+
+.pull-left[
+- .large[Binary]
+
+&lt;br&gt;
+
+- .large[Categorical]
+
+&lt;br&gt;
+
+- .large[Ordinal]
+
+&lt;br&gt;
+
+- .large[Count]
+
+&lt;br&gt;
+
+- .large[Real-valued]
+]
+
+--
+
+.pull-right[
+- .large[Logical]
+
+&lt;br&gt;
+
+- .large[Factor]
+
+&lt;br&gt;
+
+- .large[Ordered factor]
+
+&lt;br&gt;
+
+- .large[Integer]
+
+&lt;br&gt;
+
+- .large[Double]
+]
+
+---
+
+# Functions behave differently depending on the data structure of the input
+
+
+```r
+num_vect &lt;- c(1, 2, 3, 4, 5)
+lgl_vect &lt;- c(TRUE, FALSE, TRUE, FALSE)
+chr_vect &lt;- c("a", "b", "c", "d", "e")
+dat_vect &lt;- as.Date(c("2017-12-02", "2017-12-16", "2017-12-28"))
+```
+
+.pull-left[
+
+```r
+*mean(num_vect)
+```
+
+```
+R&gt; [1] 3
+```
+
+```r
+*mean(lgl_vect)
+```
+
+```
+R&gt; [1] 0.5
+```
+]
+
+.pull-right[
+
+```r
+*mean(chr_vect)
+```
+
+```
+R&gt; [1] NA
+```
+
+```r
+*mean(dat_vect)
+```
+
+```
+R&gt; [1] "2017-12-15"
+```
+]
+
+---
+class: inverse, center, middle
+
+.h0[Wrap-up]
+
+---
+background-image: url(simple_view_object.png)
+background-size: contain
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

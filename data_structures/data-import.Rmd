@@ -1,0 +1,60 @@
+---
+title: ".giant[Data import]"
+subtitle: ".giant[with R]"
+author: ".superhuge[An Chu]"
+date: ".superhuge[12/2017]"
+output:
+  xaringan::moon_reader:
+    css: ["default", "/home/anchu/Dropbox/R-workshop/slides/my_theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
+```
+
+---
+class: inverse, center, middle
+
+.h0[Data import]
+
+
+---
+
+# Tabular data
+
+
+- .huge[CSV and friends]
+
+<br>
+
+- .huge[XLS, XLSX]
+
+
+---
+
+(Code)
+
+
+---
+
+# Commercial software data format
+
+- .huge[SPSS]
+
+<br>
+
+- .huge[STATA]
+
+<br>
+
+- .huge[SAS]
+
+---
+
+(Code)

@@ -1,0 +1,63 @@
+
+
+.large { font-size: 30px }
+
+.huge { font-size: 35px }
+
+.superhuge { font-size: 45px;}
+
+.enormous { font-size: 50px;}
+
+.superenormous { font-size: 65px;}
+
+.big { font-size: 80px;}
+
+.superbig { font-size: 90px;}
+
+.giant { font-size: 100px;}
+
+.supergiant {font-size: 300px;}
+
+.bold { font-weight: bold;}
+
+.h0 {
+    font-size: 200px;
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: normal
+}
+
+.h9 {
+    font-size: 90px;
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: normal
+}
+
+
+.title-slide h1 {
+    line-height: 2.5em;
+}
+
+.ubt { font-family: Ubuntu Mono;}
+
+.title-slide {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg);
+    background-size: contain;
+}
+
+.remark-slide-number {
+  display: none;
+}
+
+
+.greenfont {
+    color: forestgreen;
+}
+
+.grayfont {
+    color: gray;
+}
+
+
+.scp {
+    font-family: 'Source Code Pro';
+}
