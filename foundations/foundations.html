@@ -4,7 +4,8 @@
     <title>.big[Introduction to R for Data Analysis and Visualisation]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
   </head>
   <body>
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # .big[Introduction to R for Data Analysis and Visualisation]
 ### .superhuge[An Chu]
-### .superhuge[12/2017]
+### .superhuge[07/2018]
 
 ---
 
@@ -83,19 +84,8 @@ used for data analysis.]
 
 
 ---
-background-image: url(data_science_flow.png)
-background-size: contain
-class: center, middle
-exclude: true
 
-
-.footnote[
-[R for Data Science, Hadley Wickham](http://r4ds.had.co.nz/)
-]
-
----
-
-# This workshop is ...
+# This course is ...
 
 --
 
@@ -122,7 +112,7 @@ exclude: true
 
 ---
 
-# This workshop is ...
+# This course is ...
 
 --
 
@@ -131,12 +121,12 @@ exclude: true
 --
 
 &lt;br&gt;
-- .huge[(mostly) about .greenfont[.bold[data manipulation]] and .greenfont[.bold[visualisation]]]
+- .huge[(mostly) about .greenfont[.bold[data manipulation]]]
 
 --
 
 &lt;br&gt;
-- .huge[(partly) about .greenfont[.bold[statistical analysis]]]
+- .huge[(partly) about .greenfont[.bold[data visualization]]]
 
 --
 
@@ -145,38 +135,13 @@ exclude: true
 
 
 ---
-background-image: url(coffee.jpg)
-background-size: cover
-
-???
+background-image: url(data_science_flow.png)
+background-size: contain
+class: center, middle
 
 .footnote[
-[http://fgrhs.org/2017/12/08/coffee-with-the-president-and-the-principal/]
+[R for Data Science, Hadley Wickham](http://r4ds.had.co.nz/)
 ]
-
----
-class: inverse, center, middle
-
-.h0[R background]
-
-
----
-class: middle
-
-.pull-left[
-
-- .large[1976, .greenfont[.bold[S language]], John Chambers, Bell Laboratories]
-
-&lt;br&gt;
-
-- .large["to turn ideas into software, quickly and faithfully"]
-
-]
-
-.pull-right[
-![](S_lang.jpg)
-]
-
 
 ---
 background-image: url(https://www.r-project.org/logo/Rlogo.svg)
@@ -197,56 +162,33 @@ language and can be considered as an environment within which statistical techni
 are implemented.
 
 ---
-background-image: url(R_paper.png)
-background-size: cover
+class: inverse, center, middle
 
-???
-
-R is an implementation of the S programming language combined with lexical scoping
-semantics inspired by Scheme. S was created by John Chambers in 1976, while at Bell
-Labs.
-
-Ross Ihaka &amp; Robert Gentleman introduce R to the world in 1993.
+.h0[R in the Real World]
 
 ---
-background-image: url(RGentleman_tweet.png)
-background-size: 60%
-class: center, middle
+background-image: url(R_Rising.jpg)
+background-size: 40%
 
+# Advanced Tool for Researchers
 
-
----
-background-image: url(R_PastFutureHistory.png)
-background-size: 90%
-
-???
-
-https://www.stat.auckland.ac.nz/~ihaka/downloads/Interface98.pdf
-
-R is becoming an international project.
-
-R-Core &amp; R Foundation formed to control design and evolution.
+.footnote[
+[Programming tools: Adventures with R, Nature](https://www.nature.com/news/programming-tools-adventures-with-r-1.16609)
+]
 
 ---
-background-image: url(R_NewYorkTime.png)
-background-size: 120%
+
+# Popular Analytics Software in Industry
+
+![tool-industry](R_NewYorkTime.png)
 
 ???
 
 R is growing its presence in industry.
 
 ---
-background-image: url(MS_BuyRevolution.png)
-background-size: 80%
-
-???
-
-Microsoft acquired Revolution Analytics to boost its big data business
-
----
 background-image: url(R_Consortium.png)
 background-size: cover
-
 
 ???
 
@@ -255,27 +197,32 @@ science and statistical computing.
 
 ---
 
-# R history in short
+# Reliable Tool for Goverment 
 
-- .large[1991: First experimental version of R]
+![R-GOV](R-GOV.png)
 
-- .large[1993: First announcement of R to the public]
+---
 
-- .large[1997: R-Core Team &amp; R Foundation formed to control the design &amp; evolution]
+# Fantasic R Community
 
-- .large[2000: R 1.0.0 is released. Stable enough for production use. Packages: &lt;70]
-
-- .large[2015: R Consortium is launched by IMB, Google, Microsoft, Oracle, ...]
-
-- .large[2017: R version 3.4.3 is released. Packages: &gt;12,000 and counting]
+![](user_conf.png)
 
 
-???
+---
+background-image: url(rstat.png)
+background-size: contain
 
-Source of packages count:
-https://www.r-bloggers.com/on-the-growth-of-cran-packages/
-https://blog.eoda.de/2017/01/28/on-occasion-of-the-10000th-r-package-the-eoda-top-10/
-http://r.789695.n4.nabble.com/Milestone-12-000-packages-on-CRAN-td4747209.html
+---
+background-image: url(rstudio_community.png)
+background-size: contain
+
+---
+background-image: url(r_ladies.png)
+background-size: contain
+
+---
+background-image: url(TKUDR.png)
+background-size: contain
 
 ---
 
@@ -299,87 +246,11 @@ statistical data analysis and graphics.]
 - .large[R is (arguably) the .greenfont[.bold[most popular analytics tool]] in 
 the industry.]
 
----
-class: inverse, center, middle
-
-.h0[Why R]
-
-
----
-background-image: url(R_Nature.png)
-background-size: contain
-
-
----
-background-image: url(nature_quotes.png)
-background-size: 80%
-
-# You want to control your own data analysis
-
-.footnote[
-[Programming tools: Adventures with R, Nature](https://www.nature.com/news/programming-tools-adventures-with-r-1.16609)
-]
-
----
-background-image: url(R_Rising.jpg)
-background-size: 40%
-
-# You want to stay current in the field
-
-.footnote[
-[Programming tools: Adventures with R, Nature](https://www.nature.com/news/programming-tools-adventures-with-r-1.16609)
-]
-
----
-
-# You want your research reproducible
-
-![](reproducible.png)
-
-???
-
-https://www.ncbi.nlm.nih.gov/pubmed/26776185
-https://academic.oup.com/biostatistics/article/10/3/405/293660
-http://science.sciencemag.org/content/334/6060/1226/tab-figures-data
-
----
-
-# You want to learn on your own way
-
-- .large[MOOCs: coursera.org, edx.org]
+--
 
 &lt;br&gt;
-- .large[Subscription-based learning platform: datacamp.com, udemy.com]
 
-&lt;br&gt;
-- .large[R news and tutorials: r-bloggers.com, r-weekly.org]
-
-&lt;br&gt;
-- .large[Books: The R Series - CRC Press, Use R! - Springer]
-
-
----
-
-# You want to join a fantasic community
-
-![](user_conf.png)
-
-
----
-background-image: url(rstat.png)
-background-size: contain
-
----
-background-image: url(rstudio_community.png)
-background-size: contain
-
----
-background-image: url(r_ladies.png)
-background-size: contain
-
----
-background-image: url(TKUDR.png)
-background-size: contain
+- .large[R has a .greenfont[.bold[vibrant, active community]].]
 
 
 ---
@@ -388,7 +259,6 @@ background-size: contain
 class: inverse, center, top
 
 # Challenges
-
 
 ---
 background-image: url(something-new.gif)
@@ -441,6 +311,11 @@ background-size: 70%
 
 ![](Rstudio1.png)
 
+
+---
+class: middle, center
+
+.h0[Demo]
 
 ---
 background-image: url(R_console.png)
@@ -536,7 +411,7 @@ getwd()
 ```
 
 ```
-R&gt; [1] "/home/anchu/Dropbox/R-workshop/slides/foundations"
+R&gt; [1] "/home/anchu/Documents/r-courses/foundations"
 ```
 
 
@@ -1156,8 +1031,15 @@ class: inverse, center, middle
 "highlightLines": true,
 "highlightStyle": "github"
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
