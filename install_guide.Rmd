@@ -9,7 +9,7 @@ title: "Installation guide for R and RStudio"
 
 
 - Download the R installer from: https://cloud.r-project.org/. The latest version
-of R is 3.4.3
+of R is 3.5.0
 
 - I recommend you install a precompiled binary distribution for your operating system.
 
@@ -19,7 +19,7 @@ of R is 3.4.3
 
 <br>
 
-- For Mac and Windows users, just run the installer: `R-3.4.3.pkg` and `R-3.4.3-win.exe`.
+- For Mac and Windows users, just run the installer: `R-3.5.0.pkg` and `R-3.5.0-win.exe`.
 Default settings are fine.
 
 - For Linux users, you might want to consult this tutorial (https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2).
