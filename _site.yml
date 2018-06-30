@@ -1,7 +1,7 @@
-name: "rworkshop-website"
+name: "rcourse-website"
 output_dir: "."
 navbar:
-  title: "R Workshop 01/2018"
+  title: "Introduction to R Course 07/2018"
   left:
     - text: "Home"
       href: index.html
@@ -21,8 +21,6 @@ navbar:
           href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
           href: ./data_structures/data-structures.html
-        - text: "Data Modelling"
-          href: ./data_modelling/data_modelling.html
 output:
   html_document:
     theme: flatly

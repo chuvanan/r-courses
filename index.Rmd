@@ -6,7 +6,7 @@ title: "An Introduction to Data Analysis and Visualization in R"
 
 ## 1. About
 
-This workshop is designed to provide an accessible introduction to R statistical
+This course is designed to provide an accessible introduction to R statistical
 software by getting participants up and running with practical data analysis
 exercises. Along the way, you will learn how to transform, visualise, and
 analyse data in R. After the course, you will be familiar with the tools
@@ -25,7 +25,7 @@ Learn the absolute essentials of R and its ecosystems.
 
 - Running R scripts, objects, functions
 
-- R packages, CRAN, Bioconductor
+- R packages, CRAN
 
 - Getting help
 
@@ -60,25 +60,13 @@ Learn to explore and properly prepare data for analysis.
 
 Learn to produce meaningful and beautiful data visualisation.
 
-- Graphics systems: `grid`, `base`, `ggplot2`, `lattice`
-
 - Grammar of graphics - `ggplot2`
 
 - Visualisation basics (1)
 
 - Exporting graphics
 
-### Data Modelling
-
-Learn to conduct simple summary statistics and linear regression models.
-
-- Descriptive analysis with continuous and categorical variables
-
-- Statistical tests
-
-- Visualisation basics (2)
-
-- Regression analysis, hypothesis testing
+- Visualisation practices (2)
 
 ### Data Practices
 
@@ -91,7 +79,3 @@ Learn to adopt 'good enough' practices when using R.
 - Documentation
 
 - Sharing data
-
---------------------------------------------------------------------------------
-
-![](theme_index.png)
