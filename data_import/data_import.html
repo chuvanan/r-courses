@@ -4,7 +4,8 @@
     <title>.giant[Data import in R]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
   </head>
   <body>
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # .giant[Data import in R]
 ### .superhuge[An Chu]
-### .superhuge[12/2017]
+### .superhuge[07/2018]
 
 ---
 
@@ -198,7 +199,7 @@ getwd() # get working directory
 ```
 
 ```
-R&gt; [1] "/home/anchu/Dropbox/R-workshop/slides/data_import"
+R&gt; [1] "/home/anchu/Documents/r-courses/data_import"
 ```
 
 ```r
@@ -207,12 +208,12 @@ dir()  # show directory contents
 
 ```
 R&gt;  [1] "airline-safety.csv"              "data_import.html"               
-R&gt;  [3] "data_import.Rmd"                 "libs"                           
-R&gt;  [5] "mtcars1.csv"                     "mtcars2.csv"                    
-R&gt;  [7] "mtcars3.csv"                     "my_theme.css"                   
-R&gt;  [9] "no_headings.csv"                 "readr_logo.png"                 
-R&gt; [11] "readxl_logo.png"                 "Rotten_Tomatoes_100_Movies.xlsx"
-R&gt; [13] "View.png"
+R&gt;  [3] "data_import.Rmd"                 "example.css"                    
+R&gt;  [5] "libs"                            "mtcars1.csv"                    
+R&gt;  [7] "mtcars2.csv"                     "mtcars3.csv"                    
+R&gt;  [9] "my_theme.css"                    "no_headings.csv"                
+R&gt; [11] "readr_logo.png"                  "readxl_logo.png"                
+R&gt; [13] "Rotten_Tomatoes_100_Movies.xlsx" "View.png"
 ```
 
 
@@ -324,8 +325,8 @@ read_csv("no_headings.csv", col_names = FALSE)
 R&gt; # A tibble: 4 x 4
 R&gt;      X1    X2    X3    X4
 R&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-R&gt; 1  21.0     6   160   110
-R&gt; 2  21.0     6   160   110
+R&gt; 1  21       6   160   110
+R&gt; 2  21       6   160   110
 R&gt; 3  22.8     4   108    93
 R&gt; 4  21.4     6   258   110
 ```
@@ -354,8 +355,8 @@ read_csv("no_headings.csv",
 R&gt; # A tibble: 4 x 4
 R&gt;    col1  col2  col3  col4
 R&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-R&gt; 1  21.0     6   160   110
-R&gt; 2  21.0     6   160   110
+R&gt; 1  21       6   160   110
+R&gt; 2  21       6   160   110
 R&gt; 3  22.8     4   108    93
 R&gt; 4  21.4     6   258   110
 ```
@@ -542,16 +543,16 @@ tomato100
 R&gt; # A tibble: 100 x 4
 R&gt;     Rank Rating Title                                `No. of Reviews`
 R&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;                                           &lt;dbl&gt;
-R&gt;  1  1.00 �99%   The Wizard of Oz (1939)                         109  
-R&gt;  2  2.00 �100%  The Third Man (1949)                             76.0
-R&gt;  3  3.00 �100%  Citizen Kane (1941)                              73.0
-R&gt;  4  4.00 �97%   Mad Max: Fury Road (2015)                       357  
-R&gt;  5  5.00 �100%  (The Cabinet of Dr. Caligari) (1920)             48.0
-R&gt;  6  6.00 �100%  All About Eve (1950)                             64.0
-R&gt;  7  7.00 �99%   The Godfather (1972)                             84.0
-R&gt;  8  8.00 �98%   Inside Out (2015)                               318  
-R&gt;  9  9.00 �100%  Modern Times (1936)                              53.0
-R&gt; 10 10.0  �99%   Metropolis (1927)                               115  
+R&gt;  1     1 �99%   The Wizard of Oz (1939)                           109
+R&gt;  2     2 �100%  The Third Man (1949)                               76
+R&gt;  3     3 �100%  Citizen Kane (1941)                                73
+R&gt;  4     4 �97%   Mad Max: Fury Road (2015)                         357
+R&gt;  5     5 �100%  (The Cabinet of Dr. Caligari) (1920)               48
+R&gt;  6     6 �100%  All About Eve (1950)                               64
+R&gt;  7     7 �99%   The Godfather (1972)                               84
+R&gt;  8     8 �98%   Inside Out (2015)                                 318
+R&gt;  9     9 �100%  Modern Times (1936)                                53
+R&gt; 10    10 �99%   Metropolis (1927)                                 115
 R&gt; # ... with 90 more rows
 ```
     </textarea>
@@ -561,8 +562,15 @@ R&gt; # ... with 90 more rows
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
