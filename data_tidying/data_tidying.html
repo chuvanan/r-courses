@@ -4,7 +4,8 @@
     <title>.giant[Data tidying with tidyr]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
   </head>
   <body>
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # .giant[Data tidying with tidyr]
 ### .superhuge[An Chu]
-### .superhuge[12/2017]
+### .superhuge[07/2018]
 
 ---
 
@@ -251,11 +252,11 @@ diemthi
 R&gt; # A tibble: 5 x 4
 R&gt;     sbd   van ngoaingu  toan
 R&gt;   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-R&gt; 1     1  6.00     5.00 0.500
-R&gt; 2     2  7.25     6.50 4.25 
-R&gt; 3     3  6.00     8.50 4.00 
-R&gt; 4     4  8.00     8.50 3.50 
-R&gt; 5     5  7.75     7.75 7.25
+R&gt; 1     1  6        5     0.5 
+R&gt; 2     2  7.25     6.5   4.25
+R&gt; 3     3  6        8.5   4   
+R&gt; 4     4  8        8.5   3.5 
+R&gt; 5     5  7.75     7.75  7.25
 ```
 
 
@@ -286,11 +287,11 @@ diemthi
 R&gt; # A tibble: 5 x 4
 R&gt;     sbd   van ngoaingu  toan
 R&gt;   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-R&gt; 1     1  6.00     5.00 0.500
-R&gt; 2     2  7.25     6.50 4.25 
-R&gt; 3     3  6.00     8.50 4.00 
-R&gt; 4     4  8.00     8.50 3.50 
-R&gt; 5     5  7.75     7.75 7.25
+R&gt; 1     1  6        5     0.5 
+R&gt; 2     2  7.25     6.5   4.25
+R&gt; 3     3  6        8.5   4   
+R&gt; 4     4  8        8.5   3.5 
+R&gt; 5     5  7.75     7.75  7.25
 ```
 ]
 
@@ -304,21 +305,21 @@ diemthi_tidy
 R&gt; # A tibble: 15 x 3
 R&gt;      sbd mon       diem
 R&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
-R&gt;  1     1 van      6.00 
-R&gt;  2     2 van      7.25 
-R&gt;  3     3 van      6.00 
-R&gt;  4     4 van      8.00 
-R&gt;  5     5 van      7.75 
-R&gt;  6     1 ngoaingu 5.00 
-R&gt;  7     2 ngoaingu 6.50 
-R&gt;  8     3 ngoaingu 8.50 
-R&gt;  9     4 ngoaingu 8.50 
-R&gt; 10     5 ngoaingu 7.75 
-R&gt; 11     1 toan     0.500
-R&gt; 12     2 toan     4.25 
-R&gt; 13     3 toan     4.00 
-R&gt; 14     4 toan     3.50 
-R&gt; 15     5 toan     7.25
+R&gt;  1     1 van       6   
+R&gt;  2     2 van       7.25
+R&gt;  3     3 van       6   
+R&gt;  4     4 van       8   
+R&gt;  5     5 van       7.75
+R&gt;  6     1 ngoaingu  5   
+R&gt;  7     2 ngoaingu  6.5 
+R&gt;  8     3 ngoaingu  8.5 
+R&gt;  9     4 ngoaingu  8.5 
+R&gt; 10     5 ngoaingu  7.75
+R&gt; 11     1 toan      0.5 
+R&gt; 12     2 toan      4.25
+R&gt; 13     3 toan      4   
+R&gt; 14     4 toan      3.5 
+R&gt; 15     5 toan      7.25
 ```
 ]
 
@@ -588,7 +589,7 @@ sales_kpi
 ```
 R&gt; # A tibble: 32 x 6
 R&gt;    period   year month kpi     quater amount
-R&gt;  * &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;
+R&gt;    &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;
 R&gt;  1 12/2017  2017    12 revenue q1        125
 R&gt;  2 12/2017  2017    12 profit  q1         25
 R&gt;  3 11/2017  2017    11 revenue q1        132
@@ -615,7 +616,7 @@ sales_kpi
 ```
 R&gt; # A tibble: 16 x 6
 R&gt;    period   year month quater profit revenue
-R&gt;  * &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+R&gt;    &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
 R&gt;  1 10/2017  2017    10 q1         18     178
 R&gt;  2 10/2017  2017    10 q2         14     114
 R&gt;  3 10/2017  2017    10 q3         13     100
@@ -712,7 +713,7 @@ weather
 ```
 R&gt; # A tibble: 1,116 x 6
 R&gt;    day        year month date  max_temp min_temp
-R&gt;  * &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;
+R&gt;    &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;
 R&gt;  1 2015-1-1   2015     1 1           24       11
 R&gt;  2 2015-1-10  2015     1 10          13       12
 R&gt;  3 2015-1-11  2015     1 11          15       12
@@ -877,8 +878,15 @@ class: inverse, center, middle
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({

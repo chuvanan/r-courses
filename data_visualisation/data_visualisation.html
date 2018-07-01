@@ -4,7 +4,8 @@
     <title>.giant[Data visualisation]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
   </head>
   <body>
@@ -14,7 +15,7 @@ class: center, middle, inverse, title-slide
 # .giant[Data visualisation]
 ## .giant[with ggplot2]
 ### .superhuge[An Chu]
-### .superhuge[12/2017]
+### .superhuge[07/2018]
 
 ---
 
@@ -180,7 +181,7 @@ air_quality
  1 2015-12-09 2015  12    9        89.1       16       22              11
  2 2015-12-10 2015  12    10       52.6       17       21              16
  3 2015-12-11 2015  12    11       63.0       17       21              15
- 4 2015-12-12 2015  12    12      116         18       23              11
+ 4 2015-12-12 2015  12    12      116.        18       23              11
  5 2015-12-13 2015  12    13       86.9       20       28              22
  6 2015-12-14 2015  12    14       43.1       17       22              22
  7 2015-12-15 2015  12    15       42.0       16       18              24
@@ -1290,8 +1291,15 @@ background-size: contain
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({

@@ -4,7 +4,8 @@
     <title>.giant[Data structures]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
   </head>
   <body>
@@ -14,7 +15,7 @@ class: center, middle, inverse, title-slide
 # .giant[Data structures]
 ## .giant[in R]
 ### .superhuge[An Chu]
-### .superhuge[12/2017]
+### .superhuge[07/2018]
 
 ---
 
@@ -964,10 +965,10 @@ table(cont_grp)
 
 ```
 R&gt; cont_grp
-R&gt;  (-3.73,-2.87]  (-2.87,-2.01]  (-2.01,-1.16] (-1.16,-0.305] (-0.305,0.549] 
-R&gt;              1              2             11             25             32 
-R&gt;    (0.549,1.4]     (1.4,2.26]    (2.26,3.12] 
-R&gt;             15              9              5
+R&gt;    (-2.86,-2.2]    (-2.2,-1.54]  (-1.54,-0.884] (-0.884,-0.228] 
+R&gt;               1               5              12              21 
+R&gt;  (-0.228,0.429]    (0.429,1.08]     (1.08,1.74]      (1.74,2.4] 
+R&gt;              24              22               9               6
 ```
 
 ---
@@ -1068,7 +1069,7 @@ unclass(now)
 ```
 
 ```
-R&gt; [1] 1517130405
+R&gt; [1] 1530439538
 ```
 ]
 
@@ -1089,19 +1090,19 @@ unclass(now_lt)
 
 ```
 R&gt; $sec
-R&gt; [1] 45.31456
+R&gt; [1] 37.6127
 R&gt; 
 R&gt; $min
-R&gt; [1] 6
+R&gt; [1] 5
 R&gt; 
 R&gt; $hour
-R&gt; [1] 16
+R&gt; [1] 17
 R&gt; 
 R&gt; $mday
-R&gt; [1] 28
+R&gt; [1] 1
 R&gt; 
 R&gt; $mon
-R&gt; [1] 0
+R&gt; [1] 6
 R&gt; 
 R&gt; $year
 R&gt; [1] 118
@@ -1110,7 +1111,7 @@ R&gt; $wday
 R&gt; [1] 0
 R&gt; 
 R&gt; $yday
-R&gt; [1] 27
+R&gt; [1] 181
 R&gt; 
 R&gt; $isdst
 R&gt; [1] 0
@@ -1159,7 +1160,7 @@ unclass(today)
 ```
 
 ```
-R&gt; [1] 17559
+R&gt; [1] 17713
 ```
 
 
@@ -1382,8 +1383,15 @@ background-size: contain
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
