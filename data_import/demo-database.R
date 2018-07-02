@@ -1,3 +1,4 @@
+## install.pacakges("DBI")
 library(DBI)
 
 path <- system.file("db", "datasets.sqlite", package = "RSQLite")

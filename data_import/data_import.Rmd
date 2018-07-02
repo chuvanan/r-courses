@@ -430,6 +430,78 @@ tomato100 <- read_xlsx("Rotten_Tomatoes_100_Movies.xlsx")
 tomato100
 ```
 
+
+---
+
+# Import from commercial softwares (SPSS, SAS, Stata)
+
+.huge[Setup:]
+
+.large[`## install.packages("haven")`]
+
+.large[`library(haven)`]
+
+---
+
+# Syntax
+
+
+---
+
+# Syntax
+
+- .large[Import from SPSS]
+
+.large[`sav <- read_sav(file, ...)`]
+
+<br>
+
+- .large[Import from SAS]
+
+.large[`sas <- read_sas(file, ...)`]
+
+<br>
+
+- .large[Import from Stata]
+
+.large[`stata <- read_stata(file, ...)`]
+
+---
+
+# Your turn
+
+.large[How many observations in the following data sets?]
+
+- .large[`Child_Data.sav`]
+
+<br>
+
+- .large[`iris.sas7bdat`]
+
+<br>
+
+- .large[`Milk_Production.dta`]
+
+
+---
+
+# Solution
+
+```{r, include=FALSE}
+library(haven)
+```
+
+```{r}
+sav <- read_sav("Child_Data.sav")
+dim(sav)
+
+sas <- read_sas("iris.sas7bdat")
+dim(sas)
+
+stata <- read_dta("Milk_Production.dta")
+dim(stata)
+```
+
 ---
 class: inverse, middle, center
 

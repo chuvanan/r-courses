@@ -239,14 +239,16 @@ dir()  # show directory contents
 ```
 
 ```
-R&gt;  [1] "airline-safety.csv"              "data_import.html"               
-R&gt;  [3] "data_import.Rmd"                 "demo-database.R"                
-R&gt;  [5] "demo-disk.R"                     "example.css"                    
-R&gt;  [7] "libs"                            "mtcars1.csv"                    
-R&gt;  [9] "mtcars2.csv"                     "mtcars3.csv"                    
-R&gt; [11] "my_theme.css"                    "no_headings.csv"                
-R&gt; [13] "readr_logo.png"                  "readxl_logo.png"                
-R&gt; [15] "Rotten_Tomatoes_100_Movies.xlsx" "View.png"
+R&gt;  [1] "airline-safety.csv"              "Child_Data.sav"                 
+R&gt;  [3] "data_import.html"                "data_import.Rmd"                
+R&gt;  [5] "demo-database.R"                 "demo-disk.R"                    
+R&gt;  [7] "example.css"                     "iris.sas7bdat"                  
+R&gt;  [9] "libs"                            "Milk_Production.dta"            
+R&gt; [11] "mtcars1.csv"                     "mtcars2.csv"                    
+R&gt; [13] "mtcars3.csv"                     "my_theme.css"                   
+R&gt; [15] "no_headings.csv"                 "readr_logo.png"                 
+R&gt; [17] "readxl_logo.png"                 "Rotten_Tomatoes_100_Movies.xlsx"
+R&gt; [19] "View.png"
 ```
 
 
@@ -587,6 +589,94 @@ R&gt;  9     9 �100%  Modern Times (1936)                                53
 R&gt; 10    10 �99%   Metropolis (1927)                                 115
 R&gt; # ... with 90 more rows
 ```
+
+
+---
+
+# Import from commercial softwares (SPSS, SAS, Stata)
+
+.huge[Setup:]
+
+.large[`## install.packages("haven")`]
+
+.large[`library(haven)`]
+
+---
+
+# Syntax
+
+
+---
+
+# Syntax
+
+- .large[Import from SPSS]
+
+.large[`sav &lt;- read_sav(file, ...)`]
+
+&lt;br&gt;
+
+- .large[Import from SAS]
+
+.large[`sas &lt;- read_sas(file, ...)`]
+
+&lt;br&gt;
+
+- .large[Import from Stata]
+
+.large[`stata &lt;- read_stata(file, ...)`]
+
+---
+
+# Your turn
+
+.large[How many observations in the following data sets?]
+
+- .large[`Child_Data.sav`]
+
+&lt;br&gt;
+
+- .large[`iris.sas7bdat`]
+
+&lt;br&gt;
+
+- .large[`Milk_Production.dta`]
+
+
+---
+
+# Solution
+
+
+
+
+```r
+sav &lt;- read_sav("Child_Data.sav")
+dim(sav)
+```
+
+```
+R&gt; [1] 20  4
+```
+
+```r
+sas &lt;- read_sas("iris.sas7bdat")
+dim(sas)
+```
+
+```
+R&gt; [1] 150   5
+```
+
+```r
+stata &lt;- read_dta("Milk_Production.dta")
+dim(stata)
+```
+
+```
+R&gt; [1] 199   7
+```
+
 
 ---
 class: inverse, middle, center
