@@ -1,5 +1,5 @@
 ---
-title: ".giant[Data import in R]"
+title: ".giant[Getting your data in R]"
 author: ".superhuge[An Chu]"
 date: ".superhuge[07/2018]"
 output:
@@ -30,13 +30,14 @@ library(readxl)
 
 - .huge[`readr` and its friends]
 
+
 ---
 
-# Common data formats
+# Common source of data
 
 --
 
-## Rectangualar data
+## On disk
 
 
 - .large[CSV and friends]
@@ -47,22 +48,21 @@ library(readxl)
 
 - .large[Proprietary softwares (SPSS, Stata, SAS)]
 
+--
 
-- .large[Databases]
+## In a database (SQL)
 
 --
 
-## Hierarchical data
-
+## On the web
 
 - .large[JSON, XML]
 
-
 ---
 
-# Common data formats
+# Common source of data
 
-## Rectangualar data
+## On disk
 
 
 - .large[.greenfont[.bold[CSV and friends]]]
@@ -74,13 +74,11 @@ library(readxl)
 - .large[Proprietary softwares (SPSS, Stata, SAS)]
 
 
-- .large[Databases]
+## In a database (SQL)
 
-## Hierarchical data
-
+## On the web
 
 - .large[JSON, XML]
-
 
 ---
 
@@ -149,11 +147,11 @@ library(readr)
 # Syntax
 
 
-| Files                     | Special cases        | General solution                  |
-|---------------------------|----------------------|-----------------------------------|
-| comma-separated     | read_csv(file, ...)  | read_delim(file, sep = ",", ...)  |
-| semicolon-separated | read_csv2(file, ...) | read_delim(file, sep = ";", ...)  |
-| tab-separated       | read_tsv(file, ...)  | read_delim(file, sep = "\t", ...) |
+| Files                     | Special cases        |
+|---------------------------|----------------------|
+| comma-separated     | read_csv(file, ...)  |
+| semicolon-separated | read_csv2(file, ...) |
+| tab-separated       | read_tsv(file, ...)  |
 
 ### Linux/Mac
 
@@ -177,10 +175,38 @@ class: center, middle
 
 .large[Common new user mistakes:]
 
-
-
 .large[trying to read files that R “can’t find”]
 
+---
+
+# Working directory
+
+.large[R associates itself with a folder (i.e. directory) on your computer.]
+
+- .large[This folder is known as your "working directory"]
+
+- .large[When you save files, R will save them here]
+
+- .large[When you load files, R will look for them here]
+
+
+---
+
+# Working directory
+
+.large[The files pane of the IDE displays the contents of your working directory]
+
+
+```{r}
+# print working directory
+getwd()
+```
+
+
+```{r, eval=FALSE}
+# change working directory
+setwd("~/Documents/data_projects/")
+```
 
 ---
 
@@ -201,14 +227,13 @@ dir()  # show directory contents
 
 ```{r, message=TRUE}
 # relative path
-airline_safety <- read_csv("airline-safety.csv") 
+airline_safety <- read_csv("airline-safety.csv")
 ```
 
 ```{r, message=TRUE}
 # absolute path
-airline_safety <- read_csv("/home/anchu/Dropbox/R-workshop/slides/data_import/airline-safety.csv")
+airline_safety <- read_csv("/home/anchu/Documents/r-courses/data_import/airline-safety.csv")
 ```
-
 
 ---
 
@@ -285,7 +310,7 @@ read_csv("no_headings.csv", col_names = FALSE)
 ```
 
 ```{r}
-read_csv("no_headings.csv", 
+read_csv("no_headings.csv",
          col_names = c("col1", "col2", "col3", "col4"))
 ```
 
@@ -378,7 +403,7 @@ R>  $ fatalities_00_14      : int  0 88 0 0 0 337 158 7 88 0 ...
 
 ---
 
-# Excel 
+# Excel
 
 ```{r, eval=FALSE}
 # install.packages("readxl")
@@ -405,7 +430,7 @@ tomato100 <- read_xlsx("Rotten_Tomatoes_100_Movies.xlsx")
 tomato100
 ```
 
+---
+class: inverse, middle, center
 
-
-
-
+.h0[Questions?]

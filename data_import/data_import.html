@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>.giant[Data import in R]</title>
+    <title>.giant[Getting your data in R]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[An Chu]" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# .giant[Data import in R]
+# .giant[Getting your data in R]
 ### .superhuge[An Chu]
 ### .superhuge[07/2018]
 
@@ -32,13 +32,14 @@ class: center, middle, inverse, title-slide
 
 - .huge[`readr` and its friends]
 
+
 ---
 
-# Common data formats
+# Common source of data
 
 --
 
-## Rectangualar data
+## On disk
 
 
 - .large[CSV and friends]
@@ -49,22 +50,21 @@ class: center, middle, inverse, title-slide
 
 - .large[Proprietary softwares (SPSS, Stata, SAS)]
 
+--
 
-- .large[Databases]
+## In a database (SQL)
 
 --
 
-## Hierarchical data
-
+## On the web
 
 - .large[JSON, XML]
 
-
 ---
 
-# Common data formats
+# Common source of data
 
-## Rectangualar data
+## On disk
 
 
 - .large[.greenfont[.bold[CSV and friends]]]
@@ -76,13 +76,11 @@ class: center, middle, inverse, title-slide
 - .large[Proprietary softwares (SPSS, Stata, SAS)]
 
 
-- .large[Databases]
+## In a database (SQL)
 
-## Hierarchical data
-
+## On the web
 
 - .large[JSON, XML]
-
 
 ---
 
@@ -152,11 +150,11 @@ library(readr)
 # Syntax
 
 
-| Files                     | Special cases        | General solution                  |
-|---------------------------|----------------------|-----------------------------------|
-| comma-separated     | read_csv(file, ...)  | read_delim(file, sep = ",", ...)  |
-| semicolon-separated | read_csv2(file, ...) | read_delim(file, sep = ";", ...)  |
-| tab-separated       | read_tsv(file, ...)  | read_delim(file, sep = "\t", ...) |
+| Files                     | Special cases        |
+|---------------------------|----------------------|
+| comma-separated     | read_csv(file, ...)  |
+| semicolon-separated | read_csv2(file, ...) |
+| tab-separated       | read_tsv(file, ...)  |
 
 ### Linux/Mac
 
@@ -180,10 +178,44 @@ class: center, middle
 
 .large[Common new user mistakes:]
 
-
-
 .large[trying to read files that R “can’t find”]
 
+---
+
+# Working directory
+
+.large[R associates itself with a folder (i.e. directory) on your computer.]
+
+- .large[This folder is known as your "working directory"]
+
+- .large[When you save files, R will save them here]
+
+- .large[When you load files, R will look for them here]
+
+
+---
+
+# Working directory
+
+.large[The files pane of the IDE displays the contents of your working directory]
+
+
+
+```r
+# print working directory
+getwd()
+```
+
+```
+R&gt; [1] "/home/anchu/Documents/r-courses/data_import"
+```
+
+
+
+```r
+# change working directory
+setwd("~/Documents/data_projects/")
+```
 
 ---
 
@@ -208,12 +240,13 @@ dir()  # show directory contents
 
 ```
 R&gt;  [1] "airline-safety.csv"              "data_import.html"               
-R&gt;  [3] "data_import.Rmd"                 "example.css"                    
-R&gt;  [5] "libs"                            "mtcars1.csv"                    
-R&gt;  [7] "mtcars2.csv"                     "mtcars3.csv"                    
-R&gt;  [9] "my_theme.css"                    "no_headings.csv"                
-R&gt; [11] "readr_logo.png"                  "readxl_logo.png"                
-R&gt; [13] "Rotten_Tomatoes_100_Movies.xlsx" "View.png"
+R&gt;  [3] "data_import.Rmd"                 "demo-database.R"                
+R&gt;  [5] "demo-disk.R"                     "example.css"                    
+R&gt;  [7] "libs"                            "mtcars1.csv"                    
+R&gt;  [9] "mtcars2.csv"                     "mtcars3.csv"                    
+R&gt; [11] "my_theme.css"                    "no_headings.csv"                
+R&gt; [13] "readr_logo.png"                  "readxl_logo.png"                
+R&gt; [15] "Rotten_Tomatoes_100_Movies.xlsx" "View.png"
 ```
 
 
@@ -222,7 +255,7 @@ R&gt; [13] "Rotten_Tomatoes_100_Movies.xlsx" "View.png"
 
 ```r
 # relative path
-airline_safety &lt;- read_csv("airline-safety.csv") 
+airline_safety &lt;- read_csv("airline-safety.csv")
 ```
 
 ```
@@ -242,7 +275,7 @@ R&gt; )
 
 ```r
 # absolute path
-airline_safety &lt;- read_csv("/home/anchu/Dropbox/R-workshop/slides/data_import/airline-safety.csv")
+airline_safety &lt;- read_csv("/home/anchu/Documents/r-courses/data_import/airline-safety.csv")
 ```
 
 ```
@@ -258,7 +291,6 @@ R&gt;   fatal_accidents_00_14 = col_integer(),
 R&gt;   fatalities_00_14 = col_integer()
 R&gt; )
 ```
-
 
 ---
 
@@ -347,7 +379,7 @@ R&gt; 4  21.4     6   258   110
 
 
 ```r
-read_csv("no_headings.csv", 
+read_csv("no_headings.csv",
          col_names = c("col1", "col2", "col3", "col4"))
 ```
 
@@ -510,7 +542,7 @@ R&gt;  Max.   :3.0000        Max.   :537.00
 
 ---
 
-# Excel 
+# Excel
 
 
 ```r
@@ -555,6 +587,11 @@ R&gt;  9     9 �100%  Modern Times (1936)                                53
 R&gt; 10    10 �99%   Metropolis (1927)                                 115
 R&gt; # ... with 90 more rows
 ```
+
+---
+class: inverse, middle, center
+
+.h0[Questions?]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
