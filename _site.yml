@@ -21,6 +21,8 @@ navbar:
           href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
           href: ./data_structures/data-structures.html
+        - text: "Getting Started with R Markdown"
+          href: ./rmarkdown_intro/rmarkdown_intro.html
 output:
   html_document:
     theme: flatly
