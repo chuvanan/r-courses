@@ -1,0 +1,176 @@
+---
+title: ".giant[Reproducible Analysis with R Markdown]"
+author: ".superhuge[An Chu]"
+date: ".superhuge[07/2018]"
+output:
+  xaringan::moon_reader:
+    css: ["default", "example.css", "my_theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
+```
+
+
+# The problems
+
+- .large[Excel for data entry]
+
+<br>
+
+- .large[SPSS/Stata/Excel for data analysis, visualization]
+
+<br>
+
+- .large[Word/Latex for publication]
+
+---
+
+# One format to rule them all
+
+![](rmarkdown.png)
+
+???
+
+https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
+
+---
+
+# What is Markdown?
+
+--
+
+- .large[A plaintext formatting syntax]
+
+<br>
+
+--
+
+- .large[Render to complex formats: HTML, PDF, ...]
+
+---
+
+# Examples
+
+.pull-left[
+
+<br>
+
+`# Header 1`
+
+<br>
+
+`## Header 2`
+
+`Normal paragraph looks like this.`
+
+`**Bold text**`
+
+`*Italic text*`
+
+`* Unordered list`
+
+`1. Ordered list`
+
+]
+
+.pull-right[
+
+# Header 1
+
+## Header 2
+
+Normal paragraph looks like this.
+
+**Bold text**
+
+*Italic text*
+
+* Unordered list
+
+1. Ordered list
+
+]
+
+---
+class: center
+
+
+# RStudio Help > Markdown References
+
+![](markdown-ref.png)
+
+
+---
+class: inverse, middle, center
+
+
+.h0[Demo 1]
+
+
+---
+
+# What is R Markdown?
+
+
+- .large[Embed R code in a Markdown document]
+
+<br>
+
+- .large[Render textual output along with codes/graphics]
+
+<br>
+
+- .large[File extensions: `.Rmd`, `.rmd`]
+
+---
+
+# Output Formats
+
+![](rmd-template.png)
+
+---
+
+# YAML
+
+- .large[Document metadata: title, author, etc.]
+
+- .large[A section of key:value pairs separated by dashed lines `———`]
+
+![](yaml.png)
+
+---
+
+# Embed code
+
+.large[Insert a chunk of R code with:]
+
+![](embed-code.png)
+
+---
+
+# Complie documents
+
+![](rmd-output.png)
+
+---
+class: inverse, middle, center
+
+.h0[Demo 2]
+
+---
+background-image: url(rmd-cheatsheet.png)
+background-size: contain
+class: center, middle
+
+---
+class: inverse, middle,center
+
+
+.h0[Questions]

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>.giant[Reproducible Analysis with R Markdown]</title>
+    <meta charset="utf-8">
+    <meta name="author" content=".superhuge[An Chu]" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="example.css" type="text/css" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# .giant[Reproducible Analysis with R Markdown]
+### .superhuge[An Chu]
+### .superhuge[07/2018]
+
+---
+
+
+
+
+
+# The problems
+
+- .large[Excel for data entry]
+
+&lt;br&gt;
+
+- .large[SPSS/Stata/Excel for data analysis, visualization]
+
+&lt;br&gt;
+
+- .large[Word/Latex for publication]
+
+---
+
+# One format to rule them all
+
+![](rmarkdown.png)
+
+???
+
+https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
+
+---
+
+# What is Markdown?
+
+--
+
+- .large[A plaintext formatting syntax]
+
+&lt;br&gt;
+
+--
+
+- .large[Render to complex formats: HTML, PDF, ...]
+
+---
+
+# Examples
+
+.pull-left[
+
+&lt;br&gt;
+
+`# Header 1`
+
+&lt;br&gt;
+
+`## Header 2`
+
+`Normal paragraph looks like this.`
+
+`**Bold text**`
+
+`*Italic text*`
+
+`* Unordered list`
+
+`1. Ordered list`
+
+]
+
+.pull-right[
+
+# Header 1
+
+## Header 2
+
+Normal paragraph looks like this.
+
+**Bold text**
+
+*Italic text*
+
+* Unordered list
+
+1. Ordered list
+
+]
+
+---
+class: center
+
+
+# RStudio Help &gt; Markdown References
+
+![](markdown-ref.png)
+
+
+---
+class: inverse, middle, center
+
+
+.h0[Demo 1]
+
+
+---
+
+# What is R Markdown?
+
+
+- .large[Embed R code in a Markdown document]
+
+&lt;br&gt;
+
+- .large[Render textual output along with codes/graphics]
+
+&lt;br&gt;
+
+- .large[File extensions: `.Rmd`, `.rmd`]
+
+---
+
+# Output Formats
+
+![](rmd-template.png)
+
+---
+
+# YAML
+
+- .large[Document metadata: title, author, etc.]
+
+- .large[A section of key:value pairs separated by dashed lines `———`]
+
+![](yaml.png)
+
+---
+
+# Embed code
+
+.large[Insert a chunk of R code with:]
+
+![](embed-code.png)
+
+---
+
+# Complie documents
+
+![](rmd-output.png)
+
+---
+class: inverse, middle, center
+
+.h0[Demo 2]
+
+---
+background-image: url(rmd-cheatsheet.png)
+background-size: contain
+class: center, middle
+
+---
+class: inverse, middle,center
+
+
+.h0[Questions]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
