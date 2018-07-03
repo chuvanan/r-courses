@@ -17,7 +17,15 @@ a, a > code {
   padding-right: 4em;
   font-size: 90%;
 }
-.remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; }
+.remark-code {
+    font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+    font-size: 20px;
+}
+
+.remark-inline-code {
+    font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+}
+
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {

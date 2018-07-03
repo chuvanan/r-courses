@@ -79,24 +79,15 @@ class: left, middle
 background-image: url(tidy_data_paper.png)
 background-size: contain
 
+
 ---
 
-# Tidy data principles
-
-.huge[1 - Each variable forms a column]
-
-&lt;br&gt;
-
-.huge[2 - Each observation forms a row]
-
-&lt;br&gt;
-
-.huge[3 - Each type of observational unit forms a table]
+# Defining tidy data
 
 --
 
-.huge[==&gt; A standardized way to link the structure of a dataset (its physical layout)
-with its semantics (its meaning)]
+![](data-layout.png)
+
 
 
 ---
@@ -162,8 +153,27 @@ attribute across observations]
 
 &lt;br&gt;
 
-.large[An .grayfont[.bold[observation]] contains all values measured on the same 
+.large[An .grayfont[.bold[observation]] contains all values measured on the same
 unit across variables]
+
+---
+
+# Tidy data principles
+
+.huge[1 - Each variable forms a column]
+
+&lt;br&gt;
+
+.huge[2 - Each observation forms a row]
+
+&lt;br&gt;
+
+.huge[3 - Each type of observational unit forms a table]
+
+--
+
+.huge[==&gt; A standardized way to link the structure of a dataset (its physical layout)
+with its semantics (its meaning)]
 
 ---
 class: center, middle
@@ -171,7 +181,6 @@ class: center, middle
 .h9[Data sets]
 
 .h9[http://bit.ly/2lqjv5r]
-
 
 ---
 
@@ -342,12 +351,12 @@ a tidy dataset]
 ```r
 forest_fire &lt;- read_csv("forest_fires.csv", skip = 2)
 
-forest_fire &lt;- gather(forest_fire, key = "year", value = "area", 
-                      Y1995:Y2016)
+forest_fire &lt;- gather(forest_fire, key = "year",
+                      value = "area", Y1995:Y2016)
 
 # clean `year` and `area`
 forest_fire &lt;- mutate(forest_fire, year = gsub("Y", "", year))
-forest_fire &lt;- mutate(forest_fire, 
+forest_fire &lt;- mutate(forest_fire,
                       area = ifelse(area == "..", NA, area))
 
 head(forest_fire)
@@ -409,7 +418,7 @@ R&gt; 6 VVDB  103.007831/21.397481 Dien Bien Phu Airport
 ```
 
 ```r
-airport_gps_tidy &lt;- separate(airport_gps, 
+airport_gps_tidy &lt;- separate(airport_gps,
                              col = "gps", into = c("lon", "lat"),
                              sep = "/")
 head(select(airport_gps_tidy, icao, lon, lat, name))
@@ -462,9 +471,9 @@ class: center, middle
 ```r
 salary &lt;- read_csv("oecd_teacher_salary.csv")
 
-salary &lt;- separate(salary, 
-                   col = "subject", 
-                   into = c("school_level", "year_exp"), 
+salary &lt;- separate(salary,
+                   col = "subject",
+                   into = c("school_level", "year_exp"),
                    sep = "_")
 
 head(salary)
@@ -553,9 +562,9 @@ R&gt; 8  2017     9 profit     13    21    18     7
 
 
 ```r
-sales_kpi &lt;- gather(sales_kpi, 
-                    key = "quater", 
-                    value = "amount", 
+sales_kpi &lt;- gather(sales_kpi,
+                    key = "quater",
+                    value = "amount",
                     q1:q4)
 sales_kpi
 ```
@@ -704,7 +713,7 @@ weather &lt;- spread(weather, key = "temp_level", value = "temp")
 
 weather &lt;- mutate(weather, date = gsub("d", "", date))
 
-weather &lt;- unite(weather, col = "day", year, month, date, 
+weather &lt;- unite(weather, col = "day", year, month, date,
                  sep = "-", remove = FALSE)
 
 weather
@@ -799,7 +808,7 @@ class: inverse, center, middle
 
 &lt;br&gt;
 
-- .large[Consistent structure =&gt; easier to reason about data + easier to 
+- .large[Consistent structure =&gt; easier to reason about data + easier to
 learn/combine other tools]
 
 ???
@@ -808,7 +817,7 @@ Non-tidy data:
 
 - Alternative representations may have substantial performance or space advantages.
 
-- Specialised fields have evolved their own conventions for storing data that may 
+- Specialised fields have evolved their own conventions for storing data that may
 be quite different to the conventions of tidy data.
 
 ---
