@@ -174,7 +174,7 @@ background-size: 40%
 
 ---
 
-# Popular Analytics Software in Industry
+# Popular Analytics Toolkit in Industry
 
 ![tool-industry](R_NewYorkTime.png)
 
@@ -193,7 +193,7 @@ science and statistical computing.
 
 ---
 
-# Reliable Toolkit for Goverment
+# Reliable Software for Goverment
 
 ![R-GOV](R-GOV.png)
 
@@ -558,8 +558,8 @@ not the .greenfont[.bold[what]]]
 
 # Variable assignment
 
-.large[Just like in algebra, `variable` is used to store a computation so that it can
-be reused]
+.large[.greenfont[.bold[Just like in algebra, `variable` is used to store a
+computation so that it can be reused]]]
 
 --
 
@@ -589,7 +589,7 @@ http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.h
 
 # Functions
 
-- .large[Everything in R is done through functions.]
+- .large[.greenfont[.bold[Everything in R is done through functions.]]]
 
 --
 
@@ -611,12 +611,11 @@ plot(cars$speed, cars$dist)    # generate X-Y plot
 [1][Commonly used built-in functions](https://www.statmethods.net/management/functions.html)
 ]
 
-
 ---
 
 # Functions
 
-- .large[Everything in R is done through functions.]
+- .large[.greenfont[.bold[Everything in R is done through functions.]]]
 
 .large[User-written functions:<sub>1</sub>]
 
@@ -627,8 +626,6 @@ say_hello <- function(to) {
 
 say_hello(to = "An Chu")
 ```
-
-
 
 .footnote[
 [1][Functions in R](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial)
@@ -672,6 +669,9 @@ to_celcius <- function(x) {
 }
 ```
 
+```{r}
+to_celcius(x = 50)
+```
 
 ---
 
@@ -711,6 +711,11 @@ churnRate()
 
 - .large[Style matters]
 
+
+---
+class: inverse, middle, center
+
+.h0[Packages]
 
 
 ---
