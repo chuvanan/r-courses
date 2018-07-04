@@ -12,7 +12,7 @@ library(ggmap)
 
 # diem thi ----------------------------------------------------------------
 
-diemthi <- read_csv("slides/data_tidying/diemthi_tslop10.csv")
+diemthi <- read_csv("data_tidying/diemthi_tslop10.csv")
 
 diemthi
 
@@ -28,7 +28,7 @@ diemthi_tidy
 
 # airport gps -------------------------------------------------------------
 
-airport_gps <- read_csv("slides/data_tidying/airports_gps.csv")
+airport_gps <- read_csv("data_tidying/airports_gps.csv")
 
 airport_gps
 
@@ -58,7 +58,7 @@ ggmap(vnm) +
 
 # toy example 3 -----------------------------------------------------------
 
-sales_kpi <- read_csv("slides/data_tidying/sales_kpi.csv")
+sales_kpi <- read_csv("data_tidying/sales_kpi.csv")
 
 sales_kpi <- gather(sales_kpi, key = "quater", value = "amount", q1:q4)
 
@@ -77,7 +77,7 @@ sales_kpi
 
 # final challenge ---------------------------------------------------------
 
-dat <- read_csv("slides/data_tidying/so3.csv")
+dat <- read_csv("data_tidying/so3.csv")
 dat
 
 # expected output:
@@ -88,6 +88,3 @@ dat
 # 3    sue         81         78       84.5           82          81        86.5
 
 # your solution goes here:
-
-
-

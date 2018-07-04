@@ -14,8 +14,8 @@ library(ggplot2)
 #   -----------------------------------------------------------------------
 # Import data -------------------------------------------------------------
 
-air_quality <- read_csv("./slides/data_visualisation/air-quality.csv")
-weather <- read_csv("./slides/data_visualisation/hanoi_weather_history.csv")
+air_quality <- read_csv("./data_visualisation/air-quality.csv")
+weather <- read_csv("./data_visualisation/hanoi_weather_history.csv")
 
 air_quality <- air_quality %>%
     group_by(date, year, month, day) %>%
@@ -107,4 +107,3 @@ ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
 # Facets ------------------------------------------------------------------
 
 # Your code goes here
-
