@@ -1,6 +1,6 @@
 
 
-source("slides/data_manipulation/01-data.R")
+source("data_manipulation/01-data.R")
 
 
 # filter() ----------------------------------------------------------------
@@ -78,5 +78,3 @@ by_hour <- group_by(air_quality, hour)
 summarise(by_hour,
           max_aqi = max(aqi, na.rm = TRUE),
           min_aqi = min(aqi, na.rm = TRUE))
-
-
