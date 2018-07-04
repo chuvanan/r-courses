@@ -17,6 +17,18 @@ options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
 ```
 
+background-image: url(future-notebook.png)
+background-size: contain
+
+---
+background-image: url(reproducible-research.jpg)
+background-size: contain
+
+---
+background-image: url(rmd-enterprise.png)
+background-size: contain
+
+---
 
 # The problems
 
@@ -34,11 +46,15 @@ knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
 
 # One format to rule them all
 
+- .large[A single document containing analysis, code, and results]
+
 ![](rmarkdown.png)
 
-???
+---
+class: inverse, middle, center
 
-https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
+
+.h0[Markdown]
 
 ---
 
@@ -46,7 +62,7 @@ https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
 
 --
 
-- .large[A plaintext formatting syntax]
+- .large[A plain text formatting syntax]
 
 <br>
 
@@ -54,9 +70,16 @@ https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
 
 - .large[Render to complex formats: HTML, PDF, ...]
 
+
 ---
 
-# Examples
+# Pandoc - Universal document converter
+
+![](pandoc.png)
+
+---
+
+# What does it look like?
 
 .pull-left[
 
@@ -101,18 +124,20 @@ Normal paragraph looks like this.
 ---
 class: center
 
-
 # RStudio Help > Markdown References
 
 ![](markdown-ref.png)
 
 
 ---
-class: inverse, middle, center
-
+class: middle, center
 
 .h0[Demo 1]
 
+---
+class: inverse, middle, center
+
+.h0[R Mardown]
 
 ---
 
@@ -160,7 +185,7 @@ class: inverse, middle, center
 ![](rmd-output.png)
 
 ---
-class: inverse, middle, center
+class: middle, center
 
 .h0[Demo 2]
 
@@ -170,7 +195,44 @@ background-size: contain
 class: center, middle
 
 ---
+
+# Workflow
+
+![](workflow-wide.png)
+
+.footnote[
+[The Plain Person’s Guide to Plain Text Social Science](http://plain-text.co/index.html#introduction)
+]
+
+---
+
+# Wrap-up
+
+- .large[Automatically regenerate documents when code, data, or assumptions
+  change]
+
+- .large[Eliminate transposition errors that occur when copying results into
+  documents]
+
+- .large[Documentation for the analytic and computational processes from which
+  conclusions are drawn]
+
+---
 class: inverse, middle,center
 
-
 .h0[Questions]
+
+
+???
+
+* https://vickysteeves.gitlab.io/repro-papers/r-markdown-in-reproducible-research.html
+* https://rpubs.com/marschmi/105639
+* http://labrtorian.com/2018/02/05/reproducible-research-write-your-clinical-chemistry-paper-using-r/
+* https://www.bioconductor.org/help/course-materials/2015/CSAMA2015/lab/rr-authoring.html
+* http://www.helsinki.fi/varieng/series/volumes/19/flanagan/
+* https://warwick.ac.uk/fac/sci/wdsi/events/vacationschool2016/for-participants/materials/knitr.pdf
+* https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf
+* https://paulromer.net/jupyter-mathematica-and-the-future-of-the-research-paper/
+* https://slides.yihui.name/2012-knitr-RStudio.html#3.2
+* http://plain-text.co/pull-it-together.html
+* https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html
