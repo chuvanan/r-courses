@@ -43,13 +43,14 @@ arrange(air_quality, desc(aqi))
 mutate(air_quality, is_good = aqi <= 50)
 
 mutate(air_quality,
-       aqi_color_code = ifelse(aqi <= 50, "green",
-                        ifelse(aqi >= 51 & aqi <= 100, "yellow",
-                        ifelse(aqi >= 101 & aqi <= 150, "orange",
-                        ifelse(aqi >= 151 & aqi <= 200, "red",
-                        ifelse(aqi >= 201 & aqi <= 300, "purple",
-                        ifelse(aqi >= 301, "brown", NA))))))
-           )
+       aqi_color_code = case_when(
+           aqi <= 50 ~ "green",
+           aqi >= 51 & aqi <= 100 ~ "yellow",
+           aqi >= 101 & aqi <= 150 ~ "orange",
+           aqi >= 151 & aqi <= 200 ~ "red",
+           aqi >= 201 & aqi <= 300 ~ "purple",
+           aqi >= 301 ~ "brown"
+       ))
 
 air_quality %>%
     summarise(avg_aqi = mean(aqi, na.rm = TRUE))

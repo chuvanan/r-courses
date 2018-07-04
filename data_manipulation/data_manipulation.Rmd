@@ -19,7 +19,6 @@ knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
 library(dplyr)
 ```
 
-
 background-image: url(hex-dplyr.png)
 background-size: contain
 
@@ -70,13 +69,13 @@ background-size: contain
 
 --
 
-- .huge[Providing the most common data manipulation operations, so that you are
-helpfully guided when working on a problem]
+- .huge[Providing the .greenfont[most common data manipulation operations], so
+that you are helpfully guided when working on a problem]
 
 --
 
-- .huge[Providing intuitive syntax, so that you can easily translate your
-thoughts into codes]
+- .huge[Providing .greenfont[intuitive syntax], so that you can easily translate
+your thoughts into codes]
 
 ---
 class: center, middle
@@ -96,12 +95,13 @@ background-size: cover
 
 <br>
 
-.huge[.bold[`air_quality`:]] .huge[[17,583 x 13]. Hourly measurement of PM2.5 articles from
-Dec 2015 to Dec 2017]
+.huge[.bold[`air-quality.csv`:]] .huge[[29,928 x 12]. Hourly measurement of
+PM2.5 articles from Jan 2015 to June 2018]
 
 <br>
 
-.huge[Source: U.S. Embassy in Hanoi (https://vn.usembassy.gov/embassy-consulate/embassy/air-quality-monitor/)]
+.huge[Source: U.S. Embassy in Hanoi
+(https://vn.usembassy.gov/embassy-consulate/embassy/air-quality-monitor/)]
 
 
 ---
@@ -110,18 +110,42 @@ Dec 2015 to Dec 2017]
 
 <br>
 
-.huge[.bold[`weather`:]] .huge[[6,556 x 9]. Daily weather data 2000-2017]
+.huge[.bold[`hanoi_weather_history.csv`:]] .huge[[6,737 x 9]. Daily weather data
+2000-2018]
 
 <br>
 
-.huge[Source: freemeteo.vn]
+.huge[Source:
+[freemeteo.vn](https://freemeteo.vn/weather/hanoi/history/monthly-history/?gid=1581130&station=11376&month=7&year=2018&language=english&country=vietnam)]
 
+---
+
+# Grammar
+
+--
+
+- .huge[`grammar`: set of rules that describe the structure of a language]
+
+<br>
+
+--
+
+- .huge[`English`: Subject + Verb + Clause]
+
+<br>
+
+--
+
+- .huge[`dplyr`: Verb + Data + .greenfont[Clause]]
+
+<br>
+
+.huge[.greenfont[Clause]: what you intend to do with the data]
 
 ---
 class: inverse, center, middle
 
 .h0[One-table verbs]
-
 
 ---
 
@@ -145,19 +169,6 @@ class: inverse, center, middle
 
 
 ---
-
-# Grammar
-
-.center[
-.superhuge[verb(data, ...)]
-]
-
-<br>
-
-.huge[`...`: what you intend to do with the data]
-
-
----
 class: inverse, center, middle
 
 .h0[filter]
@@ -168,7 +179,8 @@ class: inverse, center, middle
 
 ```{r, eval=FALSE}
 dtf <- data.frame(
-    gender = c("Male", "Female", "Female", "Male", "Female"),
+    gender = c("Male", "Female", "Female",
+               "Male", "Female"),
     age = c(38, 26, 29, 24, 30),
     stringsAsFactors = FALSE
 )
@@ -179,7 +191,9 @@ dtf <- data.frame(
 ---
 class: center, middle
 
-.huge[.scp[filter(dtf, gender == "Female")]]
+```r
+filter(dtf, gender == "Female")
+```
 
 ![](filter_example1.png)
 
@@ -187,18 +201,20 @@ class: center, middle
 ---
 class: center, middle
 
-.huge[.scp[filter(dtf, age >= 28)]]
+```r
+filter(dtf, age >= 28)
+```
 
 ![](filter_example2.png)
-
 
 ---
 class: center, middle
 
-.huge[.scp[filter(dtf, gender == "Female" | age < 25)]]
+```r
+filter(dtf, gender == "Female" | age < 25)
+```
 
 ![](filter_example3.png)
-
 
 ---
 
@@ -313,17 +329,20 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-.huge[.scp[select(dtf, gender)]]
+```r
+select(dtf, gender)
+```
 
 ![](select_example1.png)
 
 ---
 class: center, middle
 
-.huge[.scp[select(dtf, -gender)]]
+```r
+select(dtf, -gender)
+```
 
 ![](select_example2.png)
-
 
 ---
 
@@ -359,16 +378,18 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-.huge[.scp[arrange(dtf, age)]]
+```r
+arrange(dtf, age)
+```
 
 ![](arrange_example1.png)
-
 
 ---
 class: center, middle
 
-.huge[.scp[arrange(dtf, desc(age))]]
-
+```r
+arrange(dtf, desc(age))
+```
 ![](arrange_example2.png)
 
 ---
@@ -400,14 +421,21 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-.huge[.scp[mutate(dtf, yob = 2017 - age)]]
+```r
+mutate(dtf, yob = 2017 - age)
+```
 
 ![](mutate_example1.png)
 
 ---
 class: center, middle
 
-.large[.scp[mutate(dtf, sex = ifelse(gender == "Female", yes = "F", no = "M"))]]
+```r
+mutate(dtf, sex = case_when(gender == "Female" ~ "F",
+                            gender == "Male" ~ "M"))
+```
+
+
 
 ![](mutate_example2.png)
 
@@ -418,7 +446,7 @@ class: center, middle
 - .large[Add a new variable (`is_good`) to indicate (TRUE/FALSE) whether an observation
 had AQI in the `Good` level]
 
-- .large[Add a new variable (`aqi_color_code`) to decode AQI level in color scheme 
+- .large[Add a new variable (`aqi_color_code`) to decode AQI level in color scheme
 from Good to Haxardous: `green`, `yellow`, `orange`, `purple`, and `brown`]
 
 ---
@@ -429,13 +457,14 @@ from Good to Haxardous: `green`, `yellow`, `orange`, `purple`, and `brown`]
 mutate(air_quality, is_good = aqi <= 50)
 
 mutate(air_quality,
-       aqi_color_code = ifelse(aqi <= 50, "green",
-                        ifelse(aqi >= 51 & aqi <= 100, "yellow",
-                        ifelse(aqi >= 101 & aqi <= 150, "orange",
-                        ifelse(aqi >= 151 & aqi <= 200, "red",
-                        ifelse(aqi >= 201 & aqi <= 300, "purple",
-                        ifelse(aqi >= 301, "brown", NA))))))
-           )
+       aqi_color_code = case_when(
+           aqi <= 50 ~ "green",
+           aqi >= 51 & aqi <= 100 ~ "yellow",
+           aqi >= 101 & aqi <= 150 ~ "orange",
+           aqi >= 151 & aqi <= 200 ~ "red",
+           aqi >= 201 & aqi <= 300 ~ "purple",
+           aqi >= 301 ~ "brown"
+       ))
 ```
 
 ---
@@ -447,10 +476,11 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-.huge[.scp[summarise(dtf, avg_age = mean(age))]]
+```r
+summarise(dtf, avg_age = mean(age))
+```
 
 ![](summarise_example1.png)
-
 
 ---
 
@@ -461,8 +491,10 @@ class: center, middle
 ---
 class: center, middle
 
-.huge[.scp[by_gender <- group_by(dtf, gender)]]
-.huge[.scp[summarise(by_gender, avg_age = mean(age))]]
+```r
+by_gender <- group_by(dtf, gender)
+summarise(by_gender, avg_age = mean(age))
+```
 
 ![](summarise_example3.png)
 
@@ -549,7 +581,7 @@ background-size: contain
 x <- data.frame(key = c(1, 2, 3),
                 val_x = c("x1", "x2", "x3"))
 y <- data.frame(key = c(1, 2, 4),
-                val_x = c("y1", "y2", "y3"))
+                val_y = c("y1", "y2", "y3"))
 ```
 
 .pull-left[
@@ -620,7 +652,8 @@ airquality_by_date <- summarise(
     max_aqi = max(aqi, na.rm = TRUE),
     avg_aqi = mean(aqi, na.rm = TRUE))
 
-airquality_by_date <- left_join(airquality_by_date, weather, 
+airquality_by_date <- left_join(airquality_by_date,
+                                weather,
                                 by = "date")
 ```
 
@@ -653,8 +686,10 @@ https://www.linkedin.com/pulse/data-pipeline-hadoop-part-1-2-birender-saini/
 --
 
 ```{r, eval=FALSE}
-x <- c(0.109, 0.359, 0.63, 0.996, 0.515, 0.142, 0.017, 0.829, 0.907)
-min(round(exp(diff(log(x))), 1)) # hard to read
+x <- c(0.109, 0.359, 0.63, 0.996, 0.515,
+       0.142, 0.017, 0.829, 0.907)
+# hard to read
+min(round(exp(diff(log(x))), 1))
 ```
 
 --
@@ -718,18 +753,18 @@ x %>% log() %>% diff() %>% exp() %>% round(1) %>% min()
 
 # Solution
 
-```{r, eval=FALSE}
+```r
 air_quality <- read_csv("air-quality.csv")
 weather <- read_csv("hanoi_weather_history.csv")
 
-air_quality %>%
+airquality_by_date <- air_quality %>%
     group_by(date) %>%
     summarise(
         min_aqi = min(aqi, na.rm = TRUE),
         max_aqi = max(aqi, na.rm = TRUE),
         avg_aqi = mean(aqi, na.rm = TRUE)
     ) %>%
-    left_join(weather, by = "date") -> airquality_by_date
+    left_join(weather, by = "date")
 
 airquality_by_date
 ```
@@ -743,7 +778,7 @@ airquality_by_date
 
 .large[Two teams of A and B.]
 
-.large[With your team, try to come up with two questions from the previous data sets 
+.large[With your team, try to come up with two questions from the previous data sets
 that can be answered by using `dplyr`.]
 
 .large[Each team has 5 min to prepare questions and 5 mins for the answers.]

@@ -12,6 +12,8 @@ str(air_quality)
 
 head(air_quality)
 
+tail(air_quality)
+
 str(weather)
 
 head(weather)

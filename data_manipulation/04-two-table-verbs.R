@@ -3,7 +3,6 @@
 library(readr)
 library(dplyr)
 
-
 air_quality <- read_csv("data_manipulation/air-quality.csv")
 weather <- read_csv("data_manipulation/hanoi_weather_history.csv")
 
@@ -16,4 +15,6 @@ airquality_by_date <- summarise(
     avg_aqi = mean(aqi, na.rm = TRUE)
 )
 
-airquality_by_date <- left_join(airquality_by_date, weather, by = "date")
+airquality_by_date <- left_join(airquality_by_date,
+                                weather,
+                                by = "date")
