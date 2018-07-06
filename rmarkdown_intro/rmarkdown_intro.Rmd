@@ -30,7 +30,7 @@ background-size: contain
 
 ---
 
-# The problems
+# The problem
 
 - .large[Excel for data entry]
 
@@ -53,81 +53,246 @@ background-size: contain
 ---
 class: inverse, middle, center
 
-
 .h0[Markdown]
 
 ---
+class: middle, center
 
-# What is Markdown?
+.center[![](foo1.png)]
+.center[.large[foo.html]]
 
---
+---
+class: middle
 
-- .large[A plain text formatting syntax]
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Header 1</h1>
+    <p>This is a HTML document</p>
+    <p>A list with three items:</p>
+    <ul style="list-style-type:circle">
+      <li>Moe</li>
+      <li>Larry</li>
+      <li>Curly</li>
+    </ul>
+    <p>Some <strong>bold</strong> text.</p>
+  </body>
+</html>
+```
+.center[.large[foo.html]]
 
-<br>
+---
+background-image: url(https://media.giphy.com/media/EsmlrgWNx5v0Y/giphy.gif)
+background-size: contain
 
---
+---
+class: middle
 
-- .large[Render to complex formats: HTML, PDF, ...]
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+*    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Header 1</h1>
+    <p>This is a HTML document</p>
+    <p>A list with three items:</p>
+    <ul style="list-style-type:circle">
+      <li>Moe</li>
+      <li>Larry</li>
+      <li>Curly</li>
+    </ul>
+    <p>Some <strong>bold</strong> text.</p>
+  </body>
+</html>
+```
+.center[.large[foo.html]]
+
+---
+class: middle
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+*    <h1>Header 1</h1>
+*    <p>This is a HTML document</p>
+*    <p>A list with three items:</p>
+    <ul style="list-style-type:circle">
+      <li>Moe</li>
+      <li>Larry</li>
+      <li>Curly</li>
+    </ul>
+    <p>Some <strong>bold</strong> text.</p>
+  </body>
+</html>
+```
+.center[.large[foo.html]]
+
+---
+class: middle
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Header 1</h1>
+    <p>This is a HTML document</p>
+    <p>A list with three items:</p>
+    <ul style="list-style-type:circle">
+*      <li>Moe</li>
+*      <li>Larry</li>
+*      <li>Curly</li>
+    </ul>
+    <p>Some <strong>bold</strong> text.</p>
+  </body>
+</html>
+```
+.center[.large[foo.html]]
+
+---
+class: middle
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Header 1</h1>
+    <p>This is a HTML document</p>
+    <p>A list with three items:</p>
+    <ul style="list-style-type:circle">
+      <li>Moe</li>
+      <li>Larry</li>
+      <li>Curly</li>
+    </ul>
+*    <p>Some <strong>bold</strong> text.</p>
+  </body>
+</html>
+```
+.center[.large[foo.html]]
+
+---
+class: middle
+
+```markdown
+# Header 1
+
+This is a HTML document
+
+A list with three tiems:
+
+- Moe
+- Larry
+- Curly
+```
+.center[.large[foo.md]]
+
+---
+background-image: url(https://media.giphy.com/media/7zDgTR3KbytSSGOuvo/giphy.gif)
+background-size: contain
+
+---
+class: middle
+
+.large[`"The idea is that a Markdown-formatted document should be publishable
+as-is, as plain text, without looking like it’s been marked up with tags or
+formatting instructions"`]
+
+.right[.large[John Gruber, creator of Markdown]]
+
+
+---
+class: middle
+
+.pull-left[
+```markdown
+# Header 1
+
+This is a HTML document
+
+A list with three tiems:
+
+- Moe
+- Larry
+- Curly
+```
+.center[.large[foo.md]]
+]
+
+.pull-right[
+![](foo2.png)
+.center[.large[foo.pdf]]
+]
+
+---
+class: middle
+
+.pull-left[
+```markdown
+# Header 1
+
+This is a HTML document
+
+A list with three tiems:
+
+- Moe
+- Larry
+- Curly
+```
+.center[.large[foo.md]]
+]
+
+.pull-right[
+![](foo3.png)
+.center[.large[foo.docx]]
+]
 
 
 ---
 
 # Pandoc - Universal document converter
 
-![](pandoc.png)
+.center[![](pandoc.png)]
 
 ---
 
-# What does it look like?
+# Caveats
 
-.pull-left[
+--
 
-<br>
-
-`# Header 1`
+- .large[Markdown is a plain text formatting syntax]
 
 <br>
 
-`## Header 2`
+--
 
-`Normal paragraph looks like this.`
+- .large[Why Markdown? It's easy, fast, portable, flexible]
 
-`**Bold text**`
+<br>
 
-`*Italic text*`
+--
 
-`* Unordered list`
-
-`1. Ordered list`
-
-]
-
-.pull-right[
-
-# Header 1
-
-## Header 2
-
-Normal paragraph looks like this.
-
-**Bold text**
-
-*Italic text*
-
-* Unordered list
-
-1. Ordered list
-
-]
+- .large[Pandoc helps to convert Markdown to complex format: html, pdf, etc.]
 
 ---
-class: center
 
 # RStudio Help > Markdown References
 
-![](markdown-ref.png)
-
+![](md-reference.png)
 
 ---
 class: middle, center
@@ -220,7 +385,7 @@ class: center, middle
 ---
 class: inverse, middle,center
 
-.h0[Questions]
+.h0[Q&A]
 
 
 ???
