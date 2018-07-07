@@ -823,7 +823,8 @@ library("dplyr")
 
 <br>
 
-.large[`readr`, `tidyr`, `dplyr`, `stringr`, `ggplot2`, `knitr`, `rmarkdown`]
+.large[`readr`, `tidyr`, `dplyr`, `stringr`, `ggplot2`, `knitr`, `rmarkdown`,
+`readxl`, `haven`]
 
 
 ---
