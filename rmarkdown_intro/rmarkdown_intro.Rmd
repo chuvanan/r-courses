@@ -1,5 +1,5 @@
 ---
-title: ".giant[Reproducible Analysis with R Markdown]"
+title: ".big[Authoring Scientific Papers and Reports with R Markdown]"
 author: ".superhuge[An Chu]"
 date: ".superhuge[07/2018]"
 output:
@@ -15,17 +15,21 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(comment = "R>", message = FALSE, warning = FALSE)
+chunk <- "```"
+inline <- function(x = "") paste0("`` `r ", x, "` ``")
 ```
 
-background-image: url(future-notebook.png)
+background-image: url(irreproducible-research.png)
 background-size: contain
+
+???
+
+- Reproducible research is hard
+- Many factors attribute to replication of a research
+- One of the form of PR is verify analysis & results
 
 ---
 background-image: url(reproducible-research.jpg)
-background-size: contain
-
----
-background-image: url(rmd-enterprise.png)
 background-size: contain
 
 ---
@@ -247,7 +251,7 @@ class: middle
 
 This is a HTML document
 
-A list with three tiems:
+NA list with three tiems:
 
 - Moe
 - Larry
@@ -299,6 +303,34 @@ class: middle, center
 
 .h0[Demo 1]
 
+.enormous[Reproduce file:
+
+`demo-markdown.html`]
+
+---
+
+
+- .large[[X] Headers]
+
+- .large[[X] Emphasis (italic, bold)]
+
+- .large[[X] Lists (numbered, bullet)]
+
+- .large[[X] Links]
+
+- .large[[X] Images]
+
+- .large[[X] Blockquotes]
+
+- .large[[X] Horizontal rule]
+
+- .large[[X] Line breaks]
+
+- .large[[X] Inline code]
+
+- .large[[...] Tables]
+
+
 ---
 class: inverse, middle, center
 
@@ -308,32 +340,65 @@ class: inverse, middle, center
 
 # What is R Markdown?
 
-
 - .large[Embed R code in a Markdown document]
-
-<br>
 
 - .large[Render textual output along with codes/graphics]
 
-<br>
-
 - .large[File extensions: `.Rmd`, `.rmd`]
 
+```r
+install.packages('knitr')
+```
+.center[![](RMarkdownFlow.png)]
+
+
 ---
 
-# Output Formats
+```{r plain-text, echo = FALSE, comment = ""}
+cat(htmltools::includeText("untitled.Rmd"))
+```
 
-![](rmd-template.png)
+---
+background-image: url(untitled.png)
+background-size: contain
+
 
 ---
 
-# YAML
+# YAML header
 
-- .large[Document metadata: title, author, etc.]
+- .large[Document metadata: title, author, date, output, etc.]
 
-- .large[A section of key:value pairs separated by dashed lines `———`]
+- .large[A section of key:value pairs separated by dashed lines]
 
-![](yaml.png)
+```yaml
+---
+title: "A simple R Markdown document"
+author: "An Chu"
+date: "July 01, 2018"
+output: html_document
+---
+```
+
+---
+
+# Output formats
+
+```yaml
+*output: html_notebook
+*output: html_document
+*output: pdf_document
+*output: word_document
+output: md_document
+output: rtf_document
+output: ioslides_presentation
+output: slidy_presentation
+output: beamer_presentation
+output: powerpoint_presentation
+...
+```
+
+.large[[Ref: R Markdown formats](https://rmarkdown.rstudio.com/formats.html)]
 
 ---
 
@@ -341,7 +406,14 @@ class: inverse, middle, center
 
 .large[Insert a chunk of R code with:]
 
-![](embed-code.png)
+.center[![](embed-code.png)]
+
+
+---
+
+# Chunk options
+
+.center[![](chunk-options.png)]
 
 ---
 
@@ -354,33 +426,36 @@ class: middle, center
 
 .h0[Demo 2]
 
----
-background-image: url(rmd-cheatsheet.png)
-background-size: contain
-class: center, middle
+.enormous[Reproduce file:
 
----
-
-# Workflow
-
-![](workflow-wide.png)
-
-.footnote[
-[The Plain Person’s Guide to Plain Text Social Science](http://plain-text.co/index.html#introduction)
-]
+`demo-rmarkdown.html`]
 
 ---
 
 # Wrap-up
 
-- .large[Automatically regenerate documents when code, data, or assumptions
+.large[The R Markdown's approach to author reporting:]
+
+- .large[Facilitate regenerating documents when code, data, or assumptions
   change]
 
 - .large[Eliminate transposition errors that occur when copying results into
   documents]
 
-- .large[Documentation for the analytic and computational processes from which
+- .large[Document the analytic and computational processes from which
   conclusions are drawn]
+
+---
+
+# Further reading
+
+.large[
+- [Writing Academic Papers with Rmarkdown](https://daijiang.name/en/2017/04/05/writing-academic-papers-with-rmarkdown/)
+- [Reproducible research: Strategies, tools, and workflows](http://www.helsinki.fi/varieng/series/volumes/19/flanagan/)
+- [A Guide to Reproducible Code in Ecology and Evolution (pdf)](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf)
+- [The Plain Person’s Guide to Plain Text Social Science](http://plain-text.co/pull-it-together.html)
+- [R for Researchers: R Markdown](https://www.ssc.wisc.edu/sscc/pubs/RFR/RFR_RMarkdown.html)
+]
 
 ---
 class: inverse, middle,center

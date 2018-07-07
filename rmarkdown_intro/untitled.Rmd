@@ -1,0 +1,21 @@
+---
+title: "A simple R Mardown document"
+output: html_document
+---
+
+## R Markdown
+
+This is an **R Markdown** document. You can include code
+chunk like this:
+
+```{r cars}
+*summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+*plot(pressure)
+```
