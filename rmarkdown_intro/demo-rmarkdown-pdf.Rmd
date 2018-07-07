@@ -2,11 +2,7 @@
 title: "Authoring Report with R Markdown"
 author: "An Chu"
 date: "July 08, 2018"
-output:
-    html_document:
-        theme: flatly
-        toc: true
-        toc_float: true
+output: pdf_document
 ---
 
 
