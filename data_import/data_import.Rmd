@@ -33,7 +33,7 @@ library(readxl)
 
 ---
 
-# Common source of data
+# Common sources of data
 
 --
 
@@ -60,7 +60,7 @@ library(readxl)
 
 ---
 
-# Common source of data
+# Common sources of data
 
 ## On disk
 
@@ -81,6 +81,13 @@ library(readxl)
 - .large[JSON, XML]
 
 ---
+class: center, middle
+
+.h9[Data sets]
+
+.h9[http://bit.ly/2lqjv5r]
+
+---
 
 # CSV and friends
 
@@ -96,7 +103,7 @@ library(readr)
 # comma-separated files (`,`)
 
 ```r
-"mpg","cyl","disp","hp","drat","wt","qsec","vs","am","gear","carb"
+mpg,cyl,disp,hp,drat,wt,qsec,vs,am,gear,carb
 21,6,160,110,3.9,2.62,16.46,0,1,4,4
 21,6,160,110,3.9,2.875,17.02,0,1,4,4
 22.8,4,108,93,3.85,2.32,18.61,1,1,4,1
@@ -108,13 +115,12 @@ library(readr)
 22.8,4,140.8,95,3.92,3.15,22.9,1,0,4,2
 ```
 
-
 ---
 
 # semicolon-separated files (`;`)
 
 ```r
-"mpg";"cyl";"disp";"hp";"drat";"wt";"qsec";"vs";"am";"gear";"carb"
+mpg;cyl;disp;hp;drat;wt;qsec;vs;am;gear;carb
 21;6;160;110;3.9;2.62;16.46;0;1;4;4
 21;6;160;110;3.9;2.875;17.02;0;1;4;4
 22.8;4;108;93;3.85;2.32;18.61;1;1;4;1
@@ -131,7 +137,7 @@ library(readr)
 # tab-separated files (`\t`)
 
 ```r
-"mpg"	"cyl"	"disp"	"hp"	"drat"	"wt"	"qsec"	"vs"	"am"	"gear"	"carb"
+mpg	cyl	disp	hp	drat	wt	qsec	vs	am	gear	carb
 21	6	160	110	3.9	2.62	16.46	0	1	4	4
 21	6	160	110	3.9	2.875	17.02	0	1	4	4
 22.8	4	108	93	3.85	2.32	18.61	1	1	4	1
@@ -146,12 +152,13 @@ library(readr)
 
 # Syntax
 
-
+.large[
 | Files                     | Special cases        |
 |---------------------------|----------------------|
 | comma-separated     | read_csv(file, ...)  |
 | semicolon-separated | read_csv2(file, ...) |
 | tab-separated       | read_tsv(file, ...)  |
+]
 
 ### Linux/Mac
 
@@ -161,21 +168,15 @@ library(readr)
 
 .large[`file = "\\\\path\\\\to\\\\your\\\\file.csv"`]
 
-
----
-class: center, middle
-
-.h9[Data sets]
-
-.h9[http://bit.ly/2lqjv5r]
-
 ---
 
-# Working directories
+# Working directory
 
 .large[Common new user mistakes:]
 
-.large[trying to read files that R “can’t find”]
+<br>
+
+.large[.bold[Trying to read files that R “can’t find”]]
 
 ---
 
@@ -433,13 +434,14 @@ tomato100
 
 ---
 
-# Import from commercial softwares (SPSS, SAS, Stata)
+# Commercial softwares (SPSS, SAS, Stata)
 
 .huge[Setup:]
 
-.large[`## install.packages("haven")`]
-
-.large[`library(haven)`]
+```r
+install.packages("haven")
+library(haven)
+```
 
 ---
 
