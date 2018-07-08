@@ -12,7 +12,9 @@ navbar:
         - text: "Foundations"
           href: ./foundations/foundations.html
         - text: "Data Import"
+          href: ./data_import/data_import.html
         - text: "Getting Started with R Markdown"
+          href: ./rmarkdown_intro/rmarkdown_intro.html
         - text: "Data Manipulation with dplyr"
         - text: "Data Tidying with tidyr"
         - text: "Data Visualisation with ggplot2"
