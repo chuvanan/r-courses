@@ -16,6 +16,7 @@ navbar:
         - text: "Getting Started with R Markdown"
           href: ./rmarkdown_intro/rmarkdown_intro.html
         - text: "Data Manipulation with dplyr"
+          href: ./data_manipulation/data_manipulation.html
         - text: "Data Tidying with tidyr"
         - text: "Data Visualisation with ggplot2"
         - text: "Data Structures"
