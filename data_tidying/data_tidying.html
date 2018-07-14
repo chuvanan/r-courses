@@ -82,13 +82,11 @@ background-size: contain
 
 ---
 
-# Defining tidy data
+# Defining tidy data?
 
 --
 
-![](data-layout.png)
-
-
+.center[![](data-layout.png)]
 
 ---
 class: center, middle
@@ -180,13 +178,22 @@ class: center, middle
 
 .h9[Data sets]
 
-.h9[http://bit.ly/2lqjv5r]
+.h9[http://bit.do/tidydata]
 
 ---
 
 # Your turn
 
 .large[Open `data_tidying.R`]
+
+.center[![](tidying.png)]
+
+
+---
+
+# Common problems
+
+.center[![](data-layout.png)]
 
 ---
 
@@ -216,11 +223,11 @@ data is often organised to make entry as easy as possible.
 
 # Solutions
 
-- .huge[`gather()`]
+- .huge[`gather()` ~ `excel::unpivot`]
 
 &lt;br&gt;
 
-- .huge[`spread()`]
+- .huge[`spread()` ~ `excel::pivot`]
 
 &lt;br&gt;
 
@@ -336,12 +343,26 @@ R&gt; 15     5 toan      7.25
 
 # Your turn
 
-&lt;br&gt;
+.large[Tidy the data set: `forest_fires.csv`]
 
-.huge[Inspect the `forest fire` data (`forest_fires.csv`) and turn it into
-a tidy dataset]
+.large[Hint: read_csv(..., skip = ...), gsub()]
 
-.huge[Hint: read_csv(..., skip = ...)]
+.large[Expected output:]
+
+```r
+   X1                  year  area
+   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;
+ 1 CẢ NƯỚC             1995  7457
+ 2 Đồng bằng sông Hồng 1995  0
+ 3 Hà Nội              1995  ""
+ 4 Hà Tây              1995  ""
+ 5 Vĩnh Phúc           1995  ""
+ 6 Bắc Ninh            1995  ""
+ 7 Quảng Ninh          1995  ""
+ 8 Hải Dương           1995  ""
+ 9 Hải Phòng           1995  ""
+10 Hà Nam              1995  ""
+```
 
 ---
 
@@ -350,15 +371,14 @@ a tidy dataset]
 
 ```r
 forest_fire &lt;- read_csv("forest_fires.csv", skip = 2)
-
 forest_fire &lt;- gather(forest_fire, key = "year",
                       value = "area", Y1995:Y2016)
 
-# clean `year` and `area`
+## clean `year` and `area`
 forest_fire &lt;- mutate(forest_fire, year = gsub("Y", "", year))
 forest_fire &lt;- mutate(forest_fire,
-                      area = ifelse(area == "..", NA, area))
-
+                      area = case_when(area == ".." ~ "",
+                                       TRUE ~ area))
 head(forest_fire)
 ```
 
@@ -368,10 +388,52 @@ R&gt;   X1                  year  area
 R&gt;   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;
 R&gt; 1 CẢ NƯỚC             1995  7457 
 R&gt; 2 Đồng bằng sông Hồng 1995  0    
-R&gt; 3 Hà Nội              1995  &lt;NA&gt; 
-R&gt; 4 Hà Tây              1995  &lt;NA&gt; 
-R&gt; 5 Vĩnh Phúc           1995  &lt;NA&gt; 
-R&gt; 6 Bắc Ninh            1995  &lt;NA&gt;
+R&gt; 3 Hà Nội              1995  ""   
+R&gt; 4 Hà Tây              1995  ""   
+R&gt; 5 Vĩnh Phúc           1995  ""   
+R&gt; 6 Bắc Ninh            1995  ""
+```
+
+---
+
+# Your turn
+
+.large[Tidy the data set: `race.csv`]
+
+.large[Expected output:]
+
+```r
+   Name   Time Score
+   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;
+ 1 Carla    50   1.2
+ 2 Carla   100   1.8
+ 3 Carla   150   2.2
+ 4 Carla   200   2.3
+ 5 Carla   250   3
+ 6 Carla   300   2.5
+ 7 Carla   350   1.8
+ 8 Karen    50   1.3
+ 9 Karen   100   1.7
+10 Karen   150   1.9
+```
+
+---
+
+# Solution
+
+```r
+race &lt;- read_csv("race.csv")
+
+race %&gt;%
+    gather(key = "Time", value = "Score", `50`:`350`) %&gt;%
+    mutate(Time = as.integer(Time)) %&gt;%
+    arrange(Name, Time)
+
+## Another solution:
+race %&gt;%
+    gather(key = "Time", value = "Score",
+           -Name, convert = TRUE) %&gt;%
+    arrange(Name, Time)
 ```
 
 ---
@@ -676,6 +738,38 @@ R&gt; 15 9/2017   2017     9 3          18      97
 R&gt; 16 9/2017   2017     9 4           7     100
 ```
 
+---
+
+# Your turn
+
+.large[Turn the data set: `cars_sales.csv` into wide format]
+
+.large[Expected output:]
+
+```r
+   model         Central North South
+   &lt;chr&gt;           &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1 Ford Ranger       171   653   573
+ 2 Honda City        203   301   470
+ 3 Honda CR-V        143   323   271
+ 4 Kia Cerato        414   407   362
+ 5 Kia Morning       501   665   349
+ 6 Mazda CX-5        627   600   584
+ 7 Mazda3            747   732   629
+ 8 Toyota Altis      100   304   280
+ 9 Toyota Innova      86   204  1012
+10 Vios              290  1066  1102
+```
+
+---
+
+# Solution
+
+```r
+cars_sales &lt;- read_csv("cars_sales.csv")
+
+cars_sales &lt;- spread(cars_sales, key = region, value = sales)
+```
 
 ---
 
@@ -736,6 +830,83 @@ R&gt; 10 2015-1-18  2015     1 18          23       12
 R&gt; # ... with 1,106 more rows
 ```
 
+
+---
+
+# Your turn
+
+.large[Tidy the data set: `grades.csv`]
+
+.large[Expected output:]
+
+```r
+      ID  Year Quarter Test1 Test2
+   &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;int&gt;
+ 1     1  2008 Fall       15    22
+ 2     1  2008 Spring     16    22
+ 3     1  2008 Winter     19    24
+ 4     1  2009 Fall       12    10
+ 5     1  2009 Spring     13    14
+ 6     1  2009 Winter     27    20
+ 7     2  2008 Fall       12    13
+ 8     2  2008 Spring     13    11
+ 9     2  2008 Winter     25    29
+10     2  2009 Fall       16    23
+```
+
+---
+
+# Solution
+
+```r
+grades &lt;- read_csv("grades.csv")
+
+grades %&gt;%
+    gather(key = Quarter, value = Score, Fall:Winter) %&gt;%
+    mutate(Test = paste0("Test", Test)) %&gt;%
+    spread(key = Test, value = Score) %&gt;%
+    arrange(ID, Year, Quarter)
+```
+
+
+---
+
+# Your turn
+
+.large[Tidy the data set: `activities.csv`]
+
+.large[Expected output:]
+
+
+```r
+   id    trt   time   play   talk   work
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 x1    tr    T1    0.865 0.536  0.652
+ 2 x1    tr    T2    0.354 0.0319 0.275
+ 3 x10   cnt   T1    0.356 0.501  0.836
+ 4 x10   cnt   T2    0.505 0.219  0.802
+ 5 x2    cnt   T1    0.615 0.0931 0.568
+ 6 x2    cnt   T2    0.936 0.114  0.229
+ 7 x3    cnt   T1    0.775 0.170  0.114
+ 8 x3    cnt   T2    0.246 0.469  0.0144
+ 9 x4    tr    T1    0.356 0.900  0.596
+10 x4    tr    T2    0.473 0.397  0.729
+```
+
+---
+
+# Solution
+
+```r
+activities &lt;- read_csv("activities.csv")
+
+activities %&gt;%
+    gather(key = key, value = value, -id, -trt) %&gt;%
+    separate(key, into = c("location", "time")) %&gt;%
+    arrange(id, trt, time) %&gt;%
+    spread(key = location, value = value)
+```
+
 ---
 
 # Final challenge
@@ -748,23 +919,23 @@ print(dat)
 
 
 ```r
-#   Person Time Score1 Score2 Score3
-# 1   greg  Pre     80     78   84.0
-# 2   greg Post     79     80   84.5
-# 3  sally  Pre     75     74   79.5
-# 4  sally Post     78     78   83.0
-# 5    sue  Pre     81     78   84.5
-# 6    sue Post     82     81   86.5
+  Person Time Score1 Score2 Score3
+1   greg  Pre     80     78   84.0
+2   greg Post     79     80   84.5
+3  sally  Pre     75     74   79.5
+4  sally Post     78     78   83.0
+5    sue  Pre     81     78   84.5
+6    sue Post     82     81   86.5
 ```
 
 .large[Expected output:]
 
 
 ```r
-#   Person Pre.Score1 Pre.Score2 Pre.Score3  Post.Score1 Post.Score2 Post.Score3
-# 1   greg         80         78       84.0           79          80        84.5
-# 2  sally         75         74       79.5           78          78        83.0
-# 3    sue         81         78       84.5           82          81        86.5
+  Person Pre.Score1 Pre.Score2 Pre.Score3  Post.Score1 Post.Score2 Post.Score3
+1   greg         80         78       84.0           79          80        84.5
+2  sally         75         74       79.5           78          78        83.0
+3    sue         81         78       84.5           82          81        86.5
 
 # Hint: `?unite`
 ```
