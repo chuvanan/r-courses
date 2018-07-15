@@ -37,6 +37,11 @@ class: center, top
 
 # Data structures
 
+---
+
+# Data structure is hard to teach
+
+.center[![](ds.png)]
 
 ---
 
@@ -957,5 +962,5 @@ class: inverse, center, middle
 .h0[Wrap-up]
 
 ---
-background-image: url(simple_view_object.png)
+background-image: url(data-structures-overview.png)
 background-size: contain
