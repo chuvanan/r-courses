@@ -18,6 +18,7 @@ navbar:
         - text: "Data Manipulation with dplyr"
           href: ./data_manipulation/data_manipulation.html
         - text: "Data Tidying with tidyr"
+          href: ./data_tidying/data_tidying.html
         - text: "Data Visualisation with ggplot2"
         - text: "Data Structures"
 
