@@ -43,7 +43,7 @@ a, a > code {
 .right-column {
   width: 75%;
   float: right;
-  padding-top: 1em;
+  padding-top: 0;
 }
 .pull-left {
   float: left;
@@ -58,6 +58,10 @@ a, a > code {
 }
 img, video, iframe {
   max-width: 100%;
+  border: 1px solid #ddd;
+  box-shadow: 5px 5px 5px #eee;
+  margin-left: auto;
+  margin-right: auto
 }
 blockquote {
   border-left: solid 5px lightgray;
