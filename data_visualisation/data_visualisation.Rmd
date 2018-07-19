@@ -18,7 +18,7 @@ output:
 options(htmltools.dir.version = FALSE, width = 90)
 # knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE, dev = "svg", fig.align = "center")
 knitr::opts_chunk$set(fig.width=4.25, fig.height=3.5, fig.retina=3, fig.align = "center",
-                      message=FALSE, warning=FALSE, cache = TRUE, 
+                      message=FALSE, warning=FALSE, cache = TRUE,
                       autodep = TRUE, hiline=TRUE, dev = "svg")
 library(readr)
 library(dplyr)
@@ -218,7 +218,7 @@ ggplot(data = air_quality)
 .left-code[
 ```{r plot1, eval=FALSE}
 ggplot(data = air_quality,
-       aes(x = min_temp, 
+       aes(x = min_temp,
            y = avg_aqi))
 ```
 ]
@@ -286,7 +286,7 @@ p2
 
 # ggplot2 layers - Facets
 
-<img src="small-multiple.png" height="550" width="1100" class="center"> 
+<img src="small-multiple.png" height="550" width="1100" class="center">
 
 ---
 
@@ -315,15 +315,15 @@ class: inverse, center, top
 
 # ggplot2 layers - Statistics
 
-<img src="cartesian-coord-1.png" height="500" width="700" class="center"> 
+<img src="cartesian-coord-1.png" height="500" width="700" class="center">
 
 ---
 
 .left-code[
 ```{r plot6, eval=FALSE}
-p4 <- p3 + 
-  geom_smooth(method = "lm", 
-              se = FALSE, 
+p4 <- p3 +
+  geom_smooth(method = "lm",
+              se = FALSE,
               color = "red")
 p4
 ```
@@ -346,14 +346,14 @@ class: inverse, center, top
 
 # ggplot2 layers - Coordinates
 
-<img src="cartesian-coord-1.png" height="550" width="750" class="center"> 
+<img src="cartesian-coord-1.png" height="550" width="750" class="center">
 
 
 ---
 
 .left-code[
 ```{r plot7, eval=FALSE}
-p5 <- p4 + 
+p5 <- p4 +
   coord_cartesian(
     xlim = c(5, 32),
     ylim = c(25, 200))
@@ -372,17 +372,17 @@ p5
 
 # ggplot2 layers - Themes
 
-<img src="unemploy-themes-1.png" height="500" width="700" class="center"> 
+<img src="unemploy-themes-1.png" height="500" width="700" class="center">
 
 ---
 
 .left-code[
 ```{r plot8, eval=FALSE}
-p6 <- p5 + 
-  theme_minimal(base_size = 8) + 
-  labs(x = "Min temp (C)", 
+p6 <- p5 +
+  theme_minimal(base_size = 8) +
+  labs(x = "Min temp (C)",
        y = "AQI") +
-  theme(strip.text = 
+  theme(strip.text =
   element_text(face = "bold"),
 panel.grid.minor = element_blank())
 
@@ -434,8 +434,8 @@ class: inverse, center, middle
 
 ```{r plot9, eval=FALSE}
 # position mapping
-ggplot(air_quality, 
-       aes(x = min_temp, 
+ggplot(air_quality,
+       aes(x = min_temp,
            y = avg_aqi)) +
     geom_point()
 ```
@@ -484,20 +484,20 @@ head(colors(), 30) # print out the first 30 colors
 
 # Shape
 
-<img src="pch.png" height="520" width="800" class="center"> 
+<img src="pch.png" height="520" width="800" class="center">
 
 ---
 
 # Linetype
 
-<img src="linetype.png" height="520" width="800" class="center"> 
+<img src="linetype.png" height="520" width="800" class="center">
 
 
 ---
 
 .left-code[
 ```{r plot10, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(color = "#CC3300")
 ```
@@ -512,11 +512,11 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot11, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point(size = 3, 
-               alpha = 0.6, 
-               color = "#003366", 
+    geom_point(size = 3,
+               alpha = 0.6,
+               color = "#003366",
                shape = 19)
 ```
 ]
@@ -546,13 +546,13 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
 
 .left-code[
 ```{r plot12, eval=FALSE}
-ggplot(air_quality, 
-       aes(max_steady_wind, 
+ggplot(air_quality,
+       aes(max_steady_wind,
            avg_aqi)) +
-    geom_point(alpha = 0.5, 
-               size = 3, 
+    geom_point(alpha = 0.5,
+               size = 3,
                shape = 21,
-               color = "white", 
+               color = "white",
                fill = "#993399")
 ```
 ]
@@ -571,7 +571,7 @@ class: center, middle
 
 .left-code[
 ```{r plot13, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp,
            avg_aqi)) +
     geom_point(color = "#001A57")
@@ -588,10 +588,10 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot14, eval=FALSE}
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = year)) +
     geom_point()
 ```
 ]
@@ -615,7 +615,7 @@ ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
 - .large[**inside of aes()**: maps an aesthetic to a variable]
 
 ```{r, eval=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
     geom_point()
 ```
 
@@ -637,10 +637,10 @@ ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
 
 .left-code[
 ```{r plot15, eval=FALSE}
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = "#001A57")) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = "#001A57")) +
     geom_point()
 ```
 ]
@@ -654,13 +654,13 @@ ggplot(air_quality,
 
 # Your turn
 
-.large[Add color, size, alpha, and shape aesthetics to the following code chunk. 
+.large[Add color, size, alpha, and shape aesthetics to the following code chunk.
 For this time, try to map visual aesthetics to discrete and/or continuous variables.]
 
 .large[What happens?]
 
 ```{r, eval=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi, 
+ggplot(air_quality, aes(max_steady_wind, avg_aqi,
                         # your code goes here
                         .........
                         )) +
@@ -673,10 +673,10 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi,
 
 .left-code[
 ```{r plot16, eval=FALSE}
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = year)) +
     geom_point()
 ```
 ]
@@ -692,14 +692,14 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot17, eval=FALSE}
-air_quality %>% 
+air_quality %>%
 mutate(
   year = as.numeric(
     as.character(year))
-  ) %>% 
-ggplot(aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+  ) %>%
+ggplot(aes(min_temp,
+           avg_aqi,
+           color = year)) +
 geom_point()
 ```
 ]
@@ -733,7 +733,7 @@ two variables `month` and `avg_aqi`?]
 
 .left-code[
 ```{r plot18, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_point()
 ```
@@ -749,7 +749,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot19, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_boxplot()
 ```
@@ -764,7 +764,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot20, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_violin()
 ```
@@ -787,7 +787,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot21, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
     geom_histogram(color = "white")
 ```
@@ -802,10 +802,10 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot22, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
-    geom_histogram(color = "white", 
-                   bins = 50) 
+    geom_histogram(color = "white",
+                   bins = 50)
                    # default  =30
 ```
 ]
@@ -819,9 +819,9 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot23, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
-    geom_histogram(color = "white", 
+    geom_histogram(color = "white",
                    binwidth = 3)
 ```
 ]
@@ -851,7 +851,7 @@ ggplot(air_quality, aes(x = avg_aqi, color = month)) +
 
 .left-code[
 ```{r plot24, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
     geom_density()
 ```
@@ -866,8 +866,8 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot25, eval=FALSE}
-ggplot(air_quality, 
-       aes(avg_aqi, 
+ggplot(air_quality,
+       aes(avg_aqi,
            color = month)) +
     geom_density()
 ```
@@ -937,7 +937,7 @@ ggplot(air_quality) +
 
 .left-code[
 ```{r plot27, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point() +
     geom_line()
@@ -953,7 +953,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot28, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
     geom_line()
@@ -969,11 +969,11 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot29, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
     geom_line(
-      data = filter(air_quality, 
+      data = filter(air_quality,
                     min_temp < 20)
       )
 ```
@@ -1003,7 +1003,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot30, eval=FALSE}
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(date, avg_aqi)) +
     geom_line()
 ```
@@ -1018,7 +1018,7 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot31, eval=FALSE}
-ggplot(weather, 
+ggplot(weather,
        aes(date, min_temp)) +
     geom_line()
 ```
@@ -1040,10 +1040,10 @@ ggplot(air_quality, aes(day, month, fill = avg_aqi)) +
 ```
 
 ```{r, out.width="60%", out.height="60%", echo=FALSE}
-air_quality %>% 
-    group_by(day, month) %>% 
-    summarise(avg_aqi = median(avg_aqi, na.rm= TRUE)) %>% 
-    ungroup() %>% 
+air_quality %>%
+    group_by(day, month) %>%
+    summarise(avg_aqi = median(avg_aqi, na.rm= TRUE)) %>%
+    ungroup() %>%
     ggplot(aes(day, month, fill = avg_aqi)) +
     geom_tile() +
     theme(text = element_text(size = 16))
@@ -1110,10 +1110,10 @@ class: inverse, center, middle
 
 .left-code[
 ```{r plot32, eval=FALSE}
-# facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, 
+# facet_wrap(~ categ_variable) - 1d
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point() + 
+    geom_point(alpha = 0.4) +
   facet_wrap(~ description)
 ```
 ]
@@ -1128,11 +1128,11 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot33, eval=FALSE}
-# facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, 
+# facet_wrap(~ categ_variable) - 1d
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point() + 
-  facet_wrap(~ description, 
+    geom_point(alpha = 0.4) +
+  facet_wrap(~ description,
              nrow = 3)
 ```
 ]
@@ -1145,20 +1145,14 @@ ggplot(air_quality,
 
 ---
 
-.left-code[
 ```{r plot34, eval=FALSE}
-# facet_wrap(row ~ col) - 2d 
-ggplot(air_quality, 
-       aes(min_temp, avg_aqi)) +
-    geom_point() + 
-  facet_grid(year ~ month)
+# facet_wrap(row ~ col) - 2d
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point(alpha = 0.4) + facet_grid(year ~ month)
 ```
-]
 
-.right-plot[
-```{r plot34-out, ref.label="plot34", echo=FALSE, out.width="100%", fig.align='right'}
+```{r plot34-out, ref.label="plot34", echo=FALSE, fig.height=5.0, fig.width=10.5, fig.align='center', dpi = 300}
 ```
-]
 
 ---
 
@@ -1168,7 +1162,7 @@ ggplot(air_quality,
 
 .large[Explore the relationship of `aqi` and `max_steady_wind`:]
 
-- .large[across `month` (hint: facet_wrap())] 
+- .large[across `month` (hint: facet_wrap())]
 
 - .large[across `year` and `month` (hint: facet_grid())]
 
@@ -1177,10 +1171,10 @@ ggplot(air_quality,
 
 .left-code[
 ```{r plot35, eval=FALSE}
-ggplot(air_quality, 
-       aes(max_steady_wind, 
+ggplot(air_quality,
+       aes(max_steady_wind,
            avg_aqi)) +
-    geom_point() + 
+    geom_point(alpha = 0.4) +
   facet_wrap(~ month)
 ```
 ]
@@ -1192,20 +1186,13 @@ ggplot(air_quality,
 
 ---
 
-.left-code[
 ```{r plot36, eval=FALSE}
-ggplot(air_quality, 
-       aes(max_steady_wind, 
-           avg_aqi)) +
-    geom_point() + 
-  facet_grid(year ~ month)
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point(alpha = 0.4) + facet_grid(year ~ month)
 ```
-]
 
-.right-plot[
-```{r plot36-out, ref.label="plot36", echo=FALSE, out.width="100%", fig.align='right'}
+```{r plot36-out, ref.label="plot36", echo=FALSE, fig.height=5.0, fig.width=10.5, fig.align='center', dpi = 300}
 ```
-]
 
 ---
 
@@ -1215,59 +1202,46 @@ ggplot(air_quality,
 
 .large[Explore the relationship of `aqi` and `max_steady_wind`:]
 
-- .large[across `month` (this time, use **facet_grid()**)] 
+- .large[across `month` (this time, use **facet_grid()**)]
 
 - .large[across `year` and `month` (this time, use **facet_wrap()**)]
 
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
+```{r plot37, eval=FALSE}
 ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
     geom_point() + facet_grid(. ~ month)
 ```
 
-
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() +
-    facet_grid(. ~ month)
-    theme(text = element_text(size = 16))
+```{r plot37-out, ref.label="plot37", echo=FALSE, fig.height=5.0, fig.width=10.5, fig.align='center', dpi = 300}
 ```
-
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() + facet_grid(month ~ .)
-```
-
-
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+.left-code[
+```{r plot38, eval=FALSE}
+ggplot(air_quality,
+       aes(max_steady_wind, avg_aqi)) +
     geom_point() +
-    facet_grid(month ~ .) +
-    theme(text = element_text(size = 16))
+    facet_grid(month ~ .)
 ```
+]
 
+.right-plot[
+```{r plot38-out, ref.label="plot38", echo=FALSE, fig.height=7.0, fig.width=5.0, fig.align='right', dpi = 300}
+```
+]
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
+```{r plot39, eval=FALSE}
 ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
     geom_point() + facet_wrap(year ~ month)
 ```
 
-
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() +
-    facet_wrap(year ~ month) +
-    theme(text = element_text(size = 16))
+```{r plot39-out, ref.label="plot39", echo=FALSE, fig.height=5.0, fig.width=10.5, fig.align='center', dpi = 300}
 ```
-
-
 
 ---
 class: inverse, center, middle
@@ -1297,23 +1271,26 @@ background-size: contain
 
 ---
 
-```{r, out.width="60%", out.height="60%", eval=FALSE}
-p + labs(title = "Scatter plot of AQI and Temperature in Hanoi",
-         subtitle = "Daily measurement from 2015 to 2017",
-         x = "Min Temperature (Ceilcus)",
-         y = "Air Quality Index")
+```{r, echo=FALSE}
+p <- ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+    geom_point(size = 3, alpha = 0.6, color = "#003366")
 ```
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(size = 3, alpha = 0.6, color = "#003366") +
-    labs(title = "Scatter plot of AQI and Temperature in Hanoi",
-         subtitle = "Daily measurement from 2015 to 2017",
-         x = "Min Temperature (Ceilcus)",
-         y = "Air Quality Index") +
-    theme(text = element_text(size = 16))
+.left-code[
+```{r plot40, eval=FALSE}
+p + labs(
+title = "Scatter plot of AQI and Temperature in Hanoi",
+subtitle = "Daily measurement from 2015 to 2017",
+x = "Min Temperature (Ceilcus)",
+y = "Air Quality Index"
+)
 ```
+]
 
+.right-plot[
+```{r plot40-out, ref.label="plot40", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 class: inverse, center, middle
@@ -1423,79 +1400,115 @@ air_quality <- air_quality %>%
 
 # Position adjustments
 
+.left-code[
 .large[How overlapping objects are arranged]
+]
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
+```{r plot41, eval=FALSE, echo=FALSE}
 ggplot(air_quality, aes(year, fill = aqi_categ)) +
     geom_bar() +
-    theme(text = element_text(size = 16)) +
-    theme(legend.position = "top", legend.title = element_blank())
+    theme(legend.position = "top",
+          legend.title = element_blank(),
+          text = element_text(size = 7.5))
 ```
+
+.right-plot[
+```{r plot41-out, ref.label="plot41", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
 # Position adjustments
 
+.left-code[
 .large[How overlapping objects are arranged]
+]
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
+```{r plot42, eval=FALSE, echo=FALSE}
 ggplot(air_quality, aes(year, fill = aqi_categ)) +
     geom_bar(position = "dodge") +
-    theme(text = element_text(size = 16)) +
-    theme(legend.position = "top", legend.title = element_blank())
+    theme(legend.position = "top",
+          legend.title = element_blank(),
+          text = element_text(size = 7.5))
 ```
+
+.right-plot[
+```{r plot42-out, ref.label="plot42", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
 # Themes
 
+.left-code[
 .large[Visual appearance of non-data elements]
+]
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
+```{r plot43, eval=FALSE, echo=FALSE}
 ggplot(air_quality, aes(year, fill = aqi_categ)) +
     geom_bar(position = "dodge") +
-    theme(text = element_text(size = 16)) +
-    theme_bw() +
-    theme(text = element_text(size = 16)) +
+    theme_minimal() +
+    theme(text = element_text(size = 7.5)) +
     theme(legend.position = "top", legend.title = element_blank())
 ```
+
+.right-plot[
+```{r plot43-out, ref.label="plot43", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
 # Scales
 
+.left-code[
 .large[Customise color scales and other mappings]
+]
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
+```{r plot44, eval=FALSE, echo=FALSE}
 ggplot(air_quality, aes(year, fill = aqi_categ)) +
     geom_bar(position = "dodge") +
-    theme_bw() +
+    theme_minimal() +
     scale_fill_manual(values = c("forestgreen", "yellow",
                                  "orange", "red",
                                  "purple", "brown")) +
-    theme(text = element_text(size = 16)) +
+    theme(text = element_text(size = 7.5)) +
     theme(legend.position = "top", legend.title = element_blank())
 ```
+
+.right-plot[
+```{r plot44-out, ref.label="plot44", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
 # Coordinate systems
 
+.left-code[
 .large[Control the space of data points]
+]
 
-```{r, out.width="65%", out.height="65%", echo=FALSE}
+```{r plot45, eval=FALSE, echo=FALSE}
 ggplot(air_quality, aes(factor(1), fill = aqi_categ)) +
     geom_bar(width = 1) +
-    theme_bw() +
+    theme_minimal() +
     scale_fill_manual(values = c("forestgreen", "yellow",
                                  "orange", "red",
                                  "purple", "brown")) +
     coord_polar(theta = "y") +
     labs(x = NULL, y = NULL) +
     theme(panel.border = element_blank()) +
-    theme(text = element_text(size = 16)) +
+    theme(text = element_text(size = 7.5)) +
     theme(legend.position = "top", legend.title = element_blank())
 ```
+
+.right-plot[
+```{r plot45-out, ref.label="plot45", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
@@ -1506,6 +1519,3 @@ ggplot(air_quality, aes(factor(1), fill = aqi_categ)) +
 ---
 background-image: url(ggplot2.jpg)
 background-size: contain
-
-
-
