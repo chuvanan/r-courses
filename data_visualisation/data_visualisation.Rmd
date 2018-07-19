@@ -16,7 +16,6 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE, width = 90)
-# knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE, dev = "svg", fig.align = "center")
 knitr::opts_chunk$set(fig.width=4.25, fig.height=3.5, fig.retina=3, fig.align = "center",
                       message=FALSE, warning=FALSE, cache = TRUE,
                       autodep = TRUE, hiline=TRUE, dev = "svg")
@@ -91,7 +90,7 @@ class: inverse, center, middle
 
 ---
 
-# Grammar of graphics
+# `gg` is Grammar of Graphics
 
 .pull-left[
 
@@ -105,6 +104,16 @@ class: inverse, center, middle
 .pull-right[
 ![](grammar_graphics.jpeg)
 ]
+
+???
+
+http://vita.had.co.nz/papers/layered-grammar.pdf
+
+---
+background-image: url(ggplot2_layers.jpg)
+background-size: 50%
+
+# Grammartical layers
 
 ---
 
@@ -125,12 +134,6 @@ class: inverse, center, middle
 ![](ggplot2.jpg)
 
 ]
-
----
-background-image: url(ggplot2_layers.jpg)
-background-size: 60%
-
-# Grammartical elements
 
 
 ---
