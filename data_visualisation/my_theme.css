@@ -1,4 +1,7 @@
 
+.font40 {
+  font-size: 40px;
+}
 
 .large { font-size: 30px }
 
@@ -77,3 +80,7 @@
   float: left;
 }
 
+.remark-slide-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}

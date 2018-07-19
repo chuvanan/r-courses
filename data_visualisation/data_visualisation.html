@@ -3,7 +3,7 @@
   <head>
     <title>.giant[Data visualisation]</title>
     <meta charset="utf-8">
-    <meta name="author" content=".superhuge[An Chu]" />
+    <meta name="author" content=".superhuge[ An Chu]" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="example.css" type="text/css" />
     <link rel="stylesheet" href="my_theme.css" type="text/css" />
@@ -14,8 +14,8 @@ class: center, middle, inverse, title-slide
 
 # .giant[Data visualisation]
 ## .giant[with ggplot2]
-### .superhuge[An Chu]
-### .superhuge[07/2018]
+### .superhuge[<br>An Chu]
+### .superhuge[<br>07/2018]
 
 ---
 
@@ -8482,7 +8482,7 @@ p2
 
 # ggplot2 layers - Facets
 
-&lt;img src="small-multiple.png" height="500" width="1000" class="center"&gt; 
+&lt;img src="small-multiple.png" height="550" width="1100" class="center"&gt; 
 
 ---
 
@@ -8542,7 +8542,7 @@ class: inverse, center, top
 
 # ggplot2 layers - Coordinates
 
-&lt;img src="cartesian-coord-1.png" height="500" width="700" class="center"&gt; 
+&lt;img src="cartesian-coord-1.png" height="550" width="750" class="center"&gt; 
 
 
 ---
@@ -8576,12 +8576,10 @@ p5
 
 ```r
 p6 &lt;- p5 + 
-  theme_minimal(
-    base_size = 8) + 
+  theme_minimal(base_size = 8) + 
   labs(x = "Min temp (C)", 
        y = "AQI") +
-  theme(
-strip.text = 
+  theme(strip.text = 
   element_text(face = "bold"),
 panel.grid.minor = element_blank())
 
@@ -8631,6 +8629,7 @@ class: inverse, center, middle
 
 .left-code[
 
+
 ```r
 # position mapping
 ggplot(air_quality, 
@@ -8638,6 +8637,7 @@ ggplot(air_quality,
            y = avg_aqi)) +
     geom_point()
 ```
+
 ]
 
 .right-plot[
@@ -8907,8 +8907,7 @@ ggplot(air_quality,
 air_quality %&gt;% 
 mutate(
   year = as.numeric(
-    as.character(year)
-    )
+    as.character(year))
   ) %&gt;% 
 ggplot(aes(min_temp, 
            avg_aqi, 
@@ -8931,7 +8930,6 @@ class: inverse, center, middle
 background-image: url(cheasheet.png)
 background-size: contain
 
-# ggplot2 cheatsheet
 
 ---
 
@@ -8944,35 +8942,49 @@ two variables `month` and `avg_aqi`?]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(month, avg_aqi)) +
+ggplot(air_quality, 
+       aes(month, avg_aqi)) +
     geom_point()
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-10-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot18-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(month, avg_aqi)) +
+ggplot(air_quality, 
+       aes(month, avg_aqi)) +
     geom_boxplot()
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-12-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot19-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
-exclude: TRUE
 
-
+.left-code[
 
 ```r
-ggplot(air_quality, aes(month, avg_aqi)) +
+ggplot(air_quality, 
+       aes(month, avg_aqi)) +
     geom_violin()
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-14-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot20-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
@@ -8984,66 +8996,95 @@ ggplot(air_quality, aes(month, avg_aqi)) +
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(x = avg_aqi)) +
+ggplot(air_quality, 
+       aes(x = avg_aqi)) +
     geom_histogram(color = "white")
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-16-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-
-```r
-ggplot(air_quality, aes(x = avg_aqi)) +
-    geom_histogram(color = "white", bins = 50) # default  =30
-```
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-18-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot21-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(x = avg_aqi)) +
-    geom_histogram(color = "white", binwidth = 3)
+ggplot(air_quality, 
+       aes(x = avg_aqi)) +
+    geom_histogram(color = "white", 
+                   bins = 50) 
+                   # default  =30
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-20-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot22-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+```r
+ggplot(air_quality, 
+       aes(x = avg_aqi)) +
+    geom_histogram(color = "white", 
+                   binwidth = 3)
+```
+]
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot23-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
 # Your turn
 
+.left-code[
 .large[Make the density plot of `avg_aqi` colored by `month`.]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-21-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-
-```r
-ggplot(air_quality, aes(x = avg_aqi)) +
-    geom_density()
-```
-
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-23-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-9-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(x = avg_aqi, color = month)) +
+ggplot(air_quality, 
+       aes(x = avg_aqi)) +
     geom_density()
 ```
+]
 
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot24-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-25-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+---
+
+.left-code[
+
+```r
+ggplot(air_quality, 
+       aes(avg_aqi, 
+           color = month)) +
+    geom_density()
+```
+]
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot25-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 exclude: true
@@ -9055,7 +9096,7 @@ ggplot(air_quality, aes(x = avg_aqi, group = month)) +
 ```
 
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-27-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-11-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -9081,51 +9122,73 @@ ggplot(air_quality) +
 
 ---
 
+.left-code[
 
 ```r
 ggplot(air_quality) +
-    geom_point(aes(min_temp, avg_aqi)) +
-    geom_line(aes(min_temp, avg_aqi))
+    geom_point(
+      aes(min_temp, avg_aqi)
+      ) +
+    geom_line(
+      aes(min_temp, avg_aqi)
+      )
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-30-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot26-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
     geom_point() +
     geom_line()
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-32-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot27-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
     geom_line()
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-34-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot28-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
-    geom_line(data = filter(air_quality, min_temp &lt; 20))
+    geom_line(
+      data = filter(air_quality, 
+                    min_temp &lt; 20)
+      )
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-36-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot29-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
@@ -9144,25 +9207,33 @@ ggplot(air_quality, aes(min_temp, avg_aqi)) +
 ---
 
 
+.left-code[
+
 ```r
-ggplot(air_quality, aes(date, avg_aqi)) +
+ggplot(air_quality, 
+       aes(date, avg_aqi)) +
     geom_line()
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-38-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot30-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(weather, aes(date, min_temp)) +
+ggplot(weather, 
+       aes(date, min_temp)) +
     geom_line()
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-40-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot31-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 exclude: true
@@ -9175,7 +9246,7 @@ ggplot(air_quality, aes(day, month, fill = avg_aqi)) +
     geom_tile()
 ```
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-42-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-14-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9232,48 +9303,61 @@ class: inverse, center, middle
 
 # Facets
 
-![](facets.png)
+.center[![](facets.png)]
 
 ---
 
+.left-code[
 
 ```r
 # facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
-    geom_point() + facet_wrap(~ description)
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
+    geom_point() + 
+  facet_wrap(~ description)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-44-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot32-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 
 ---
 
+.left-code[
 
 ```r
 # facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
-    geom_point() + facet_wrap(~ description, nrow = 3)
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
+    geom_point() + 
+  facet_wrap(~ description, 
+             nrow = 3)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-46-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot33-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 
 ---
 
-
+.left-code[
 
 ```r
 # facet_wrap(row ~ col) - 2d 
-ggplot(air_quality, aes(min_temp, avg_aqi)) +
-    geom_point() + facet_grid(year ~ month)
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
+    geom_point() + 
+  facet_grid(year ~ month)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-48-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot34-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
@@ -9290,26 +9374,37 @@ ggplot(air_quality, aes(min_temp, avg_aqi)) +
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() + facet_wrap(~ month)
+ggplot(air_quality, 
+       aes(max_steady_wind, 
+           avg_aqi)) +
+    geom_point() + 
+  facet_wrap(~ month)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-50-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot35-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() + facet_grid(year ~ month)
+ggplot(air_quality, 
+       aes(max_steady_wind, 
+           avg_aqi)) +
+    geom_point() + 
+  facet_grid(year ~ month)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-52-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot36-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
@@ -9333,7 +9428,7 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
 ```
 
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-54-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-16-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 ```
 ## List of 1
@@ -9365,7 +9460,7 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
 ```
 
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-56-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-18-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -9377,7 +9472,7 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
 ```
 
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-58-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-20-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -9417,7 +9512,7 @@ p + labs(title = "Scatter plot of AQI and Temperature in Hanoi",
          y = "Air Quality Index")
 ```
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-60-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-22-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -9488,7 +9583,7 @@ ggsave(filename = "~/path/to/figures/plot.eps")
 
 # [aqivn.org](http://www.aqivn.org/vi/)
 
-![](aqivn-org.png)
+center[![](aqivn-org.png)]
 
 
 ---
@@ -9497,7 +9592,7 @@ ggsave(filename = "~/path/to/figures/plot.eps")
 
 .large[Replicate the following graph:]
 
-![](alltime.png)
+.center[![](alltime.png)]
 
 ---
 class: inverse, center, middle
@@ -9535,7 +9630,7 @@ air_quality &lt;- air_quality %&gt;%
 
 .large[How overlapping objects are arranged]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-66-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-28-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9543,7 +9638,7 @@ air_quality &lt;- air_quality %&gt;%
 
 .large[How overlapping objects are arranged]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-67-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-29-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9551,7 +9646,7 @@ air_quality &lt;- air_quality %&gt;%
 
 .large[Visual appearance of non-data elements]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-68-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-30-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9559,7 +9654,7 @@ air_quality &lt;- air_quality %&gt;%
 
 .large[Customise color scales and other mappings]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-69-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-31-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9567,14 +9662,13 @@ air_quality &lt;- air_quality %&gt;%
 
 .large[Control the space of data points]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-70-1.svg" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-32-1.svg" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
 
-![](ggplot2_website.png)
-
+.center[![](ggplot2_website.png)]
 
 ---
 background-image: url(ggplot2.jpg)
