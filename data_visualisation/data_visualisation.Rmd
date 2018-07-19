@@ -8,14 +8,18 @@ output:
     css: ["default", "example.css", "my_theme.css"]
     lib_dir: libs
     nature:
+      ratio: 16:9
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 ---
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE, dev = "svg", fig.align = "center")
+options(htmltools.dir.version = FALSE, width = 90)
+# knitr::opts_chunk$set(comment = "", message = FALSE, warning = FALSE, dev = "svg", fig.align = "center")
+knitr::opts_chunk$set(fig.width=4.25, fig.height=3.5, fig.retina=3, fig.align = "center",
+                      message=FALSE, warning=FALSE, cache = TRUE, 
+                      autodep = TRUE, hiline=TRUE, dev = "svg")
 library(readr)
 library(dplyr)
 library(ggplot2)
@@ -39,7 +43,6 @@ background-size: contain
 ???
 
 https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/
-
 
 ---
 background-image: url(population_lines_sml.jpg)
@@ -155,7 +158,7 @@ air_quality <- air_quality %>%
     summarise(avg_aqi = mean(aqi, na.rm = TRUE)) %>%
     ungroup() %>%
     left_join(
-        select(weather, date, min_temp, max_temp, 
+        select(weather, date, min_temp, max_temp,
                max_steady_wind, description)
         )
 
@@ -164,13 +167,6 @@ air_quality <- air_quality %>%
            year = factor(year),
            day = factor(day))
 ```
-
----
-
-```{r}
-air_quality
-```
-
 
 ---
 
@@ -191,92 +187,121 @@ air_quality
 
 .large[ggplot2 loves tidy data.]
 
-![](ggplot2_layers_data.bmp)
+```{r, echo=FALSE}
+knitr::kable(air_quality, format = "html")
+```
+
+<!-- ![](ggplot2_layers_data.bmp) -->
 
 ---
 
-```{r, eval=FALSE}
+.left-code[
+```{r plot0, eval=FALSE}
 ggplot(data = air_quality)
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(data = air_quality)
+.right-plot[
+```{r plot0-out, echo=FALSE, ref.label="plot0", out.width="100%", fig.align="right"}
 ```
+]
+
 
 ---
 
 # ggplot2 layers - Aesthetics
 
-.large[A mapping that describes how variables in the data are linked to 
-**aes**thetic attributes, such as position, color, size, shape, ...]
-
-![](ggplot2_layers_aes.png)
+![](common-aesthetics.png)
 
 ---
 
-```{r, eval=FALSE}
-ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi))
+.left-code[
+```{r plot1, eval=FALSE}
+ggplot(data = air_quality,
+       aes(x = min_temp, 
+           y = avg_aqi))
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot1-out, ref.label="plot1", echo=FALSE, out.width="100%", fig.align='right'}
 ```
-
+]
 
 ---
 
-```{r, eval=FALSE}
-p1 <- ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi))
+.left-code[
+```{r plot2, eval=FALSE}
+p1 <- ggplot(data = air_quality,
+             aes(x = min_temp,
+                 y = avg_aqi))
 p1
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-p1 <- ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
-    theme(text = element_text(size = 16))
-p1
+.right-plot[
+```{r plot2-out, ref.label="plot2", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
+
 
 ---
 
 # ggplot2 layers - Geometries
 
-.large[Geometric shapes, **geom** for short, represent what you actually see on
-the plot: points, lines, polygons, ...]
 
-![](ggplot2_layers_geom.png)
+![](amounts-1.png)
+![](single-distributions-1.png)
 
 ---
 
-```{r, eval=FALSE}
-p2 <- p1 + geom_point(alpha = 0.6)
+.left-code[
+```{r plot3, eval=FALSE}
+p2 <- p1 + geom_point()
 p2
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-p2 <- p1 + geom_point(size = 2, alpha = 0.6)
+
+.right-plot[
+```{r plot3-out, ref.label="plot3", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+```{r plot4, eval=FALSE}
+p2 <- p1 + geom_point(alpha = 0.4)
 p2
 ```
+]
+
+.right-plot[
+```{r plot4-out, ref.label="plot4", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 
 # ggplot2 layers - Facets
 
-.large[A **face**ting specification describes how to visualise the data into subsets.]
-
-![](ggplot2_layers_facet.png)
+<img src="small-multiple.png" height="500" width="1000" class="center"> 
 
 ---
 
-```{r, eval=FALSE}
+.left-code[
+```{r plot5, eval=FALSE}
 p3 <- p2 + facet_wrap(~ month)
 p3
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-p3 <- p2 + facet_wrap(~ month)
-p3
+.right-plot[
+```{r plot5-out, ref.label="plot5", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
+
 
 ---
 background-image: url(https://media1.tenor.com/images/e51d16dd6ad5a5762631a3dddff7c6e9/tenor.gif?itemid=7561108)
@@ -290,22 +315,25 @@ class: inverse, center, top
 
 # ggplot2 layers - Statistics
 
-.large[Statistical transformations, **stat** for short, of the data that can
-be plotted such as quantiles, fitted curves,...]
-
-![](ggplot2_layers_stats.png)
+<img src="cartesian-coord-1.png" height="500" width="700" class="center"> 
 
 ---
 
-```{r, eval=FALSE}
-p4 <- p3 + geom_smooth(method = "lm", se = FALSE, color = "red")
+.left-code[
+```{r plot6, eval=FALSE}
+p4 <- p3 + 
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "red")
 p4
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-p4 <- p3 + geom_smooth(method = "lm", se = FALSE, color = "red")
-p4
+.right-plot[
+```{r plot6-out, ref.label="plot6", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
+
 
 ---
 background-image: url(https://media1.tenor.com/images/9b2e7fd615836d4d684f46957b2ff7ac/tenor.gif?itemid=9085691)
@@ -318,48 +346,56 @@ class: inverse, center, top
 
 # ggplot2 layers - Coordinates
 
-.large[A coordinate system, **coord** for short, describes how data coordinates are
-mapped to the plane of the graphic.]
+<img src="cartesian-coord-1.png" height="500" width="700" class="center"> 
 
-![](ggplot2_layers_coord.png)
 
 ---
 
-```{r, eval=FALSE}
-p5 <- p4 + coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200))
+.left-code[
+```{r plot7, eval=FALSE}
+p5 <- p4 + 
+  coord_cartesian(
+    xlim = c(5, 32),
+    ylim = c(25, 200))
 p5
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-p5 <- p4 + coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200))
-p5
+
+.right-plot[
+```{r plot7-out, ref.label="plot7", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 
 ---
 
 # ggplot2 layers - Themes
 
-.large[A **theme** which controls the finer points of display, like the font size and
-background colour, ...]
-
-![](ggplot2_layers_theme.png)
+<img src="unemploy-themes-1.png" height="500" width="700" class="center"> 
 
 ---
 
-```{r, eval=FALSE}
-p6 <- p5 + theme_minimal() + labs(x = "Min temp (C)", y = "AQI") +
-    theme(strip.text = element_text(face = "bold"))
+.left-code[
+```{r plot8, eval=FALSE}
+p6 <- p5 + 
+  theme_minimal(
+    base_size = 8) + 
+  labs(x = "Min temp (C)", 
+       y = "AQI") +
+  theme(
+strip.text = 
+  element_text(face = "bold"),
+panel.grid.minor = element_blank())
+
 p6
 ```
+]
 
-
-```{r, out.width="67%", out.height="67%", echo=FALSE}
-p6 <- p5 + theme_minimal() + labs(x = "Min temp (C)", y = "AQI") +
-    theme(text = element_text(size = 16)) +
-    theme(strip.text = element_text(face = "bold"))
-p6
+.right-plot[
+```{r plot8-out, ref.label="plot8", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
@@ -367,13 +403,14 @@ p6
 
 ```{r, eval=FALSE}
 ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(alpha = 0.6) +
-    facet_wrap(~ month) +
-    geom_smooth(method = "lm", se = FALSE, color = "red") +
-    coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200)) +
-    theme_minimal() + 
-    labs(x = "Min temp (C)", y = "AQI") +
-    theme(strip.text = element_text(face = "bold"))
+  geom_point(alpha = 0.4) +
+  facet_wrap( ~ month) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  coord_cartesian(xlim = c(5, 32),  ylim = c(25, 200)) +
+  labs(x = "Min temp (C)", y = "AQI") +
+  theme_minimal(base_size = 8) +
+  theme(strip.text = element_text(face = "bold"),
+        panel.grid.minor = element_blank())
 ```
 
 ---
@@ -395,22 +432,25 @@ class: inverse, center, middle
 
 # Recall
 
-```{r, out.width="50%", out.height="50%", eval=FALSE}
+.left-code[
+```{r plot9, eval=FALSE}
 # position mapping
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+ggplot(air_quality, 
+       aes(x = min_temp, 
+           y = avg_aqi)) +
     geom_point()
 ```
+]
 
-
-```{r, out.width="55%", out.height="55%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(size = 3) +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot9-out, ref.label="plot9", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
+
 
 ---
 
-# Typical aesthetics
+# Other common aesthetics
 
 - .large[**color**: color of dots, outlines of other shapes]
 
@@ -444,39 +484,47 @@ head(colors(), 30) # print out the first 30 colors
 
 # Shape
 
-![](pch.png)
+<img src="pch.png" height="520" width="800" class="center"> 
 
 ---
 
 # Linetype
 
-![](linetype.png)
+<img src="linetype.png" height="520" width="800" class="center"> 
+
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+.left-code[
+```{r plot10, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
     geom_point(color = "#CC3300")
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(color = "#CC3300") +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot10-out, ref.label="plot10", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(size = 3, alpha = 0.6, color = "#003366", shape = 19)
+.left-code[
+```{r plot11, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp, avg_aqi)) +
+    geom_point(size = 3, 
+               alpha = 0.6, 
+               color = "#003366", 
+               shape = 19)
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(size = 3, alpha = 0.6, color = "#003366", shape = 19) +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot11-out, ref.label="plot11", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
@@ -487,7 +535,7 @@ ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
 <br>
 
 ```{r, eval=FALSE}
-ggplot(air_quality, aes(max_steady, avg_aqi)) +
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
     geom_point(
         # your code goes here
         ......
@@ -496,18 +544,23 @@ ggplot(air_quality, aes(max_steady, avg_aqi)) +
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point(alpha = 0.5, size = 4, shape = 21,
-               color = "white", fill = "#993399")
+.left-code[
+```{r plot12, eval=FALSE}
+ggplot(air_quality, 
+       aes(max_steady_wind, 
+           avg_aqi)) +
+    geom_point(alpha = 0.5, 
+               size = 3, 
+               shape = 21,
+               color = "white", 
+               fill = "#993399")
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point(alpha = 0.5, size = 4, shape = 21,
-               color = "white", fill = "#993399") +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot12-out, ref.label="plot12", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 class: center, middle
@@ -516,30 +569,37 @@ class: center, middle
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
+.left-code[
+```{r plot13, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp,
+           avg_aqi)) +
     geom_point(color = "#001A57")
 ```
+]
 
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
-    geom_point(color = "#001A57") +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot13-out, ref.label="plot13", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
+
 
 ---
 
-```{r, out.width="70%", out.height="70%", eval=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+.left-code[
+```{r plot14, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp, 
+           avg_aqi, 
+           color = year)) + 
     geom_point()
 ```
+]
 
-
-```{r, out.width="70%", out.height="70%", echo=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
-    geom_point() +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot14-out, ref.label="plot14", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
@@ -575,16 +635,20 @@ ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
 
 # Common mistake
 
-```{r, out.width="60%", out.height="60%", eval=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = "#001A57")) + 
+.left-code[
+```{r plot15, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp, 
+           avg_aqi, 
+           color = "#001A57")) + 
     geom_point()
 ```
+]
 
-```{r, out.width="60%", out.height="60%", echo=FALSE}
-ggplot(air_quality, aes(x = min_temp, y = avg_aqi, color = "#001A57")) + 
-    geom_point() +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot15-out, ref.label="plot15", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
@@ -607,35 +671,44 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi,
 
 # Mappings - categorical variables
 
-```{r, out.width="60%", out.height="60%", eval=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+.left-code[
+```{r plot16, eval=FALSE}
+ggplot(air_quality, 
+       aes(min_temp, 
+           avg_aqi, 
+           color = year)) + 
     geom_point()
 ```
+]
 
-
-```{r, out.width="60%", out.height="60%", echo=FALSE}
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
-    geom_point() +
-    theme(text = element_text(size = 16))
+.right-plot[
+```{r plot16-out, ref.label="plot16", echo=FALSE, out.width="100%", fig.align='right'}
 ```
+]
 
 ---
 
 # Mappings - continuous variables
 
-```{r, out.width="60%", out.height="60%", eval=FALSE}
-air_quality %>% mutate(year = as.numeric(as.character(year))) %>% 
-    ggplot(aes(min_temp, avg_aqi, color = year) + geom_point()
-```
-
-
-```{r, out.width="60%", out.height="60%", echo=FALSE}
+.left-code[
+```{r plot17, eval=FALSE}
 air_quality %>% 
-    mutate(year = as.numeric(as.character(year))) %>% 
-    ggplot(aes(min_temp, avg_aqi, color = year)) + 
-    geom_point() +
-    theme(text = element_text(size = 16))
+mutate(
+  year = as.numeric(
+    as.character(year)
+    )
+  ) %>% 
+ggplot(aes(min_temp, 
+           avg_aqi, 
+           color = year)) + 
+geom_point()
 ```
+]
+
+.right-plot[
+```{r plot17-out, ref.label="plot17", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 ---
 class: inverse, center, middle
