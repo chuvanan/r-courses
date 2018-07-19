@@ -88,7 +88,7 @@ class: inverse, center, middle
 
 ---
 
-# Grammar of graphics
+# `gg` is Grammar of Graphics
 
 .pull-left[
 
@@ -102,6 +102,16 @@ class: inverse, center, middle
 .pull-right[
 ![](grammar_graphics.jpeg)
 ]
+
+???
+
+http://vita.had.co.nz/papers/layered-grammar.pdf
+
+---
+background-image: url(ggplot2_layers.jpg)
+background-size: 50%
+
+# Grammartical layers
 
 ---
 
@@ -122,12 +132,6 @@ class: inverse, center, middle
 ![](ggplot2.jpg)
 
 ]
-
----
-background-image: url(ggplot2_layers.jpg)
-background-size: 60%
-
-# Grammartical elements
 
 
 ---
@@ -8415,7 +8419,7 @@ ggplot(data = air_quality)
 
 ```r
 ggplot(data = air_quality,
-       aes(x = min_temp, 
+       aes(x = min_temp,
            y = avg_aqi))
 ```
 ]
@@ -8482,7 +8486,7 @@ p2
 
 # ggplot2 layers - Facets
 
-&lt;img src="small-multiple.png" height="550" width="1100" class="center"&gt; 
+&lt;img src="small-multiple.png" height="550" width="1100" class="center"&gt;
 
 ---
 
@@ -8511,16 +8515,16 @@ class: inverse, center, top
 
 # ggplot2 layers - Statistics
 
-&lt;img src="cartesian-coord-1.png" height="500" width="700" class="center"&gt; 
+&lt;img src="cartesian-coord-1.png" height="500" width="700" class="center"&gt;
 
 ---
 
 .left-code[
 
 ```r
-p4 &lt;- p3 + 
-  geom_smooth(method = "lm", 
-              se = FALSE, 
+p4 &lt;- p3 +
+  geom_smooth(method = "lm",
+              se = FALSE,
               color = "red")
 p4
 ```
@@ -8542,7 +8546,7 @@ class: inverse, center, top
 
 # ggplot2 layers - Coordinates
 
-&lt;img src="cartesian-coord-1.png" height="550" width="750" class="center"&gt; 
+&lt;img src="cartesian-coord-1.png" height="550" width="750" class="center"&gt;
 
 
 ---
@@ -8550,7 +8554,7 @@ class: inverse, center, top
 .left-code[
 
 ```r
-p5 &lt;- p4 + 
+p5 &lt;- p4 +
   coord_cartesian(
     xlim = c(5, 32),
     ylim = c(25, 200))
@@ -8568,18 +8572,18 @@ p5
 
 # ggplot2 layers - Themes
 
-&lt;img src="unemploy-themes-1.png" height="500" width="700" class="center"&gt; 
+&lt;img src="unemploy-themes-1.png" height="500" width="700" class="center"&gt;
 
 ---
 
 .left-code[
 
 ```r
-p6 &lt;- p5 + 
-  theme_minimal(base_size = 8) + 
-  labs(x = "Min temp (C)", 
+p6 &lt;- p5 +
+  theme_minimal(base_size = 8) +
+  labs(x = "Min temp (C)",
        y = "AQI") +
-  theme(strip.text = 
+  theme(strip.text =
   element_text(face = "bold"),
 panel.grid.minor = element_blank())
 
@@ -8632,8 +8636,8 @@ class: inverse, center, middle
 
 ```r
 # position mapping
-ggplot(air_quality, 
-       aes(x = min_temp, 
+ggplot(air_quality,
+       aes(x = min_temp,
            y = avg_aqi)) +
     geom_point()
 ```
@@ -8691,13 +8695,13 @@ head(colors(), 30) # print out the first 30 colors
 
 # Shape
 
-&lt;img src="pch.png" height="520" width="800" class="center"&gt; 
+&lt;img src="pch.png" height="520" width="800" class="center"&gt;
 
 ---
 
 # Linetype
 
-&lt;img src="linetype.png" height="520" width="800" class="center"&gt; 
+&lt;img src="linetype.png" height="520" width="800" class="center"&gt;
 
 
 ---
@@ -8705,7 +8709,7 @@ head(colors(), 30) # print out the first 30 colors
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(color = "#CC3300")
 ```
@@ -8720,11 +8724,11 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point(size = 3, 
-               alpha = 0.6, 
-               color = "#003366", 
+    geom_point(size = 3,
+               alpha = 0.6,
+               color = "#003366",
                shape = 19)
 ```
 ]
@@ -8755,13 +8759,13 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(max_steady_wind, 
+ggplot(air_quality,
+       aes(max_steady_wind,
            avg_aqi)) +
-    geom_point(alpha = 0.5, 
-               size = 3, 
+    geom_point(alpha = 0.5,
+               size = 3,
                shape = 21,
-               color = "white", 
+               color = "white",
                fill = "#993399")
 ```
 ]
@@ -8780,7 +8784,7 @@ class: center, middle
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp,
            avg_aqi)) +
     geom_point(color = "#001A57")
@@ -8797,10 +8801,10 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = year)) +
     geom_point()
 ```
 ]
@@ -8825,7 +8829,7 @@ ggplot(air_quality, aes(x = min_temp, y = avg_aqi)) +
 
 
 ```r
-ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) + 
+ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
     geom_point()
 ```
 
@@ -8848,10 +8852,10 @@ ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = "#001A57")) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = "#001A57")) +
     geom_point()
 ```
 ]
@@ -8864,14 +8868,14 @@ ggplot(air_quality,
 
 # Your turn
 
-.large[Add color, size, alpha, and shape aesthetics to the following code chunk. 
+.large[Add color, size, alpha, and shape aesthetics to the following code chunk.
 For this time, try to map visual aesthetics to discrete and/or continuous variables.]
 
 .large[What happens?]
 
 
 ```r
-ggplot(air_quality, aes(max_steady_wind, avg_aqi, 
+ggplot(air_quality, aes(max_steady_wind, avg_aqi,
                         # your code goes here
                         .........
                         )) +
@@ -8885,10 +8889,10 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi,
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+ggplot(air_quality,
+       aes(min_temp,
+           avg_aqi,
+           color = year)) +
     geom_point()
 ```
 ]
@@ -8904,14 +8908,14 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-air_quality %&gt;% 
+air_quality %&gt;%
 mutate(
   year = as.numeric(
     as.character(year))
-  ) %&gt;% 
-ggplot(aes(min_temp, 
-           avg_aqi, 
-           color = year)) + 
+  ) %&gt;%
+ggplot(aes(min_temp,
+           avg_aqi,
+           color = year)) +
 geom_point()
 ```
 ]
@@ -8945,7 +8949,7 @@ two variables `month` and `avg_aqi`?]
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_point()
 ```
@@ -8961,7 +8965,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_boxplot()
 ```
@@ -8976,7 +8980,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(month, avg_aqi)) +
     geom_violin()
 ```
@@ -8999,7 +9003,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
     geom_histogram(color = "white")
 ```
@@ -9014,10 +9018,10 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
-    geom_histogram(color = "white", 
-                   bins = 50) 
+    geom_histogram(color = "white",
+                   bins = 50)
                    # default  =30
 ```
 ]
@@ -9031,9 +9035,9 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
-    geom_histogram(color = "white", 
+    geom_histogram(color = "white",
                    binwidth = 3)
 ```
 ]
@@ -9060,7 +9064,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(x = avg_aqi)) +
     geom_density()
 ```
@@ -9075,8 +9079,8 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(avg_aqi, 
+ggplot(air_quality,
+       aes(avg_aqi,
            color = month)) +
     geom_density()
 ```
@@ -9144,7 +9148,7 @@ ggplot(air_quality) +
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point() +
     geom_line()
@@ -9160,7 +9164,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
     geom_line()
@@ -9176,11 +9180,11 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
     geom_point(aes(color = month)) +
     geom_line(
-      data = filter(air_quality, 
+      data = filter(air_quality,
                     min_temp &lt; 20)
       )
 ```
@@ -9210,7 +9214,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
+ggplot(air_quality,
        aes(date, avg_aqi)) +
     geom_line()
 ```
@@ -9225,7 +9229,7 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(weather, 
+ggplot(weather,
        aes(date, min_temp)) +
     geom_line()
 ```
@@ -9310,10 +9314,10 @@ class: inverse, center, middle
 .left-code[
 
 ```r
-# facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, 
+# facet_wrap(~ categ_variable) - 1d
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point() + 
+    geom_point(alpha = 0.4) +
   facet_wrap(~ description)
 ```
 ]
@@ -9328,11 +9332,11 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-# facet_wrap(~ categ_variable) - 1d 
-ggplot(air_quality, 
+# facet_wrap(~ categ_variable) - 1d
+ggplot(air_quality,
        aes(min_temp, avg_aqi)) +
-    geom_point() + 
-  facet_wrap(~ description, 
+    geom_point(alpha = 0.4) +
+  facet_wrap(~ description,
              nrow = 3)
 ```
 ]
@@ -9344,20 +9348,14 @@ ggplot(air_quality,
 
 ---
 
-.left-code[
 
 ```r
-# facet_wrap(row ~ col) - 2d 
-ggplot(air_quality, 
-       aes(min_temp, avg_aqi)) +
-    geom_point() + 
-  facet_grid(year ~ month)
+# facet_wrap(row ~ col) - 2d
+ggplot(air_quality, aes(min_temp, avg_aqi)) +
+    geom_point(alpha = 0.4) + facet_grid(year ~ month)
 ```
-]
 
-.right-plot[
-&lt;img src="data_visualisation_files/figure-html/plot34-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
-]
+&lt;img src="data_visualisation_files/figure-html/plot34-out-1.svg" width="3150" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9367,7 +9365,7 @@ ggplot(air_quality,
 
 .large[Explore the relationship of `aqi` and `max_steady_wind`:]
 
-- .large[across `month` (hint: facet_wrap())] 
+- .large[across `month` (hint: facet_wrap())]
 
 - .large[across `year` and `month` (hint: facet_grid())]
 
@@ -9377,10 +9375,10 @@ ggplot(air_quality,
 .left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(max_steady_wind, 
+ggplot(air_quality,
+       aes(max_steady_wind,
            avg_aqi)) +
-    geom_point() + 
+    geom_point(alpha = 0.4) +
   facet_wrap(~ month)
 ```
 ]
@@ -9391,20 +9389,13 @@ ggplot(air_quality,
 
 ---
 
-.left-code[
 
 ```r
-ggplot(air_quality, 
-       aes(max_steady_wind, 
-           avg_aqi)) +
-    geom_point() + 
-  facet_grid(year ~ month)
+ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
+    geom_point(alpha = 0.4) + facet_grid(year ~ month)
 ```
-]
 
-.right-plot[
-&lt;img src="data_visualisation_files/figure-html/plot36-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
-]
+&lt;img src="data_visualisation_files/figure-html/plot36-out-1.svg" width="3150" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -9414,7 +9405,7 @@ ggplot(air_quality,
 
 .large[Explore the relationship of `aqi` and `max_steady_wind`:]
 
-- .large[across `month` (this time, use **facet_grid()**)] 
+- .large[across `month` (this time, use **facet_grid()**)]
 
 - .large[across `year` and `month` (this time, use **facet_wrap()**)]
 
@@ -9427,41 +9418,23 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
     geom_point() + facet_grid(. ~ month)
 ```
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-16-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
-```
-## List of 1
-##  $ text:List of 11
-##   ..$ family       : NULL
-##   ..$ face         : NULL
-##   ..$ colour       : NULL
-##   ..$ size         : num 16
-##   ..$ hjust        : NULL
-##   ..$ vjust        : NULL
-##   ..$ angle        : NULL
-##   ..$ lineheight   : NULL
-##   ..$ margin       : NULL
-##   ..$ debug        : NULL
-##   ..$ inherit.blank: logi FALSE
-##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-##  - attr(*, "class")= chr [1:2] "theme" "gg"
-##  - attr(*, "complete")= logi FALSE
-##  - attr(*, "validate")= logi TRUE
-```
-
+&lt;img src="data_visualisation_files/figure-html/plot37-out-1.svg" width="3150" style="display: block; margin: auto;" /&gt;
 
 ---
 
+.left-code[
 
 ```r
-ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
-    geom_point() + facet_grid(month ~ .)
+ggplot(air_quality,
+       aes(max_steady_wind, avg_aqi)) +
+    geom_point() +
+    facet_grid(month ~ .)
 ```
+]
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-18-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot38-out-1.svg" width="1500" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
@@ -9471,10 +9444,7 @@ ggplot(air_quality, aes(max_steady_wind, avg_aqi)) +
     geom_point() + facet_wrap(year ~ month)
 ```
 
-
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-20-1.svg" width="70%" height="70%" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="data_visualisation_files/figure-html/plot39-out-1.svg" width="3150" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
@@ -9505,15 +9475,22 @@ background-size: contain
 ---
 
 
+
+.left-code[
+
 ```r
-p + labs(title = "Scatter plot of AQI and Temperature in Hanoi",
-         subtitle = "Daily measurement from 2015 to 2017",
-         x = "Min Temperature (Ceilcus)",
-         y = "Air Quality Index")
+p + labs(
+title = "Scatter plot of AQI and Temperature in Hanoi",
+subtitle = "Daily measurement from 2015 to 2017",
+x = "Min Temperature (Ceilcus)",
+y = "Air Quality Index"
+)
 ```
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-22-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
-
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot40-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 class: inverse, center, middle
@@ -9628,41 +9605,71 @@ air_quality &lt;- air_quality %&gt;%
 
 # Position adjustments
 
+.left-code[
 .large[How overlapping objects are arranged]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-28-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot41-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
 # Position adjustments
 
+.left-code[
 .large[How overlapping objects are arranged]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-29-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot42-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
 # Themes
 
+.left-code[
 .large[Visual appearance of non-data elements]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-30-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot43-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
 # Scales
 
+.left-code[
 .large[Customise color scales and other mappings]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-31-1.svg" width="60%" height="60%" style="display: block; margin: auto;" /&gt;
+
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot44-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
 # Coordinate systems
 
+.left-code[
 .large[Control the space of data points]
+]
 
-&lt;img src="data_visualisation_files/figure-html/unnamed-chunk-32-1.svg" width="65%" height="65%" style="display: block; margin: auto;" /&gt;
+
+
+.right-plot[
+&lt;img src="data_visualisation_files/figure-html/plot45-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
