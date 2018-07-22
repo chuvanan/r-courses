@@ -1065,12 +1065,32 @@ weekly <- air_quality %>%
     group_by(year, month, week) %>%
     mutate(avg_per_week = mean(avg_aqi, na.rm = TRUE)) %>%
     ungroup()
-
-head(weekly)
+weekly <- distinct(weekly, year, month, week, .keep_all = T)
+head(weekly[, c("date", "year", "month", "week", 
+                "avg_aqi", "avg_per_week")])
 ```
 
-
 ---
+
+
+.left-code[
+```{r plot30a, eval=FALSE}
+ggplot(air_quality,
+       aes(date, avg_aqi)) +
+    geom_line(color = "gray80") +
+    geom_line(data = weekly,
+              aes(date, 
+                  avg_per_week),
+              color = "red4")
+```
+]
+
+.right-plot[
+```{r plot30a-out, ref.label="plot30a", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+
 
 ---
 
@@ -1079,11 +1099,32 @@ monthly <- weekly %>%
     group_by(year, month) %>%
     mutate(avg_per_month = mean(avg_aqi, na.rm = TRUE)) %>%
     ungroup()
-head(monthly)
+monthly <- distinct(monthly, year, month, .keep_all = T)
+head(monthly[, c("date", "year", "month", "avg_aqi", "avg_per_month")])
 ```
+
+---
+
+.left-code[
+```{r plot30b, eval=FALSE}
+ggplot(air_quality,
+       aes(date, avg_aqi)) +
+    geom_line(color = "gray80") +
+    geom_line(data = monthly,
+              aes(date, 
+                  avg_per_month),
+              color = "red4")
+```
+]
+
+.right-plot[
+```{r plot30b-out, ref.label="plot30b", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 
 ---
+exclude: true
 
 .left-code[
 ```{r plot31, eval=FALSE}

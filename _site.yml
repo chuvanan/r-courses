@@ -20,6 +20,7 @@ navbar:
         - text: "Data Tidying with tidyr"
           href: ./data_tidying/data_tidying.html
         - text: "Data Visualisation with ggplot2"
+          href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
 
 output:

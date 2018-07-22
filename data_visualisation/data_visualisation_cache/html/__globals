@@ -10,16 +10,16 @@ unnamed-chunk-9	ggplot	air_quality	aes	avg_aqi	month	geom_density
 unnamed-chunk-10	ggplot	air_quality	aes	avg_aqi	month	geom_density
 unnamed-chunk-11	ggplot	air_quality	aes	avg_aqi	month	geom_density	theme	element_text
 unnamed-chunk-12	ggplot	air_quality	geom_point	aes	min_temp	avg_aqi	geom_line
-unnamed-chunk-13	ggplot	air_quality	aes	day	month	avg_aqi	geom_tile
-unnamed-chunk-14	air_quality	%>%	group_by	day	month	summarise	median	avg_aqi	ungroup	ggplot	aes	geom_tile	theme	element_text
-unnamed-chunk-15	p	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
-unnamed-chunk-16	ggsave
-unnamed-chunk-17	ggsave	my_plot
+unnamed-chunk-13	weekly	air_quality	%>%	mutate	week	date	group_by	year	month	mean	avg_aqi	ungroup	distinct	T	head	c
+unnamed-chunk-14	monthly	weekly	%>%	group_by	year	month	mutate	mean	avg_aqi	ungroup	distinct	T	head	c
+unnamed-chunk-15	ggplot	air_quality	aes	day	month	avg_aqi	geom_tile
+unnamed-chunk-16	air_quality	%>%	group_by	day	month	summarise	median	avg_aqi	ungroup	ggplot	aes	geom_tile	theme	element_text
+unnamed-chunk-17	p	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
 unnamed-chunk-18	ggsave
-unnamed-chunk-19	ggsave
-unnamed-chunk-20	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
-unnamed-chunk-21	p	labs
-unnamed-chunk-22	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	labs	theme	element_text
+unnamed-chunk-19	ggsave	my_plot
+unnamed-chunk-20	ggsave
+unnamed-chunk-21	ggsave
+unnamed-chunk-22	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
 unnamed-chunk-23	ggsave
 unnamed-chunk-24	ggsave	my_plot
 unnamed-chunk-25	ggsave
@@ -194,3 +194,7 @@ plot44	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	scale_fill_m
 plot44-out	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	theme	element_text	element_blank
 plot45	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
 plot45-out	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+plot30a	ggplot	air_quality	aes	date	avg_aqi	geom_line	weekly	avg_per_week
+plot30a-out	ggplot	air_quality	aes	date	avg_aqi	geom_line	weekly	avg_per_week
+plot30b	ggplot	air_quality	aes	date	avg_aqi	geom_line	monthly	avg_per_month
+plot30b-out	ggplot	air_quality	aes	date	avg_aqi	geom_line	monthly	avg_per_month

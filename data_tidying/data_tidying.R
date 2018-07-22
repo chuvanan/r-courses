@@ -80,7 +80,31 @@ sales_kpi
 
 ## your turn: hanoi_temp_wideform.csv ----------
 
+weather <- read_csv("hanoi_temp_wideform.csv")
+weather <- gather(weather, key = "date", value = "temp", d1:d31)
+weather <- spread(weather, key = "temp_level", value = "temp")
 
+
+test <- weather
+test %>%
+    mutate(year = as.character(year)) %>%
+    separate(col = "year",
+             into = c("c1", "c2", "c3", "c4"),
+             sep = "")
+
+test <- test %>%
+    mutate(year = as.character(year)) %>%
+    mutate(new_var = strsplit(year, "")) %>%
+    select(new_var)
+
+
+
+
+
+weather <- mutate(weather, date = gsub("d", "", date))
+weather <- unite(weather, col = "day", year, month, date,
+                 sep = "-", remove = FALSE)
+weather
 
 ## your turn: grades.csv ----------
 
