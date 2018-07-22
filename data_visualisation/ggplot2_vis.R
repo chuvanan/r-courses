@@ -107,3 +107,12 @@ ggplot(data = air_quality, aes(x = min_temp, y = avg_aqi)) +
 # Facets ------------------------------------------------------------------
 
 # Your code goes here
+
+air_quality %>%
+    mutate(week = lubridate::week(date)) %>%
+    group_by(year, month) %>%
+    mutate(avg_per_week = mean(avg_aqi)) %>%
+    ungroup() %>%
+    ggplot() +
+    geom_line(aes(date, avg_aqi), color = "gray80") +
+    geom_line(aes(date, avg_per_week), color = "red4")

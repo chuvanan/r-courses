@@ -318,7 +318,7 @@ class: inverse, center, top
 
 # ggplot2 layers - Statistics
 
-<img src="cartesian-coord-1.png" height="500" width="700" class="center">
+<img src="Linear_regression.png" height="500" width="700" class="center">
 
 ---
 
@@ -421,6 +421,44 @@ background-size: contain
 ???
 
 https://fivethirtyeight.com/features/the-weird-world-of-expensive-wine/
+
+
+---
+class: inverse, center, middle
+.h0[Data]
+
+
+---
+
+# Taxonomy of Data Types (?)
+
+---
+
+# Nominal, Ordinal & Quantiative
+
+--
+
+- .large[N - Nominal (labels or categories)]
+
+  - .large[Gender: Male, Female]
+
+--
+
+- .large[O - Ordinal (ordered)]
+
+  - .large[Quality of stocks: Grade A, AA, AAA]
+  
+--
+
+- .large[Q - Interval]
+
+  - .large[Dates: July 12, 2018; Location: (lat 11.21, long -122.45)]
+
+--
+
+- .large[Q - Ratio (zero fixed)]
+
+  - .large[Physical measurement: length, mass, temperature, ...]
 
 
 ---
@@ -991,15 +1029,17 @@ ggplot(air_quality,
 
 # Your turn
 
-.large[Draw two time series plots of the following variables:]
+.large[Draw time series plots of the following variables:]
 
-.large[From air quality data]
+.large[From air quality data:]
 
-- .large[aqi]
+- .large[avg_aqi]
 
-.large[From weather history data]
+.large[From weather history data:]
 
 - .large[min_temp]
+
+.large[How about plotting weekly, monthly, yearly in the same x-axis scales?]
 
 ---
 
@@ -1016,6 +1056,32 @@ ggplot(air_quality,
 ```{r plot30-out, ref.label="plot30", echo=FALSE, out.width="100%", fig.align='right'}
 ```
 ]
+
+---
+
+```{r}
+weekly <- air_quality %>%
+    mutate(week = lubridate::week(date)) %>%
+    group_by(year, month, week) %>%
+    mutate(avg_per_week = mean(avg_aqi, na.rm = TRUE)) %>%
+    ungroup()
+
+head(weekly)
+```
+
+
+---
+
+---
+
+```{r}
+monthly <- weekly %>%
+    group_by(year, month) %>%
+    mutate(avg_per_month = mean(avg_aqi, na.rm = TRUE)) %>%
+    ungroup()
+head(monthly)
+```
+
 
 ---
 

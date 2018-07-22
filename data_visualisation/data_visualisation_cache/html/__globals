@@ -1,0 +1,196 @@
+unnamed-chunk-1	air_quality	read_csv	weather	%>%	group_by	date	year	month	day	summarise	mean	aqi	ungroup	left_join	select	min_temp	max_temp	max_steady_wind	description	mutate	factor
+unnamed-chunk-2	kable	air_quality
+unnamed-chunk-3	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_wrap	month	geom_smooth	coord_cartesian	c	labs	theme_minimal	theme	element_text	element_blank
+unnamed-chunk-4	head	colors
+unnamed-chunk-5	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	......
+unnamed-chunk-6	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+unnamed-chunk-7	ggplot	air_quality	aes	min_temp	avg_aqi	year	geom_point
+unnamed-chunk-8	ggplot	air_quality	aes	max_steady_wind	avg_aqi	.........	geom_point
+unnamed-chunk-9	ggplot	air_quality	aes	avg_aqi	month	geom_density
+unnamed-chunk-10	ggplot	air_quality	aes	avg_aqi	month	geom_density
+unnamed-chunk-11	ggplot	air_quality	aes	avg_aqi	month	geom_density	theme	element_text
+unnamed-chunk-12	ggplot	air_quality	geom_point	aes	min_temp	avg_aqi	geom_line
+unnamed-chunk-13	ggplot	air_quality	aes	day	month	avg_aqi	geom_tile
+unnamed-chunk-14	air_quality	%>%	group_by	day	month	summarise	median	avg_aqi	ungroup	ggplot	aes	geom_tile	theme	element_text
+unnamed-chunk-15	p	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+unnamed-chunk-16	ggsave
+unnamed-chunk-17	ggsave	my_plot
+unnamed-chunk-18	ggsave
+unnamed-chunk-19	ggsave
+unnamed-chunk-20	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-21	p	labs
+unnamed-chunk-22	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	labs	theme	element_text
+unnamed-chunk-23	ggsave
+unnamed-chunk-24	ggsave	my_plot
+unnamed-chunk-25	ggsave
+unnamed-chunk-26	ggsave
+unnamed-chunk-27	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-28	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-29	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-30	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-31	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-32	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-33	ggsave
+unnamed-chunk-34	ggsave	my_plot
+unnamed-chunk-35	ggsave
+unnamed-chunk-36	ggsave
+unnamed-chunk-37	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-38	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-39	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-40	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-41	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-42	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-43	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-44	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-45	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-46	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-47	ggsave
+unnamed-chunk-48	ggsave
+unnamed-chunk-49	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-50	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-51	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-52	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-53	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-54	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-55	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-56	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-57	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-58	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-59	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-60	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-61	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-62	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-63	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-64	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-65	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-66	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-67	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-68	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-69	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-70	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-71	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-72	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-73	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-74	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-75	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-76	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-77	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-78	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-79	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-80	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-81	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-82	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-83	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-84	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-85	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-86	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-87	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-88	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-89	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-90	ggsave
+unnamed-chunk-91	categorise_aqi	x	is.na	impute	ceiling	return	air_quality	%>%	mutate	sapply	avg_aqi	median	factor	aqi_categ
+unnamed-chunk-92	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-93	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	element_blank
+unnamed-chunk-94	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-95	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-96	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-97	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-98	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-99	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_text	theme_bw	element_blank
+unnamed-chunk-100	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-101	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-102	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+unnamed-chunk-103	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	theme	element_text	element_blank
+unnamed-chunk-104	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_bw	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+plot1	ggplot	air_quality	aes	min_temp	avg_aqi
+plot1-out	ggplot	air_quality	aes	min_temp	avg_aqi
+plot0	ggplot	air_quality
+plot0-out	ggplot	air_quality
+plot2	p1	ggplot	air_quality	aes	min_temp	avg_aqi
+plot2-out	p1	ggplot	air_quality	aes	min_temp	avg_aqi
+plot3	p2	p1	geom_point
+plot3-out	p2	p1	geom_point
+plot4	p2	p1	geom_point
+plot4-out	p2	p1	geom_point
+plot5	p3	p2	facet_wrap	month
+plot5-out	p3	p2	facet_wrap	month
+plot6	p4	p3	geom_smooth
+plot6-out	p4	p3	geom_smooth
+plot7	p5	p4	coord_cartesian	c
+plot7-out	p5	p4	coord_cartesian	c
+plot8	p6	p5	theme_minimal	labs	theme	element_text	element_blank
+plot8-out	p6	p5	theme_minimal	labs	theme	element_text	element_blank
+plot9	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot9-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot10	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot10-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot11	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot11-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot12	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point
+plot12-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point
+plot13	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot13-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot14	ggplot	air_quality	aes	min_temp	avg_aqi	year	geom_point
+plot14-out	ggplot	air_quality	aes	min_temp	avg_aqi	year	geom_point
+plot15	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot15-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point
+plot16	ggplot	air_quality	aes	min_temp	avg_aqi	year	geom_point
+plot16-out	ggplot	air_quality	aes	min_temp	avg_aqi	year	geom_point
+plot17	air_quality	%>%	mutate	as.numeric	as.character	year	ggplot	aes	min_temp	avg_aqi	geom_point
+plot17-out	air_quality	%>%	mutate	as.numeric	as.character	year	ggplot	aes	min_temp	avg_aqi	geom_point
+plot18	ggplot	air_quality	aes	month	avg_aqi	geom_point
+plot18-out	ggplot	air_quality	aes	month	avg_aqi	geom_point
+plot19	ggplot	air_quality	aes	month	avg_aqi	geom_boxplot
+plot19-out	ggplot	air_quality	aes	month	avg_aqi	geom_boxplot
+plot20	ggplot	air_quality	aes	month	avg_aqi	geom_violin
+plot20-out	ggplot	air_quality	aes	month	avg_aqi	geom_violin
+plot21	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot21-out	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot22	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot22-out	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot23	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot23-out	ggplot	air_quality	aes	avg_aqi	geom_histogram
+plot24	ggplot	air_quality	aes	avg_aqi	geom_density
+plot24-out	ggplot	air_quality	aes	avg_aqi	geom_density
+plot25	ggplot	air_quality	aes	avg_aqi	month	geom_density
+plot25-out	ggplot	air_quality	aes	avg_aqi	month	geom_density
+plot26	ggplot	air_quality	geom_point	aes	min_temp	avg_aqi	geom_line
+plot26-out	ggplot	air_quality	geom_point	aes	min_temp	avg_aqi	geom_line
+plot27	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	geom_line
+plot27-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	geom_line
+plot28	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	month	geom_line
+plot28-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	month	geom_line
+plot29	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	month	geom_line	filter
+plot29-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	month	geom_line	filter
+plot30	ggplot	air_quality	aes	date	avg_aqi	geom_line
+plot30-out	ggplot	air_quality	aes	date	avg_aqi	geom_line
+plot31	ggplot	weather	aes	date	min_temp	geom_line
+plot31-out	ggplot	weather	aes	date	min_temp	geom_line
+plot32	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_wrap	description
+plot32-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_wrap	description
+plot33	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_wrap	description
+plot33-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_wrap	description
+plot34	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_grid	year	month
+plot34-out	ggplot	air_quality	aes	min_temp	avg_aqi	geom_point	facet_grid	year	month
+plot35	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_wrap	month
+plot35-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_wrap	month
+plot36	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	year	month
+plot36-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	year	month
+plot37	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	.	month
+plot37-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	.	month
+plot38	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	month	.
+plot38-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_grid	month	.
+plot39	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_wrap	year	month
+plot39-out	ggplot	air_quality	aes	max_steady_wind	avg_aqi	geom_point	facet_wrap	year	month
+plot40	p	labs
+plot40-out	p	labs
+plot41	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_blank	element_text
+plot41-out	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_blank	element_text
+plot42	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_blank	element_text
+plot42-out	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme	element_blank	element_text
+plot43	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	theme	element_text	element_blank
+plot43-out	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	theme	element_text	element_blank
+plot44	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	theme	element_text	element_blank
+plot44-out	ggplot	air_quality	aes	year	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	theme	element_text	element_blank
+plot45	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
+plot45-out	ggplot	air_quality	aes	factor	aqi_categ	geom_bar	theme_minimal	scale_fill_manual	c	coord_polar	labs	theme	element_blank	element_text
