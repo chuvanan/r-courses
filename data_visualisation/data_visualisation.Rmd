@@ -660,6 +660,10 @@ ggplot(air_quality, aes(min_temp, avg_aqi, color = year)) +
     geom_point()
 ```
 
+- .large[**Note**: It is techinical legible to set an aesthetic to a value
+inside `aes()` (i.e. `aes(color = "#001A57")` is a valid expression), however, 
+it's a convention to use this method outside `aes()`]
+
 ---
 
 # Set

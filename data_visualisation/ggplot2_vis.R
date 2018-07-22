@@ -28,6 +28,26 @@ air_quality <- air_quality %>%
            year = factor(year),
            day = factor(day))
 
+weekly <- air_quality %>%
+    mutate(week = lubridate::week(date)) %>%
+    group_by(year, month, week) %>%
+    mutate(avg_per_week = mean(avg_aqi, na.rm = TRUE)) %>%
+    ungroup()
+
+ggplot(air_quality,
+       aes(date, avg_aqi)) +
+    geom_line(color = "gray80") +
+    geom_line(data = weekly,
+              aes(date,
+                  avg_per_week),
+              color = "red4")
+
+
+# calculate week ----------------------------------------------------------
+
+
+air_quality %>%
+    mutate(week = lubridate::week(date))
 
 #   -----------------------------------------------------------------------
 # Buid a plot layer by layer ----------------------------------------------
