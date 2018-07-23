@@ -1,7 +1,7 @@
 
 
 
-## Assigment
+## Assignment
 
 Sử dụng bộ dữ liệu điểm thi THPT 2018, anh/chị hãy thiết kế một biểu đồ tĩnh
 (static visualization) mà anh/chị tin rằng truyền tải tốt nhất nội dung bộ dữ
