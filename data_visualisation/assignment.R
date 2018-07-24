@@ -1,15 +1,17 @@
 # An analysis of Diem thi THPT 2018
 
 
-
 library(dplyr)
 library(rvest)
 library(ggplot2)
+library(patchwork)
 read_csv <- readr::read_csv
 str_sub <- stringr::str_sub
 
 # Import data -------------------------------------------------------------
 
+
+setwd("~/Documents/r-courses/")
 diemthi <- read_csv("./data/THPT 2018 Quoc gia.csv")
 diemthi$X12 <- NULL
 
@@ -45,13 +47,11 @@ diemthi <- left_join(diemthi, prov_code)
 
 # EDA ---------------------------------------------------------------------
 
-names(diemthi)
-
-ggplot(diemthi, aes(Math, group = ProvID)) +
-    geom_density(color = "gray60", stat = "density") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "orange", stat = "density", size = 0.7) +
-    annotate("text", 2, 0.3, label = "Hà Giang", size = 5, hjust = 0.9, color = "orange") +
+math_plot <- ggplot(diemthi, aes(Math, group = ProvID)) +
+    geom_line(color = "gray80", stat = "density") +
+    geom_line(data = filter(diemthi, ProvID == "05"),
+              color = "red4", stat = "density", size = 0.7) +
+    annotate("text", 2, 0.3, label = "Hà Giang", size = 4, hjust = 0.9, color = "red4") +
     scale_x_continuous(expand = c(0, 0), breaks = 0:10, name = NULL) +
     scale_y_continuous(expand = c(0, 0), labels = NULL, name = NULL) +
     labs(title = "Math") +
@@ -59,41 +59,34 @@ ggplot(diemthi, aes(Math, group = ProvID)) +
     theme(axis.ticks = element_blank(),
           panel.grid.minor.y = element_blank(),
           panel.grid.minor.x = element_blank(),
-          panel.grid = element_blank(),
-          panel.background = element_rect(fill = "#36394A", color = "#36394A"))
+          panel.grid = element_line(color = "white"),
+          plot.background = element_rect(fill = "gray98", color = "gray98"))
+
+ggplot_helper <- function(dta, subj, title = subj) {
+    ggplot(data = dta, aes_string(subj, group = "ProvID")) +
+        geom_line(color = "gray80", stat = "density") +
+        geom_line(data = filter(dta, ProvID == "05"),
+                  color = "red4", stat = "density", size = 0.7) +
+        scale_x_continuous(expand = c(0, 0), breaks = 0:10, name = NULL) +
+        scale_y_continuous(expand = c(0, 0), labels = NULL, name = NULL) +
+        labs(title = title) +
+        theme_minimal(base_size = 14, base_family = "Roboto Slab") +
+        theme(axis.ticks = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              panel.grid = element_line(color = "white"),
+              plot.background = element_rect(fill = "gray98", color = "gray98"))
+}
+
+viet_plot <- ggplot_helper(diemthi, subj = "Viet")
+english_plot <- ggplot_helper(diemthi, subj = "English")
+physics_plot <- ggplot_helper(diemthi, subj = "Physics")
+chemistry_plot <- ggplot_helper(diemthi, subj = "Chemistry")
+biology_plot <- ggplot_helper(diemthi, subj = "Biology")
+geography_plot <- ggplot_helper(diemthi, subj = "Geography")
+gdcd_plot <- ggplot_helper(diemthi, subj = "GDCD")
 
 
-ggplot(diemthi, aes(Viet, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(English, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(Physics, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(Chemistry, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(Biology, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(Geography, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
-
-ggplot(diemthi, aes(GDCD, group = ProvID)) +
-    geom_density(color = "gray80") +
-    geom_density(data = filter(diemthi, ProvID == "05"),
-                 color = "red4")
+math_plot + viet_plot + english_plot + physics_plot +
+    chemistry_plot + biology_plot + geography_plot + gdcd_plot +
+    plot_layout(nrow = 2)
