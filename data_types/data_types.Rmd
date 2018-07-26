@@ -16,7 +16,9 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, comment="#",
+                      fig.width=4.25, fig.height=3.5, fig.retina=3, dev = "svg")
+library(ggplot2)
 ```
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
@@ -24,4 +26,488 @@ background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharin
 ???
 
 Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+
+
+---
+
+# Wikipedia
+
+.huge[In computer science, a .greenfont[data structure] is a data organization
+and storage format that enables efficient access and modification. More precisely,
+a data structure is a collection of data values, the relationships among them, 
+and the functions or operations that can be applied to the data.]
+
+--
+
+.center[![](https://media.giphy.com/media/3o6Ztqb2KJXPpW3Fba/giphy.gif)]
+
+
+???
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
+
+
+---
+
+# Data structure (DS) is hard to learn
+
+
+.center[![](ds.png)]
+
+
+---
+
+# Data seen by humans
+
+
+```r
+"Good", "Bad", "Ugly", ...
+
+1, 2, 3, 4, ...
+
+2018-07-01, 2018-07-02, ...
+```
+
+---
+
+# Data understood by computers
+
+
+```r
+11010 1001001 101010 101010
+10100 1010101 101010 101010
+11110 1101011 101010 100101
+11110 1101011 101010 100101
+11110 1101011 101010 100101
+```
+
+---
+
+# A helicopter view
+
+<br>
+
+<br>
+
+.enormous[DS is a way to .greenfont[organise] and .greenfont[store] 
+data that is readable by humans and interpretable by computers.]
+
+
+---
+
+# DS featured by
+
+<br>
+
+- .enormous[dimensionality]
+
+<br>
+
+- .enormous[type]
+
+---
+
+# R's base DS
+
+
+```r
+
+|    	|  Same types    	|  Different types 	|
+|----	|----------------	|------------------	|
+| 1d 	| Atomic vectors 	| List             	|
+| 2d 	| Matrix         	| Data frame       	|
+| nd 	| Array          	|                  	|
+```
+
+---
+
+# Inspection tools
+
+
+```r
+
+# `str`ucture?
+str()
+
+# what type it is?
+typeof()
+class()
+
+# how many elements it stores?
+length()
+dim()
+
+# tell names (if any) of each elements?
+names()
+
+```
+
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Vectors are everywhere]]
+
+
+---
+
+```r
+logical_vt <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+integer_vt <- c(1L, 2L, 5L, 4L, 3L)
+double_vt <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+chracter_vt <- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.center[![](atomic_vec.png)]
+
+
+---
+
+# Atomic vectors are always flat
+
+```{r}
+c(1, c(2, c(3, 4)))
+```
+
+
+```{r}
+# the same as
+c(1, 2, 3, 4)
+```
+
+
+---
+
+# Types and tests
+
+```{r}
+logical_vt <- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+integer_vt <- c(1L, 2L, 5L, 4L, 3L)
+double_vt <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+chracter_vt <- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+```{r}
+{{typeof(integer_vt)}}
+
+{{typeof(chracter_vt)}}
+```
+]
+
+.pull-right[
+```{r}
+{{is.integer(integer_vt)}}
+
+{{is.double(double_vt)}}
+```
+]
+
+
+---
+
+# Length and names
+
+```{r}
+double_vt <- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+```
+
+
+```{r}
+{{length(double_vt)}}
+```
+
+```{r}
+{{names(double_vt) <- c("v1", "v2", "v3", "v4", "v5", "v6")}}
+```
+
+```{r, echo=FALSE}
+double_vt
+```
+
+```{r}
+{{names(double_vt)}}
+```
+
+---
+
+# Coercion
+
+
+---
+
+# Your turn
+
+
+
+---
+
+# Rules
+
+--
+
+<br>
+
+- .enormous[All elements of an atomic vector must be the same type.]
+
+--
+
+<br>
+
+- .enormous[Coercion often happens automatically.]
+
+--
+
+<br>
+
+- .enormous[When in doubt, do coercion explicitly.]
+
+---
+
+# Indexing vectors
+
+
+---
+
+# NA & NULL
+
+
+
+---
+
+# Your turn
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Lists hold just about anything]]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Data frames]]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Handle strings like a boss]]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Be the boss of your factors]]
+
+
+---
+
+# What is factor?
+
+--
+
+- .huge[Factors are used to store categorical data in R]
+
+```{r}
+{{sex <- factor(c("male", "female", "female", "male"))}}
+sex
+```
+
+--
+
+.pull-left[
+```{r}
+{{levels(sex)}}
+```
+]
+
+.pull-right[
+```{r}
+{{nlevels(sex)}}
+```
+]
+
+--
+
+<br>
+
+- .huge[Factors are the data type that R's users love to hate]
+
+
+---
+
+# The Janus-like nature of factors
+
+--
+
+.pull-left[
+![](janus.jpg)
+]
+
+--
+
+.pull-right[
+```{r, eval=FALSE}
+sex <- factor(
+  c("male", "female", 
+    "female", "male")
+  )
+```
+
+
+```{r}
+# look like strings
+class(sex)
+# but are integer underhood
+typeof(sex)
+```
+]
+
+---
+
+# How it can be useful? Counting
+
+--
+
+```{r}
+month_chr <- c("Jan", "Dec", "Apr", "Nov", "May", "Apr")
+table(month_chr)
+```
+
+--
+
+```{r}
+{{month_fac <- factor(month_chr, levels = month.abb)}}
+# even groups that have no observations are counted
+table(month_fac) 
+```
+
+
+---
+
+# How it can be useful? Sorting
+
+
+```{r}
+month_chr <- c("Jan", "Dec", "Apr", "Nov", "May", "Apr")
+sort(month_chr)
+```
+
+--
+
+```{r}
+{{month_fac <- factor(month_chr, levels = month.abb)}}
+sort(month_fac) 
+```
+
+---
+
+# How it can be useful? Reodering thoes bars
+
+```{r, echo=FALSE}
+dtf <- data.frame(Skill = c("Beginner", "Adv Beginner", "Intermediate", "Expert"),
+                  Num = c(75, 60, 15, 25),
+                  stringsAsFactors = FALSE)
+```
+
+.left-code[
+```{r}
+dtf
+```
+
+```{r reorder-bars1, eval=FALSE}
+ggplot(
+  dtf, aes(Skill, Num)
+  ) + geom_col()
+```
+]
+
+.right-plot[
+```{r, ref.label="reorder-bars1", echo=FALSE, out.width="100%", fig.align='right', }
+```
+]
+
+
+---
+
+# How it can be useful? Reodering thoes bars
+
+.left-code[
+```{r}
+dtf$Skill <- factor(
+  dtf$Skill,
+  levels = 
+    c("Beginner", 
+      "Adv Beginner", 
+      "Intermediate", 
+      "Expert")
+  )
+```
+
+```{r reorder-bars2, eval=FALSE}
+ggplot(
+  dtf, aes(Skill, Num)
+  ) + geom_col()
+```
+]
+
+.right-plot[
+```{r, ref.label="reorder-bars2", echo=FALSE, out.width="100%", fig.align='right', }
+```
+]
+
+
+---
+
+# How it might be evil
+
+
+---
+
+# Manipulating factors
+
+- .huge[Modifying factor order]
+
+<br>
+
+- .huge[.grayfont[Modifying factor levels]]
+
+---
+
+# Manipulating factors
+
+- .huge[.grayfont[Modifying factor order]]
+
+<br>
+
+- .huge[Modifying factor levels]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Dates & Times]]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Moral of the story]]
+
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Further reading]]
+
+
+---
+
+# Acknowledgement
+
 
