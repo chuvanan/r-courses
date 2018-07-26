@@ -1,0 +1,27 @@
+---
+title: ".giant[Navigate your way through]"
+subtitle: ".giant[R's data structures]"
+author: ".superhuge[<br>An Chu]"
+date: ".superhuge[<br>07/2018]"
+output:
+  xaringan::moon_reader:
+    css: ["default", "example.css", "my_theme.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
