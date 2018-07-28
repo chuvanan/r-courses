@@ -22,11 +22,3342 @@ class: center, middle, inverse, title-slide
 
 
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+class: inverse, middle, center
+
+.giant[.greenfont[Data structures]]
+
+
+---
+
+# Wikipedia
+
+.huge[In computer science, a .greenfont[data structure] is a data organization
+and storage format that enables efficient access and modification. More precisely,
+a data structure is a collection of data values, the relationships among them, 
+and the functions or operations that can be applied to the data.]
+
+--
+
+.center[![](https://media.giphy.com/media/3o6Ztqb2KJXPpW3Fba/giphy.gif)]
+
 
 ???
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)
+
+
+---
+
+# Data structure (DS) is hard to learn
+
+
+.center[![](ds.png)]
+
+
+---
+
+# Data seen by humans
+
+
+```r
+"Good", "Bad", "Ugly", ...
+
+1, 2, 3, 4, ...
+
+1.23, 3.41, 6.09, ...
+
+2018-07-01, 2018-07-02, ...
+
+2018-07-01 12:45:00, 2018-07-02 21:12:40, ...
+```
+
+---
+
+# Data understood by computers
+
+
+```r
+11010 1001001 101010 101010
+10100 1010101 101010 101010
+11110 1101011 101010 100101
+11110 1101011 101010 100101
+11110 1101011 101010 100101
+```
+
+---
+
+# A helicopter view
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+.enormous[DS is a way to .greenfont[organise] and .greenfont[store] 
+data that is readable by humans and interpretable by computers.]
+
+
+---
+
+# DS featured by
+
+&lt;br&gt;
+
+- .enormous[dimensionality]
+
+&lt;br&gt;
+
+- .enormous[type]
+
+---
+
+# R's base DS
+
+
+```r
+
+|    	|  Same types    	|  Different types 	|
+|----	|----------------	|------------------	|
+| 1d 	| Atomic vectors 	| List             	|
+| 2d 	| Matrix         	| Data frame       	|
+| nd 	| Array          	|                  	|
+```
+
+???
+
+http://adv-r.had.co.nz/Data-structures.html
+
+---
+
+# R's base DS
+
+.center[![](rds.png)]
+
+???
+
+http://venus.ifca.unican.es/Rintro/dataStruct.html
+
+---
+
+# Inspection tools
+
+
+```r
+
+# `str`ucture?
+str()
+
+# what type it is?
+typeof()
+class()
+
+# how many elements it stores?
+length()
+dim()
+
+# tell names (if any) of each elements?
+names()
+
+```
+
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Vectors are everywhere]]
+
+
+---
+
+```r
+logical_vt &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+integer_vt &lt;- c(1L, 2L, 5L, 4L, 3L)
+double_vt &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+chracter_vt &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.center[![](atomic_vec.png)]
+
+
+---
+
+# Atomic vectors are always flat
+
+
+```r
+c(1, c(2, c(3, 4)))
+```
+
+```
+# [1] 1 2 3 4
+```
+
+
+
+```r
+# the same as
+c(1, 2, 3, 4)
+```
+
+```
+# [1] 1 2 3 4
+```
+
+
+---
+
+# Types and tests
+
+
+```r
+logical_vt &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+integer_vt &lt;- c(1L, 2L, 5L, 4L, 3L)
+double_vt &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+chracter_vt &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+.pull-left[
+
+```r
+*typeof(integer_vt)
+```
+
+```
+# [1] "integer"
+```
+
+```r
+*typeof(chracter_vt)
+```
+
+```
+# [1] "character"
+```
+]
+
+.pull-right[
+
+```r
+*is.integer(integer_vt)
+```
+
+```
+# [1] TRUE
+```
+
+```r
+*is.double(double_vt)
+```
+
+```
+# [1] TRUE
+```
+]
+
+---
+
+# Types and tests
+
+
+```r
+logical_vt &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+integer_vt &lt;- c(1L, 2L, 5L, 4L, 3L)
+double_vt &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+chracter_vt &lt;- c("a", "b", "c", "d", "e", "f", "g", "h")
+```
+
+
+```r
+# other test functions
+*is.numeric()
+
+*is.character()
+
+*is.logical()
+```
+
+
+---
+
+# Length and names
+
+
+```r
+double_vt &lt;- c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56)
+```
+
+
+
+```r
+*length(double_vt)
+```
+
+```
+# [1] 6
+```
+
+
+```r
+*names(double_vt) &lt;- c("v1", "v2", "v3", "v4", "v5", "v6")
+```
+
+
+```
+#   v1   v2   v3   v4   v5   v6 
+# 1.23 3.21 2.35 2.40 2.13 4.56
+```
+
+
+```r
+*names(double_vt)
+```
+
+```
+# [1] "v1" "v2" "v3" "v4" "v5" "v6"
+```
+
+---
+
+# Vectorization
+
+.huge[Most arithmetic manipulation carried out in vectorized mode:]
+
+
+```r
+x &lt;- c(2, 4, 6, 8)
+x^2
+```
+
+```
+# [1]  4 16 36 64
+```
+
+```r
+2 * x + 1
+```
+
+```
+# [1]  5  9 13 17
+```
+
+```r
+sqrt(x)
+```
+
+```
+# [1] 1.414214 2.000000 2.449490 2.828427
+```
+
+---
+
+# Recycling rule
+
+.huge[Less obvious case when vectors of different sizes are combined:]
+
+
+```r
+c(1, 2, 3, 4) + c(1, 2)
+```
+
+```
+# [1] 2 4 4 6
+```
+
+--
+
+.center[![](recycling-rule.png)]
+
+---
+
+# But
+
+
+```r
+c(1, 2, 3, 4) + c(1, 2, 3)
+```
+
+```
+# Warning in c(1, 2, 3, 4) + c(1, 2, 3): longer object length is 
+# not a multiple of shorter object length
+
+# [1] 2 4 6 5
+```
+
+---
+
+# Sequences
+
+--
+
+.huge[Generate patterned vectors with `n1:n2`]
+
+--
+
+
+```r
+1:50
+```
+
+```
+#  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+# [24] 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+# [47] 47 48 49 50
+```
+
+
+```r
+5:-5
+```
+
+```
+#  [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5
+```
+
+---
+
+# General sequences
+
+```r
+seq(from, to, by, length)
+```
+
+```r
+?seq # you have 1 min to read documentaion
+```
+
+
+---
+
+# General sequences
+
+--
+
+
+```r
+seq(0, 1, by = .1)
+```
+
+```
+#  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+```
+
+--
+
+
+```r
+seq(0, 1, length = 11)
+```
+
+```
+#  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+```
+
+--
+
+
+```r
+seq(0, by = .1, length = 11)
+```
+
+```
+#  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+```
+
+--
+
+
+```r
+seq(to = 1, by = .1, length = 11)
+```
+
+```
+#  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+```
+
+
+---
+
+# Repeating values
+
+
+```r
+rep(x, times, each)
+```
+
+
+```r
+?rep # you have 1 min to read documentaion
+```
+
+
+---
+
+# rep() examples
+
+--
+
+
+```r
+rep(1:4, times = 3)
+```
+
+```
+#  [1] 1 2 3 4 1 2 3 4 1 2 3 4
+```
+
+--
+
+
+```r
+rep(1:4, times = c(2, 3, 2, 3))
+```
+
+```
+#  [1] 1 1 2 2 2 3 3 4 4 4
+```
+
+--
+
+
+```r
+rep(c("A", "B", "C"), times = 3)
+```
+
+```
+# [1] "A" "B" "C" "A" "B" "C" "A" "B" "C"
+```
+
+---
+
+# rep() examples
+
+--
+
+
+```r
+rep(1:4, each = 3)
+```
+
+```
+#  [1] 1 1 1 2 2 2 3 3 3 4 4 4
+```
+
+--
+
+
+```r
+rep(1:4, rep(3, 4))
+```
+
+```
+#  [1] 1 1 1 2 2 2 3 3 3 4 4 4
+```
+
+
+
+
+---
+
+# Your turn
+
+.huge[Create a sequence of perriods as follows:]
+
+```r
+"01/2012" "02/2012" "03/2012" "04/2012" "05/2012" "06/2012" 
+...
+...
+...
+"07/2018" "08/2018" "09/2018" "10/2018" "11/2018" "12/2018"
+```
+
+---
+
+# Solution
+
+
+```r
+m &lt;- 1:12
+m &lt;- ifelse(nchar(m) == 1, paste0("0", m), m)
+y &lt;- 2012:2018
+
+paste0(
+    rep(m, times = length(y)), "/",
+    rep(y, each = 12)
+    )
+```
+
+
+---
+
+# Explicit coercion
+
+--
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+```
+
+.pull-left[
+
+```r
+*y &lt;- as.numeric(x)
+y
+```
+
+```
+# [1] 1 0 1 0 0 1 1
+```
+
+```r
+sum(y)
+```
+
+```
+# [1] 4
+```
+
+```r
+mean(y)
+```
+
+```
+# [1] 0.5714286
+```
+]
+
+--
+
+.pull-right[
+
+```r
+# Other coercion functions:
+*as.integer()
+*as.logical()
+*as.character()
+```
+]
+
+---
+
+# Implicit coercion
+
+--
+
+
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE)
+```
+
+.pull-left[
+
+```r
+y &lt;- as.numeric(x)
+sum(y)
+```
+
+```
+# [1] 4
+```
+
+```r
+mean(y)
+```
+
+```
+# [1] 0.5714286
+```
+]
+
+--
+
+.pull-right[
+
+.huge[Automatic coercion is a good thing:]
+
+
+```r
+*sum(x)
+```
+
+```
+# [1] 4
+```
+
+```r
+*mean(x)
+```
+
+```
+# [1] 0.5714286
+```
+]
+
+---
+
+# Implicit coercion
+
+
+```r
+x &lt;- c("a", 1)
+str(x)
+```
+
+```
+#  chr [1:2] "a" "1"
+```
+
+--
+
+.huge[However, it can create surprises:]
+
+
+```r
+50 &lt; "7"
+```
+
+```
+# [1] TRUE
+```
+
+
+---
+
+# Implicit coercion
+
+--
+
+
+```r
+12 %in% c("as", 12)                  # looks good
+```
+
+```
+# [1] TRUE
+```
+
+--
+
+
+```r
+"12" %in% c("as", 12)                # not so trivial
+```
+
+```
+# [1] TRUE
+```
+
+--
+
+
+```r
+12 %in% c("as", "12")                # uhmmmm
+```
+
+```
+# [1] TRUE
+```
+
+--
+
+
+```r
+"12" %in% c(1, 12)                   # .....
+```
+
+```
+# [1] TRUE
+```
+
+
+---
+
+# Your turn
+
+.huge[Experiment with automatic coercion.]
+
+.huge[What is happening in the following cases?]
+
+
+```r
+sum(c(TRUE, FALSE, TRUE))
+c(TRUE, FALSE, TRUE, TRUE, "FALSE")
+c(1, 2, 3, 4, FALSE)
+c(1, 2, "3", 7, TRUE)
+c(10L, 11L, 12)
+```
+
+.huge[Can you deduce the R's coercion rule?]
+
+---
+
+# Solution
+
+
+```r
+sum(c(TRUE, FALSE, TRUE))
+```
+
+```
+# [1] 2
+```
+
+```r
+c(TRUE, FALSE, TRUE, TRUE, "FALSE")
+```
+
+```
+# [1] "TRUE"  "FALSE" "TRUE"  "TRUE"  "FALSE"
+```
+
+```r
+c(1, 2, 3, 4, FALSE)
+```
+
+```
+# [1] 1 2 3 4 0
+```
+
+```r
+c(1, 2, "3", 7, TRUE)
+```
+
+```
+# [1] "1"    "2"    "3"    "7"    "TRUE"
+```
+
+---
+
+# Rule
+
+&lt;br&gt;
+
+- .enormous[Vectors are coerced to the most flexible type.]
+
+&lt;br&gt;
+
+- .enormous[Types from least to most flexible are: `logical` &lt; `integer` &lt; `double` &lt; `character`]
+
+---
+
+# Wrap-up
+
+--
+
+&lt;br&gt;
+
+- .enormous[All elements of an atomic vector must be the same type.]
+
+--
+
+&lt;br&gt;
+
+- .enormous[Coercion often happens automatically.]
+
+--
+
+&lt;br&gt;
+
+- .enormous[When in doubt, do coercion explicitly.]
+
+---
+
+# Recall
+
+
+.superenormous[.center[.greenfont[Inspect]]]
+
+&lt;br&gt;
+
+.superenormous[.center[.grayfont[Query]]]
+
+&lt;br&gt;
+
+.superenormous[.center[.grayfont[Modify]]]
+
+---
+
+# Next
+
+
+.superenormous[.center[.grayfont[Inspect]]]
+
+&lt;br&gt;
+
+.superenormous[.center[.greenfont[Query]]]
+
+&lt;br&gt;
+
+.superenormous[.center[.greenfont[Modify]]]
+
+
+---
+
+# Your turn
+
+.huge[Create two vectors:]
+
+
+```r
+set.seed(12)
+x &lt;- sample(1:10)
+y &lt;- x
+names(y) &lt;- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
+```
+
+
+```r
+x
+```
+
+```
+#  [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+```r
+y
+```
+
+```
+#  a  b  c  d  e  f  g  h  i  j 
+#  1  8  9  2  7 10  5  6  4  3
+```
+
+
+
+---
+
+# Your turn
+
+
+.huge[Run the following code:]
+
+.pull-left[
+```r
+x[]
+x[-1]
+x[-1:4]
+x[-(1:3)]
+x[1:4]
+x[x == 3]
+x["a"]
+```
+]
+
+.pull-right[
+```r
+x[x]
+x[0]
+x[x &lt; 3 | x &gt; 8]
+y["a"]
+y[order(y)]
+y[c("a", "c", "e")]
+```
+]
+
+.huge[Could you figure out six types of subsetting?]
+
+
+---
+background-image: url(subsetting_types.png)
+background-size: contain
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+--
+
+- .large[*Positive integers*: return elements at the specified positions]
+
+.pull-left[
+
+```r
+x[c(3, 1)]
+```
+
+```
+# [1] 9 1
+```
+
+```r
+# Duplicated indices yield
+# duplicated values
+x[c(1, 1)]
+```
+
+```
+# [1] 1 1
+```
+]
+
+.pull-right[
+
+```r
+# Real numbers are silently 
+# truncated to integers
+x[c(2.1, 2.9)]
+```
+
+```
+# [1] 8 8
+```
+]
+
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+- .large[*Negative integers:* omit elements at the specified positions]
+
+
+```r
+x[-c(3, 1)] # do not mix: x[c(-1, 3)]
+```
+
+```
+# [1]  8  2  7 10  5  6  4  3
+```
+
+
+```r
+x[c(-1, 3)] # throw error
+```
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+- .large[*Logical vectors:* select elements where the corresponding logical value is TRUE]
+
+
+```r
+x[c(TRUE, TRUE, FALSE, FALSE)] # recycling rule
+```
+
+```
+# [1]  1  8  7 10  4  3
+```
+
+```r
+x[x &gt; 3]
+```
+
+```
+# [1]  8  9  7 10  5  6  4
+```
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+- .large[*Nothing:* returns the original vector]
+
+
+```r
+x[]
+```
+
+```
+#  [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+- .large[*Zero:* returns a zero-length vector]
+
+
+```r
+x[0]
+```
+
+```
+# integer(0)
+```
+
+---
+
+# Subsetting vectors
+
+
+```r
+print(y)
+```
+
+```
+#  a  b  c  d  e  f  g  h  i  j 
+#  1  8  9  2  7 10  5  6  4  3
+```
+
+- .large[*Character vectors:* to return elements with matching names]
+
+.pull-left[
+
+```r
+y[c("d", "c", "a")]
+```
+
+```
+# d c a 
+# 2 9 1
+```
+]
+
+.pull-right[
+
+```r
+y[c("a", "d", "k")]
+```
+
+```
+#    a    d &lt;NA&gt; 
+#    1    2   NA
+```
+]
+
+---
+
+# Application
+
+
+```r
+print(x) ==&gt; [1]  1  8  9  2  7 10  5  6  4  3
+```
+
+
+```r
+order(x)
+```
+
+```
+#  [1]  1  4 10  9  7  8  5  2  3  6
+```
+
+```r
+x[order(x)]
+```
+
+```
+#  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+```r
+x[order(x, decreasing = TRUE)]
+```
+
+```
+#  [1] 10  9  8  7  6  5  4  3  2  1
+```
+
+---
+
+# Your turn
+
+.large[Write a function that takes an integer vector with length &gt; 3 as input 
+and return a vector of the second largest and smallest values]
+
+
+
+```r
+fun &lt;- function(x) {
+    # your codes go here
+}
+```
+
+.large[Expected output:]
+
+
+
+
+```r
+v1 &lt;- c(27L, 50L, 19L, 43L, 65L, 23L, 84L, 83L, 75L, 58L)
+fun(v1)
+```
+
+```
+# [1] 23 83
+```
+
+---
+
+# Solution
+
+
+```r
+fun &lt;- function(x) {
+    inc_x &lt;- x[order(x)]
+    inc_x[c(2, length(x) - 1)]
+}
+```
+
+
+
+---
+
+# Modifying vectors
+
+--
+
+.huge[All subsetting operators can be combined with assignment to modify selected values of the input vector.]
+
+--
+
+
+```r
+x &lt;- 1:5
+x
+```
+
+```
+# [1] 1 2 3 4 5
+```
+
+```r
+x[c(1, 2)] &lt;- 2:3
+x
+```
+
+```
+# [1] 2 3 3 4 5
+```
+
+---
+
+# NULL
+
+- .huge[`NULL` is a special data structure:]
+
+
+```r
+typeof(NULL)
+```
+
+```
+# [1] "NULL"
+```
+
+```r
+length(NULL)
+```
+
+```
+# [1] 0
+```
+
+```r
+is.null(NULL)
+```
+
+```
+# [1] TRUE
+```
+
+
+---
+
+# Two common uses of NULL:
+
+--
+
+- .huge[To represent an empty vector of arbitrary type:]
+
+
+```r
+z &lt;- c()
+z
+```
+
+```
+# NULL
+```
+
+--
+
+- .huge[To represent an absent vector:]
+
+
+```r
+plus_some &lt;- function(x, int = NULL) {
+  if (is.null(int)) {
+    int &lt;- 1
+  }
+  x + int
+}
+```
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Lists hold just about anything]]
+
+
+---
+
+
+
+```r
+lst &lt;- list(c("a", "b", "c", "d", "e", "f", "g", "h"),
+            c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56),
+            c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE))
+```
+
+.center[![](list.png)]
+
+---
+
+# Properties
+
+--
+
+- .huge[List has the same properties as atomic vectors (`typeof()`, `length()`, `names()`)]
+
+&lt;br&gt;
+
+--
+
+- .huge[New property: each element of a list can be of different types (even another list)]
+
+---
+
+# Creation: list()
+
+
+```r
+my_list &lt;- list(c(1L, 2L, 3L), 
+                text = c("a", "b"), 
+                boolean = c(TRUE, FALSE, FALSE, TRUE))
+str(my_list)
+```
+
+```
+# List of 3
+#  $        : int [1:3] 1 2 3
+#  $ text   : chr [1:2] "a" "b"
+#  $ boolean: logi [1:4] TRUE FALSE FALSE TRUE
+```
+
+```r
+names(my_list)
+```
+
+```
+# [1] ""        "text"    "boolean"
+```
+
+---
+
+# Combination: c()
+
+
+```r
+your_list &lt;- list(num = c(12.34, 34.45, 45.56))
+new_list &lt;- c(my_list, your_list)
+str(new_list)
+```
+
+```
+# List of 4
+#  $        : int [1:3] 1 2 3
+#  $ text   : chr [1:2] "a" "b"
+#  $ boolean: logi [1:4] TRUE FALSE FALSE TRUE
+#  $ num    : num [1:3] 12.3 34.5 45.6
+```
+
+---
+
+# Conversion &amp; checking:
+
+
+
+```r
+strings &lt;- c("a", "b", "c", "e")
+*strings_list &lt;- as.list(strings)
+strings_list
+```
+
+```
+# [[1]]
+# [1] "a"
+# 
+# [[2]]
+# [1] "b"
+# 
+# [[3]]
+# [1] "c"
+# 
+# [[4]]
+# [1] "e"
+```
+
+---
+
+# Conversion &amp; checking:
+
+
+```r
+strings &lt;- c("a", "b", "c", "e")
+strings_list &lt;- as.list(strings)
+*is.list(strings_list)
+```
+
+```
+# [1] TRUE
+```
+
+```r
+*unlist(strings_list)
+```
+
+```
+# [1] "a" "b" "c" "e"
+```
+
+
+---
+
+# Subsetting lists
+
+
+
+```r
+a &lt;- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+```
+
+
+--
+
+
+```r
+#  `[` extracts a sub-list. The result will always be a list.
+str(a[1:2])
+```
+
+```
+# List of 2
+#  $ a: int [1:3] 1 2 3
+#  $ b: chr "a string"
+```
+
+---
+
+# Subsetting lists
+
+
+
+```r
+a &lt;- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+```
+
+
+--
+
+
+```r
+#  `[[` extracts a single component from a list.
+str(a[[1]])
+```
+
+```
+#  int [1:3] 1 2 3
+```
+
+
+---
+
+# Subsetting lists
+
+
+
+```r
+a &lt;- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+```
+
+--
+
+
+```r
+# `$` is a shorthand for extracting named elements of a list
+a$a
+```
+
+```
+# [1] 1 2 3
+```
+
+```r
+a[["a"]]
+```
+
+```
+# [1] 1 2 3
+```
+
+
+---
+
+&lt;img src="lists-subsetting.png" height="600" width="650" class="center"&gt;
+
+
+---
+class: middle, center
+exclude: true
+
+.pull-left[
+.giant[x]
+]
+
+.pull-right[
+&lt;img src="pepper.jpg" height="600" width="420" class="center"&gt;
+]
+
+
+---
+class: middle, center
+exclude: true
+
+.pull-left[
+.giant[x[1]]
+]
+
+.pull-right[
+&lt;img src="pepper-1.jpg" height="600" width="420" class="center"&gt;
+]
+
+
+---
+class: middle, center
+exclude: true
+
+.pull-left[
+.giant[x[[1]]]
+]
+
+.pull-right[
+&lt;img src="pepper-2.jpg" height="300" width="420" class="center"&gt;
+]
+
+---
+class: middle, center
+exclude: true
+
+.pull-left[
+.giant[x[[1]][[1]]]
+]
+
+.pull-right[
+&lt;img src="pepper-3.jpg" height="300" width="420" class="center"&gt;
+]
+
+---
+
+# Why lists
+
+.huge[Lists are used to build up many of the more complicated data structures 
+in R (e.g. linear models)]
+
+
+```r
+reg_lm &lt;- lm(dist ~ speed, data = cars)
+is.list(reg_lm)
+```
+
+```
+# [1] TRUE
+```
+
+
+---
+
+
+```r
+summary(reg_lm)
+```
+
+```
+# 
+# Call:
+# lm(formula = dist ~ speed, data = cars)
+# 
+# Residuals:
+#     Min      1Q  Median      3Q     Max 
+# -29.069  -9.525  -2.272   9.215  43.201 
+# 
+# Coefficients:
+#             Estimate Std. Error t value Pr(&gt;|t|)    
+# (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+# speed         3.9324     0.4155   9.464 1.49e-12 ***
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+# 
+# Residual standard error: 15.38 on 48 degrees of freedom
+# Multiple R-squared:  0.6511,	Adjusted R-squared:  0.6438 
+# F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12
+```
+
+---
+
+# Why lists
+
+
+```r
+str(reg_lm)
+```
+
+```
+# List of 12
+#  $ coefficients : Named num [1:2] -17.58 3.93
+#   ..- attr(*, "names")= chr [1:2] "(Intercept)" "speed"
+#  $ residuals    : Named num [1:50] 3.85 11.85 -5.95 12.05 2.12 ...
+#   ..- attr(*, "names")= chr [1:50] "1" "2" "3" "4" ...
+#  $ effects      : Named num [1:50] -303.914 145.552 -8.115 9.885 0.194 ...
+#   ..- attr(*, "names")= chr [1:50] "(Intercept)" "speed" "" "" ...
+#  $ rank         : int 2
+#  $ fitted.values: Named num [1:50] -1.85 -1.85 9.95 9.95 13.88 ...
+#   ..- attr(*, "names")= chr [1:50] "1" "2" "3" "4" ...
+#  $ assign       : int [1:2] 0 1
+#  $ qr           :List of 5
+#   ..$ qr   : num [1:50, 1:2] -7.071 0.141 0.141 0.141 0.141 ...
+#   .. ..- attr(*, "dimnames")=List of 2
+#   .. .. ..$ : chr [1:50] "1" "2" "3" "4" ...
+#   .. .. ..$ : chr [1:2] "(Intercept)" "speed"
+#   .. ..- attr(*, "assign")= int [1:2] 0 1
+#   ..$ qraux: num [1:2] 1.14 1.27
+#   ..$ pivot: int [1:2] 1 2
+#   ..$ tol  : num 1e-07
+#   ..$ rank : int 2
+#   ..- attr(*, "class")= chr "qr"
+#  $ df.residual  : int 48
+#  $ xlevels      : Named list()
+#  $ call         : language lm(formula = dist ~ speed, data = cars)
+#  $ terms        :Classes 'terms', 'formula'  language dist ~ speed
+#   .. ..- attr(*, "variables")= language list(dist, speed)
+#   .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+#   .. .. ..- attr(*, "dimnames")=List of 2
+#   .. .. .. ..$ : chr [1:2] "dist" "speed"
+#   .. .. .. ..$ : chr "speed"
+#   .. ..- attr(*, "term.labels")= chr "speed"
+#   .. ..- attr(*, "order")= int 1
+#   .. ..- attr(*, "intercept")= int 1
+#   .. ..- attr(*, "response")= int 1
+#   .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+#   .. ..- attr(*, "predvars")= language list(dist, speed)
+#   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+#   .. .. ..- attr(*, "names")= chr [1:2] "dist" "speed"
+#  $ model        :'data.frame':	50 obs. of  2 variables:
+#   ..$ dist : num [1:50] 2 10 4 22 16 10 18 26 34 17 ...
+#   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
+#   ..- attr(*, "terms")=Classes 'terms', 'formula'  language dist ~ speed
+#   .. .. ..- attr(*, "variables")= language list(dist, speed)
+#   .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+#   .. .. .. ..- attr(*, "dimnames")=List of 2
+#   .. .. .. .. ..$ : chr [1:2] "dist" "speed"
+#   .. .. .. .. ..$ : chr "speed"
+#   .. .. ..- attr(*, "term.labels")= chr "speed"
+#   .. .. ..- attr(*, "order")= int 1
+#   .. .. ..- attr(*, "intercept")= int 1
+#   .. .. ..- attr(*, "response")= int 1
+#   .. .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+#   .. .. ..- attr(*, "predvars")= language list(dist, speed)
+#   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+#   .. .. .. ..- attr(*, "names")= chr [1:2] "dist" "speed"
+#  - attr(*, "class")= chr "lm"
+```
+
+
+---
+
+# Your turn
+
+.huge[Extracting `coefficients`, `residuals` and `fitted.values` from the 
+following regression model]
+
+
+```r
+lm_regs &lt;- lm(dist ~ speed, data = cars)
+lm_regs
+```
+
+
+---
+
+# Wrap-up
+
+&lt;img src="summary-tree.png" height="550" width="800" class="center"&gt;
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Be the boss of your factors]]
+
+---
+
+# What is factor?
+
+--
+
+- .huge[Factors are used to store categorical data in R]
+
+
+```r
+*sex &lt;- factor(c("male", "female", "female", "male"))
+sex
+```
+
+```
+# [1] male   female female male  
+# Levels: female male
+```
+
+--
+
+.pull-left[
+
+```r
+*levels(sex)
+```
+
+```
+# [1] "female" "male"
+```
+]
+
+.pull-right[
+
+```r
+*nlevels(sex)
+```
+
+```
+# [1] 2
+```
+]
+
+--
+
+&lt;br&gt;
+
+- .huge[Factors are the data type that R's users love to hate]
+
+---
+
+# The Janus-like nature of factors
+
+--
+
+.pull-left[
+![](janus.jpg)
+]
+
+--
+
+.pull-right[
+
+```r
+# look like strings
+x &lt;- factor(
+  c("a", "b", 
+    "b", "a")
+  )
+```
+
+
+
+```r
+class(x)
+```
+
+```
+# [1] "factor"
+```
+
+```r
+# but are integer underhood
+typeof(x)
+```
+
+```
+# [1] "integer"
+```
+]
+
+---
+
+# The Janus-like nature of factors
+
+.pull-left[
+
+```r
+unclass(x)
+```
+
+```
+# [1] 1 2 2 1
+# attr(,"levels")
+# [1] "a" "b"
+```
+
+![](factor.png)
+]
+
+.pull-right[
+
+```r
+# look like strings
+x &lt;- factor(
+  c("a", "b", 
+    "b", "a")
+  )
+```
+
+
+
+```r
+class(x)
+```
+
+```
+# [1] "factor"
+```
+
+```r
+# but are integer underhood
+typeof(x)
+```
+
+```
+# [1] "integer"
+```
+]
+
+
+---
+
+# How it can be useful? Counting
+
+--
+
+
+```r
+month_chr &lt;- c("Jan", "Dec", "Apr", "Nov", "May", "Apr")
+table(month_chr)
+```
+
+```
+# month_chr
+# Apr Dec Jan May Nov 
+#   2   1   1   1   1
+```
+
+--
+
+
+```r
+*month_fac &lt;- factor(month_chr, levels = month.abb)
+# even groups that have no observations are counted
+table(month_fac) 
+```
+
+```
+# month_fac
+# Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+#   1   0   0   2   1   0   0   0   0   0   1   1
+```
+
+
+---
+
+# How it can be useful? Sorting
+
+
+
+```r
+month_chr &lt;- c("Jan", "Dec", "Apr", "Nov", "May", "Apr")
+sort(month_chr)
+```
+
+```
+# [1] "Apr" "Apr" "Dec" "Jan" "May" "Nov"
+```
+
+--
+
+
+```r
+*month_fac &lt;- factor(month_chr, levels = month.abb)
+sort(month_fac) 
+```
+
+```
+# [1] Jan Apr Apr May Nov Dec
+# Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+```
+
+---
+
+# How it can be useful? Reodering thoes bars
+
+
+
+.left-code[
+
+```r
+dtf
+```
+
+```
+#          Skill Num
+# 1     Beginner  75
+# 2 Adv Beginner  60
+# 3 Intermediate  15
+# 4       Expert  25
+```
+
+
+```r
+ggplot(
+  dtf, aes(Skill, Num)
+  ) + geom_col()
+```
+]
+
+.right-plot[
+&lt;img src="data_types_files/figure-html/unnamed-chunk-99-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+# How it can be useful? Reodering thoes bars
+
+.left-code[
+
+```r
+dtf$Skill &lt;- factor(
+  dtf$Skill,
+  levels = 
+    c("Beginner", 
+      "Adv Beginner", 
+      "Intermediate", 
+      "Expert")
+  )
+```
+
+
+```r
+ggplot(
+  dtf, aes(Skill, Num)
+  ) + geom_col()
+```
+]
+
+.right-plot[
+&lt;img src="data_types_files/figure-html/unnamed-chunk-101-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+# How it might be evil? 
+
+--
+
+.huge[When you treat them like strings]
+
+
+
+```r
+month_fac &lt;- factor(c("Jan", "Dec", "Apr", "Nov", "Apr"), 
+                    levels = month.abb)
+month_fac &lt;- c(month_fac, "Oct")
+month_fac
+```
+
+```
+# [1] "1"   "12"  "4"   "11"  "4"   "Oct"
+```
+
+---
+
+# How it might be evil?
+
+.huge[When you try to get numeric vectors from factors]
+
+--
+
+.pull-left[
+
+```r
+y &lt;- factor(c(101:103))
+y
+```
+
+```
+# [1] 101 102 103
+# Levels: 101 102 103
+```
+
+```r
+# bad
+as.numeric(y)
+```
+
+```
+# [1] 1 2 3
+```
+]
+
+--
+
+.pull-right[
+
+```r
+# good
+as.numeric(as.character(y))
+```
+
+```
+# [1] 101 102 103
+```
+]
+
+---
+
+# How it might be evil?
+
+.huge[Do not subscript with factors]
+
+
+```r
+w &lt;- c(a=4, b=44, c=444)
+w[c("a", "c")]
+```
+
+```
+#   a   c 
+#   4 444
+```
+
+```r
+w[factor(c("a", "c"))]
+```
+
+```
+#  a  b 
+#  4 44
+```
+
+---
+
+# Manipulating factors
+
+.pull-left[
+
+```r
+# install.packages("forcats")
+library(forcats)
+```
+]
+
+.pull-right[
+&lt;img src="forcats.svg" height="550" width="550" class="center"&gt;
+]
+
+---
+
+# Manipulating factors
+
+- .huge[Modifying factor order]
+
+&lt;br&gt;
+
+- .huge[.grayfont[Modifying factor levels]]
+
+
+---
+
+# Change level order: fct_relevel()
+
+
+```r
+f &lt;- factor(c("a", "b", "c", "d"))
+f
+```
+
+```
+# [1] a b c d
+# Levels: a b c d
+```
+
+.pull-left[
+
+```r
+*fct_relevel(f, "c")
+```
+
+```
+# [1] a b c d
+# Levels: c a b d
+```
+]
+
+.pull-right[
+
+```r
+*fct_relevel(f, "b", "d")
+```
+
+```
+# [1] a b c d
+# Levels: b d a c
+```
+]
+
+
+---
+
+# Change level order: fct_inorder()
+
+
+```r
+f &lt;- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c
+```
+
+```r
+# orders according to the first appearance of each level
+*fct_inorder(f) 
+```
+
+```
+# [1] b b a c c c
+# Levels: b a c
+```
+
+---
+
+# Change level order: fct_infreq()
+
+
+```r
+f &lt;- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c
+```
+
+```r
+# orders according to the frequency
+*fct_infreq(f)
+```
+
+```
+# [1] b b a c c c
+# Levels: c b a
+```
+
+
+---
+
+# Change level order: fct_rev()
+
+
+```r
+f &lt;- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c
+```
+
+```r
+# reverse order of factor levels
+*fct_rev(f)
+```
+
+```
+# [1] b b a c c c
+# Levels: c b a
+```
+
+
+---
+
+# Your turn
+
+
+```r
+air_quality &lt;- read.csv("air-quality.csv")
+by_categ &lt;-  filter(air_quality, !is.na(aqi_categ))
+str(by_categ$aqi_categ)
+```
+
+```
+#  Factor w/ 6 levels "Good","Hazardous",..: 4 4 4 4 4 4 4 4 4 4 ...
+```
+
+```r
+levels(by_categ$aqi_categ)
+```
+
+```
+# [1] "Good"                           "Hazardous"                     
+# [3] "Moderate"                       "Unhealthy"                     
+# [5] "Unhealthy for Sensitive Groups" "Very Unhealthy"
+```
+
+---
+
+# Your turn
+
+.left-code[
+
+```r
+ggplot(
+  by_categ, 
+  aes(aqi_categ)
+  ) +
+  geom_bar()
+```
+
+.huge[Reoder the bars by levels of increasing frequency]
+
+]
+
+.right-plot[
+&lt;img src="data_types_files/figure-html/plot0-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+# Solution
+
+
+
+```r
+by_categ &lt;- mutate(by_categ, 
+                   aqi_categ = fct_rev(fct_infreq(aqi_categ)))
+
+ggplot(by_categ, aes(aqi_categ)) +
+    geom_bar()
+```
+
+
+---
+
+# Manipulating factors
+
+- .huge[.grayfont[Modifying factor order]]
+
+&lt;br&gt;
+
+- .huge[Modifying factor levels]
+
+
+---
+
+# Change factor levels: fct_recode()
+
+
+
+```r
+x &lt;- factor(c("apple", "bear", "banana", "dear"))
+x
+```
+
+```
+# [1] apple  bear   banana dear  
+# Levels: apple banana bear dear
+```
+
+```r
+*fct_recode(x, fruit = "apple", fruit = "banana")
+```
+
+```
+# [1] fruit bear  fruit dear 
+# Levels: fruit bear dear
+```
+
+
+---
+
+# Change factor levels: fct_expand()
+
+
+
+```r
+f &lt;- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c
+```
+
+```r
+# add additional levels to a factor
+*fct_expand(f, "d", "e")
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c d e
+```
+
+---
+
+# Change factor levels: fct_collapse()
+
+
+```r
+f &lt;- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+```
+# [1] b b a c c c
+# Levels: a b c
+```
+
+```r
+# collapse factor levels into manually defined groups
+*fct_collapse(f, G1 = c("a", "b"), G2 = "c")
+```
+
+```
+# [1] G1 G1 G1 G2 G2 G2
+# Levels: G1 G2
+```
+
+---
+
+# Your turn
+
+.left-code[
+
+
+.huge[Re-create AQI categories as follows:]
+
+- .huge[Acceptalbe ~ Good, Moderate]
+- .huge[Dangerous ~ Unhealthy, Unhealthy for Sensitive Groups]
+- .huge[Deadly ~ Very Unhealthy, Hazardous]
+
+.huge[And draw the plot on the right]
+
+]
+
+.right-plot[
+&lt;img src="data_types_files/figure-html/plot1-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+# Solution
+
+
+```r
+by_categ &lt;-  filter(air_quality, !is.na(aqi_categ))
+
+by_categ &lt;- mutate(
+  by_categ,
+  aqi_categ = fct_collapse(
+    aqi_categ,
+    Acceptalbe = c("Good", "Moderate"),
+    Dangerous = c("Unhealthy", "Unhealthy for Sensitive Groups"),
+    Deadly = c("Very Unhealthy", "Hazardous")
+    )
+  )
+
+by_categ$aqi_categ &lt;- fct_relevel(by_categ$aqi_categ, 
+                                  "Acceptalbe", "Dangerous")
+```
+
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Handle dates &amp; times like a boss]]
+
+---
+class: center, middle
+
+.giant[What is time?]
+
+---
+class: center, middle
+
+.giant[What is time?]
+&lt;br&gt;
+.grayfont[.large[Hint: this is not a philosophical question]]
+
+---
+
+- .huge[Time is a measurement system]
+
+&lt;br&gt;
+
+- .huge[Time can be arranged on a time line]
+
+.center[![](timeline.png)]
+
+---
+
+- .huge[A date-time is a specific instant of time, a point in time line]
+
+&lt;br&gt;
+
+- .huge[For example: 27/12/2017 21:32:00]
+
+.center[![](instants.png)]
+
+
+---
+
+# Identifying instants
+
+
+.huge[1 - By reference: as the number of seconds since a reference time]
+
+&lt;br&gt;
+
+.huge[2 - By description: a unique combination of year, month, day, hour, minute, second, and time zones]
+
+
+.center[![](instants_identifying.png)]
+
+---
+
+# 'Date-time' objects
+
+
+.huge[`datetimes` are stored as either `POSIXct` or `POSIXlt` objects]
+
+--
+
+&lt;br&gt;
+
+- .huge[POSIXct objects are stored as the number of seconds since a reference 
+time (default: `1970-01-01 00:00:00`)]
+
+--
+
+&lt;br&gt;
+
+- .huge[POSIXct objects are stored as a unique combination of year, month, day, 
+hour, minute, second, and time zone values]
+
+
+---
+
+
+```r
+now &lt;- Sys.time()
+now
+```
+
+```
+# [1] "2018-07-28 23:57:35 +07"
+```
+
+```r
+class(now)
+```
+
+```
+# [1] "POSIXct" "POSIXt"
+```
+
+```r
+typeof(now)
+```
+
+```
+# [1] "double"
+```
+
+```r
+unclass(now)
+```
+
+```
+# [1] 1532797056
+```
+
+---
+
+.pull-left[
+
+```r
+now_lt &lt;- as.POSIXlt(now)
+typeof(now_lt)
+```
+
+```
+# [1] "list"
+```
+]
+
+.pull-right[
+
+```r
+unclass(now_lt)
+```
+
+```
+# $sec
+# [1] 35.88489
+# 
+# $min
+# [1] 57
+# 
+# $hour
+# [1] 23
+# 
+# $mday
+# [1] 28
+# 
+# $mon
+# [1] 6
+# 
+# $year
+# [1] 118
+# 
+# $wday
+# [1] 6
+# 
+# $yday
+# [1] 208
+# 
+# $isdst
+# [1] 0
+# 
+# $zone
+# [1] "+07"
+# 
+# $gmtoff
+# [1] 25200
+# 
+# attr(,"tzone")
+# [1] ""    "+07" "+07"
+```
+]
+
+---
+
+# 'Date' objects
+
+.huge[R uses 'Date' object to store instants that have only dates, but no times]
+
+.huge[Dates are stored internally as the number of days from a reference date
+(default: 1970-01-01)]
+
+.pull-left[
+
+```r
+today &lt;- Sys.Date()
+class(today)
+```
+
+```
+# [1] "Date"
+```
+]
+
+.pull-right[
+
+```r
+typeof(today)
+```
+
+```
+# [1] "double"
+```
+
+```r
+unclass(today)
+```
+
+```
+# [1] 17740
+```
+]
+
+---
+
+# Parsing dates
+
+- .large[standard format: yyyy-mm-dd]
+
+
+```r
+dt1 &lt;- as.Date("2012-07-22")
+dt1
+```
+
+```
+# [1] "2012-07-22"
+```
+
+- .large[non-standard format]
+
+
+```r
+dt2 &lt;- as.Date("03/20/2012", format = "%m/%d/%Y")
+dt2
+```
+
+```
+# [1] "2012-03-20"
+```
+
+```r
+dt3 &lt;- as.Date("November 6, 2011", format = "%B %d, %Y")
+dt3
+```
+
+```
+# [1] "2011-11-06"
+```
+
+
+???
+
+Sources:
+
+http://www.thertrader.com/2014/04/18/date-formating-in-r/
+http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
+
+
+---
+
+# Your turn
+
+```
+| Code 	| Value                             	|
+|------	|-----------------------------------	|
+| %d   	| Day of the month (decimal number) 	|
+| %m   	| Month (decimal number)            	|
+| %b   	| Month (abbreviated)               	|
+| %B   	| Month (full name)                 	|
+| %y   	| Year (2 digit)                    	|
+| %Y   	| Year (4 digit)                    	|
+```
+
+---
+
+.huge[Consult the previous table or `?strptime` and parse the following vectors
+to 'Date' objects]
+
+
+```r
+date1 &lt;- "6aug2005"
+
+date2 &lt;- "aug061999"
+
+date3 &lt;- "12-05-2001"
+
+date4 &lt;- "May 27 1984"
+
+date5 &lt;- "1998-22-07"
+
+date6 &lt;- "20041024"
+
+date7 &lt;- "22.10.2004"
+```
+
+
+---
+
+# Wrap-up
+
+&lt;img src="summary-tree-s3-1.png" height="550" width="700" class="center"&gt;
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Matrices &amp; Arrays]]
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- cbind(c(1L, 2L, 3L, 4L, 5L),
+             c(6L, 7L, 8L, 9L, 10L),
+             c(11L, 12L, 13L, 14L, 15L))
+```
+
+.center[![](matrix.png)]
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- rbind(c(1L, 6L, 11L),
+             c(2L, 7L, 12L),
+             c(3L, 8L, 13L),
+             c(4L, 9L, 14L),
+             c(5L, 10L, 15L))
+```
+
+.center[![](matrix.png)]
+
+---
+
+# Matrix
+
+
+```r
+mat &lt;- matrix(1L:15L, ncol = 3)
+```
+
+.center[![](matrix.png)]
+
+---
+
+# Properties
+
+- .huge[typeof(), class()]
+
+&lt;br&gt;
+
+- .huge[colnames(), rownames()]
+
+&lt;br&gt;
+
+- .huge[nrow(), ncol()]
+
+---
+
+
+
+```r
+mat &lt;- matrix(1L:15L, ncol = 3, 
+              dimnames = list(c("R1", "R2", "R3", "R4", "R5"),
+                              c("A", "B", "C")))
+```
+
+.pull-left[
+
+```r
+class(mat)
+```
+
+```
+# [1] "matrix"
+```
+
+```r
+mat
+```
+
+```
+#    A  B  C
+# R1 1  6 11
+# R2 2  7 12
+# R3 3  8 13
+# R4 4  9 14
+# R5 5 10 15
+```
+]
+
+.pull-right[
+
+```r
+*nrow(mat)
+```
+
+```
+# [1] 5
+```
+
+```r
+*ncol(mat)
+```
+
+```
+# [1] 3
+```
+
+```r
+*colnames(mat)
+```
+
+```
+# [1] "A" "B" "C"
+```
+
+```r
+*rownames(mat)
+```
+
+```
+# [1] "R1" "R2" "R3" "R4" "R5"
+```
+]
+
+---
+
+# Array
+
+
+```r
+arr &lt;- array(1L:45L, dim = c(5, 3, 3))
+```
+
+.center[![](array.png)]
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Data frames - the R's famed tabular d/s]]
+
+
+---
+
+
+```r
+data.frame(x = c("a", "b", "c", "d", "e", "f", "g", "h"),
+           z = c(1.23, 3.21, 2.35, 2.4, 2.13, 4.56, 2.13, 4.56),
+           w = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+           y = c(1L, 2L, 5L, 4L, 3L, 4L, 3L, 4L),
+           stringsAsFactors = FALSE)
+```
+
+.center[![](dataframe.png)]
+
+
+---
+
+# Properties
+
+--
+
+- .huge[A cross between matrix and list: 2-dimensional structure &amp; 
+Each column can have a different type]
+
+--
+
+- .huge[typeof(), class()]
+
+--
+
+- .huge[names() ~ colnames(), and rownames()]
+
+--
+
+- .huge[length() ~ ncol(), nrow()]
+
+
+---
+
+# Subsetting data frames
+
+
+```r
+data("mtcars")
+head(mtcars)
+```
+
+```
+#                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+# Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+# Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+# Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+# Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+# Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+# Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+
+---
+
+# Your turn
+
+.huge[Try to write the following codes in `dplyr` verbs]
+
+---
+
+
+```r
+# everything 
+mtcars[, ]
+```
+
+```
+#                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+# Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+# Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+# Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+# Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+# Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+# Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+# Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+# Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+# Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+# Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+# Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+# Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+# Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+# Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+# Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+# Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+# Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+# Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+# Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+# Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+# Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+# Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+# AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+# Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+# Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+# Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+# Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+# Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+# Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+# Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+# Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+# Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+
+```r
+# positive integer in either row or column
+mtcars[1:4, ]
+```
+
+```
+#                 mpg cyl disp  hp drat    wt  qsec vs am gear carb
+# Mazda RX4      21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+# Mazda RX4 Wag  21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+# Datsun 710     22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+# Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+```
+
+```r
+mtcars[, 1:4]
+```
+
+```
+#                      mpg cyl  disp  hp
+# Mazda RX4           21.0   6 160.0 110
+# Mazda RX4 Wag       21.0   6 160.0 110
+# Datsun 710          22.8   4 108.0  93
+# Hornet 4 Drive      21.4   6 258.0 110
+# Hornet Sportabout   18.7   8 360.0 175
+# Valiant             18.1   6 225.0 105
+# Duster 360          14.3   8 360.0 245
+# Merc 240D           24.4   4 146.7  62
+# Merc 230            22.8   4 140.8  95
+# Merc 280            19.2   6 167.6 123
+# Merc 280C           17.8   6 167.6 123
+# Merc 450SE          16.4   8 275.8 180
+# Merc 450SL          17.3   8 275.8 180
+# Merc 450SLC         15.2   8 275.8 180
+# Cadillac Fleetwood  10.4   8 472.0 205
+# Lincoln Continental 10.4   8 460.0 215
+# Chrysler Imperial   14.7   8 440.0 230
+# Fiat 128            32.4   4  78.7  66
+# Honda Civic         30.4   4  75.7  52
+# Toyota Corolla      33.9   4  71.1  65
+# Toyota Corona       21.5   4 120.1  97
+# Dodge Challenger    15.5   8 318.0 150
+# AMC Javelin         15.2   8 304.0 150
+# Camaro Z28          13.3   8 350.0 245
+# Pontiac Firebird    19.2   8 400.0 175
+# Fiat X1-9           27.3   4  79.0  66
+# Porsche 914-2       26.0   4 120.3  91
+# Lotus Europa        30.4   4  95.1 113
+# Ford Pantera L      15.8   8 351.0 264
+# Ferrari Dino        19.7   6 145.0 175
+# Maserati Bora       15.0   8 301.0 335
+# Volvo 142E          21.4   4 121.0 109
+```
+
+---
+
+
+```r
+# positive integer in both row &amp; column
+mtcars[1:4, 1:4]
+```
+
+```
+#                 mpg cyl disp  hp
+# Mazda RX4      21.0   6  160 110
+# Mazda RX4 Wag  21.0   6  160 110
+# Datsun 710     22.8   4  108  93
+# Hornet 4 Drive 21.4   6  258 110
+```
+
+---
+
+
+```r
+# negative integer subsetting
+mtcars[-c(1:4), -c(1:4)]
+```
+
+```
+#                     drat    wt  qsec vs am gear carb
+# Hornet Sportabout   3.15 3.440 17.02  0  0    3    2
+# Valiant             2.76 3.460 20.22  1  0    3    1
+# Duster 360          3.21 3.570 15.84  0  0    3    4
+# Merc 240D           3.69 3.190 20.00  1  0    4    2
+# Merc 230            3.92 3.150 22.90  1  0    4    2
+# Merc 280            3.92 3.440 18.30  1  0    4    4
+# Merc 280C           3.92 3.440 18.90  1  0    4    4
+# Merc 450SE          3.07 4.070 17.40  0  0    3    3
+# Merc 450SL          3.07 3.730 17.60  0  0    3    3
+# Merc 450SLC         3.07 3.780 18.00  0  0    3    3
+# Cadillac Fleetwood  2.93 5.250 17.98  0  0    3    4
+# Lincoln Continental 3.00 5.424 17.82  0  0    3    4
+# Chrysler Imperial   3.23 5.345 17.42  0  0    3    4
+# Fiat 128            4.08 2.200 19.47  1  1    4    1
+# Honda Civic         4.93 1.615 18.52  1  1    4    2
+# Toyota Corolla      4.22 1.835 19.90  1  1    4    1
+# Toyota Corona       3.70 2.465 20.01  1  0    3    1
+# Dodge Challenger    2.76 3.520 16.87  0  0    3    2
+# AMC Javelin         3.15 3.435 17.30  0  0    3    2
+# Camaro Z28          3.73 3.840 15.41  0  0    3    4
+# Pontiac Firebird    3.08 3.845 17.05  0  0    3    2
+# Fiat X1-9           4.08 1.935 18.90  1  1    4    1
+# Porsche 914-2       4.43 2.140 16.70  0  1    5    2
+# Lotus Europa        3.77 1.513 16.90  1  1    5    2
+# Ford Pantera L      4.22 3.170 14.50  0  1    5    4
+# Ferrari Dino        3.62 2.770 15.50  0  1    5    6
+# Maserati Bora       3.54 3.570 14.60  0  1    5    8
+# Volvo 142E          4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+
+```r
+# column names selection
+mtcars[, c("mpg", "hp", "vs", "am")]
+```
+
+```
+#                      mpg  hp vs am
+# Mazda RX4           21.0 110  0  1
+# Mazda RX4 Wag       21.0 110  0  1
+# Datsun 710          22.8  93  1  1
+# Hornet 4 Drive      21.4 110  1  0
+# Hornet Sportabout   18.7 175  0  0
+# Valiant             18.1 105  1  0
+# Duster 360          14.3 245  0  0
+# Merc 240D           24.4  62  1  0
+# Merc 230            22.8  95  1  0
+# Merc 280            19.2 123  1  0
+# Merc 280C           17.8 123  1  0
+# Merc 450SE          16.4 180  0  0
+# Merc 450SL          17.3 180  0  0
+# Merc 450SLC         15.2 180  0  0
+# Cadillac Fleetwood  10.4 205  0  0
+# Lincoln Continental 10.4 215  0  0
+# Chrysler Imperial   14.7 230  0  0
+# Fiat 128            32.4  66  1  1
+# Honda Civic         30.4  52  1  1
+# Toyota Corolla      33.9  65  1  1
+# Toyota Corona       21.5  97  1  0
+# Dodge Challenger    15.5 150  0  0
+# AMC Javelin         15.2 150  0  0
+# Camaro Z28          13.3 245  0  0
+# Pontiac Firebird    19.2 175  0  0
+# Fiat X1-9           27.3  66  1  1
+# Porsche 914-2       26.0  91  0  1
+# Lotus Europa        30.4 113  1  1
+# Ford Pantera L      15.8 264  0  1
+# Ferrari Dino        19.7 175  0  1
+# Maserati Bora       15.0 335  0  1
+# Volvo 142E          21.4 109  1  1
+```
+
+---
+
+
+```r
+# logical subsetting
+mtcars[mtcars$cyl %in% c(6, 8), ]
+```
+
+```
+#                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+# Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+# Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+# Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+# Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+# Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+# Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+# Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+# Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+# Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+# Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+# Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+# Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+# Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+# Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+# Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+# AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+# Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+# Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+# Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+# Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+# Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+```
+
+---
+
+# Solution
+
+
+```r
+# mtcars[, ]
+select(mtcars, everything())
+# mtcars[1:4, ]
+slice(mtcars, 1:4)
+# mtcars[, 1:4]
+# mtcars[1:4, 1:4]
+# mtcars[-c(1:4), -c(1:4)]
+# ==&gt; no equivalent in dplyr
+# mtcars[, c("mpg", "hp", "vs", "am")]
+select(mtcars, mpg, hp, vs, am)
+# mtcars[mtcars$cyl %in% c(6, 8), ]
+filter(mtcars, cyl %in% c(6, 8))
+```
+
+
+---
+
+# Your turn
+
+.huge[Fix each of the following common data frame subsetting errors:]
+
+
+```r
+mtcars[mtcars$cyl = 4, ]
+
+mtcars[-1:4, ]
+
+mtcars[mtcars$cyl &lt;= 5]
+
+mtcars[mtcars$cyl == 4 | 6, ]
+```
+
+---
+
+# Solution
+
+
+```r
+mtcars[mtcars$cyl == 4, ]
+
+mtcars[-c(1:4), ]
+
+mtcars[mtcars$cyl &lt;= 5, ]
+
+mtcars[mtcars$cyl == 4 | mtcars$cyl == 6, ]
+```
+
+---
+
+# Wrap-up
+
+&lt;img src="summary-tree-s3-2.png" height="550" width="800" class="center"&gt;
+
+---
+background-image: url(learning_not_failing.gif)
+background-size: contain
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Moral of the story]]
+
+
+---
+background-image: url(https://media.giphy.com/media/h4Z6RfuQycdiM/giphy.gif)
+background-size: cover
+class: inverse, middle, center
+
+# How are these things useful?
+
+---
+
+# Recall statistical data types
+
+--
+
+- .huge[Binary (yes/no)]
+
+--
+
+&lt;br&gt;
+
+- .huge[Categorical (blood types: A, B, O, AB)]
+
+--
+
+&lt;br&gt;
+
+- .huge[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)]
+
+--
+
+&lt;br&gt;
+
+- .huge[Count (housing census, number of click, views, likes)]
+
+--
+
+&lt;br&gt;
+
+- .huge[Real-valued (temperature, height)]
+
+
+---
+
+# Represented in R
+
+--
+
+- .huge[Binary (yes/no)] .huge[.greenfont[.bold[==&gt; logical]]]
+
+--
+
+&lt;br&gt;
+
+- .huge[Categorical (blood types: A, B, O, AB)] .huge[.greenfont[.bold[==&gt; factors]]]
+
+--
+
+&lt;br&gt;
+
+- .huge[Ordinal (Likert scale: Like - Somewhat Like - Neutral - Somewhat Dislike - Dislike)] .huge[.greenfont[.bold[==&gt; ordered factors]]]
+
+--
+
+&lt;br&gt;
+
+- .huge[Count (housing census, number of click, views, likes)] .huge[.greenfont[.bold[==&gt; integer]]]
+
+--
+
+&lt;br&gt;
+
+- .huge[Real-valued (temperature, height)] .huge[.greenfont[.bold[==&gt; double]]]
+
+
+---
+
+# Caveat
+
+--
+
+.huge[Functions behave differently depending on the input]
+
+--
+
+
+```r
+num_vect &lt;- c(1, 2, 3, 4, 5)
+lgl_vect &lt;- c(TRUE, FALSE, TRUE, FALSE)
+chr_vect &lt;- c("a", "b", "c", "d", "e")
+dat_vect &lt;- as.Date(c("2017-12-02", "2017-12-16", "2017-12-28"))
+```
+
+.pull-left[
+
+```r
+mean(num_vect)
+```
+
+```
+# [1] 3
+```
+
+```r
+mean(lgl_vect)
+```
+
+```
+# [1] 0.5
+```
+]
+
+.pull-right[
+
+```r
+mean(chr_vect)
+```
+
+```
+# [1] NA
+```
+
+```r
+mean(dat_vect)
+```
+
+```
+# [1] "2017-12-15"
+```
+]
+
+
+
+---
+class: inverse, middle, center
+
+.giant[.greenfont[Q&amp;A]]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
