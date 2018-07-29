@@ -45,17 +45,15 @@ ggplot(test, aes(med_math)) +
 ## EDA ---------------------------------------------------------------------
 
 math_plot <- ggplot(diemthi, aes(Math, group = ProvID)) +
-    geom_line(color = "white", stat = "density") +
+    geom_line(color = "gray80", stat = "density") +
     geom_line(data = filter(diemthi, ProvID == "05"),
-              color = "orange", stat = "density", size = 0.8) +
+              color = "red4", stat = "density", size = 0.8) +
     annotate("text", 2, 0.3, label = "Hà Giang", size = 4, hjust = 0.9, color = "red4") +
     scale_x_continuous(breaks = seq(0, 10, 2), name = NULL) +
     scale_y_continuous(labels = NULL, name = NULL) +
     labs(title = "Math") +
     theme_minimal(base_size = 14, base_family = "Roboto Slab") +
-    theme(axis.ticks = element_blank(),
-          panel.grid = element_blank(),
-          plot.background = element_rect(fill = "gray50"))
+    theme(axis.ticks = element_blank())
 
 ggplot_helper <- function(dta, subj, title = subj) {
     ggplot(data = dta, aes_string(subj, group = "ProvID")) +
@@ -66,8 +64,7 @@ ggplot_helper <- function(dta, subj, title = subj) {
         scale_y_continuous(labels = NULL, name = NULL) +
         labs(title = title) +
         theme_minimal(base_size = 14, base_family = "Roboto Slab") +
-        theme(axis.ticks = element_blank(),
-              panel.grid.minor.y = element_blank())
+        theme(axis.ticks = element_blank())
 }
 
 viet_plot <- ggplot_helper(diemthi, subj = "Viet")
