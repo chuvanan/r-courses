@@ -22,6 +22,7 @@ navbar:
         - text: "Data Visualisation with ggplot2"
           href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
+          href: ./data_types/data_types.html
 
 output:
   html_document:
