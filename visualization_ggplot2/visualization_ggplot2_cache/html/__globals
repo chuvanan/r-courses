@@ -1,0 +1,7 @@
+plot1	ggplot	mpg	aes	displ	hwy
+plot1-out	ggplot	mpg	aes	displ	hwy
+plot2	ggplot	mpg	aes	displ	hwy	cyl	geom_point
+plot2-out	ggplot	mpg	aes	displ	hwy	cyl	geom_point
+unnamed-chunk-1	mpg	cyl	factor
+unnamed-chunk-2	ggplot	mpg	aes	displ	hwy	cyl	geom_point	scale_x_continuous	scale_y_continuous	scale_color_discrete	x	disp	y	color
+unnamed-chunk-3	x	disp	scale_x_continuous	y	hwy	scale_y_continuous	color	cyl	scale_color_discrete
