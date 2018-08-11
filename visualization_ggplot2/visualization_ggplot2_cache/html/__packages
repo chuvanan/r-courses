@@ -3,3 +3,6 @@ rmarkdown
 readr
 dplyr
 ggplot2
+patchwork
+bindrcpp
+tidyr

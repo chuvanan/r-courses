@@ -1,7 +1,36 @@
-plot1	ggplot	mpg	aes	displ	hwy
-plot1-out	ggplot	mpg	aes	displ	hwy
-plot2	ggplot	mpg	aes	displ	hwy	cyl	geom_point
-plot2-out	ggplot	mpg	aes	displ	hwy	cyl	geom_point
-unnamed-chunk-1	mpg	cyl	factor
-unnamed-chunk-2	ggplot	mpg	aes	displ	hwy	cyl	geom_point	scale_x_continuous	scale_y_continuous	scale_color_discrete	x	disp	y	color
-unnamed-chunk-3	x	disp	scale_x_continuous	y	hwy	scale_y_continuous	color	cyl	scale_color_discrete
+plot1	ggplot	mpg	aes	displ	hwy	geom_point
+plot1-out	ggplot	mpg	aes	displ	hwy	geom_point
+plot2	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	scale_y_continuous
+plot2-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	scale_y_continuous
+unnamed-chunk-1	ggplot	cpi	aes	year	geom_line	geom_point	labs	scale_x_continuous	c	paste0	scale_y_continuous
+unnamed-chunk-2	ggplot	health_index	aes	country	score	geom_col	labs	coord_flip	c	none_zero_baseline	zero_baseline
+unnamed-chunk-3	ggplot	gasoline_price	aes	date	price	geom_point	geom_step	labs	scale_x_date	scale_y_continuous	seq	c
+plot3	ggplot	mpg	aes	displ	hwy	geom_point	labs
+plot3-out	ggplot	mpg	aes	displ	hwy	geom_point	labs
+plot4	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	seq
+plot4-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	seq
+plot5	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	seq	c
+plot5-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_x_continuous	seq	c
+plot6	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous	c
+plot6-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous	c
+plot7	ggplot	mpg	aes	displ	hwy	geom_point	ylim
+plot7-out	ggplot	mpg	aes	displ	hwy	geom_point	ylim
+plot8	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous
+plot8-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous
+plot9	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_reverse
+plot9-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_reverse
+plot10	cpi	data.frame	c	ggplot	aes	year	geom_line	geom_point	labs	scale_x_continuous	paste0	scale_y_continuous	theme	element_blank
+plot11	health_index	data.frame	c	%>%	mutate	fct_reorder	country	score	ggplot	aes	geom_col	labs	theme_gray	coord_flip	none_zero_baseline	scale_y_continuous	zero_baseline
+plot12	gasoline_price	data.frame	c	date	as.Date	ggplot	aes	price	geom_point	geom_step	labs	scale_x_date	scale_y_continuous	seq	theme_gray	theme	element_text	element_blank
+plot13	env_tax	data.frame	c	%>%	gather	type	amount	year	ggplot	aes	geom_line	geom_point	labs	scale_color_manual	theme_gray
+unnamed-chunk-4	env_tax	%>%	gather	type	amount	year	ggplot	aes	geom_line	geom_point	labs
+plot60	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_gray
+plot60-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_gray
+plot61	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_minimal
+plot61-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_minimal
+plot62	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_bw
+plot62-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_bw
+plot63	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_classic
+plot63-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_classic
+unnamed-chunk-5	theme
+unnamed-chunk-6	theme	line	rect	text	title	aspect.ratio	axis.title	axis.title.x	axis.title.x.top	axis.title.x.bottom	axis.title.y	axis.title.y.left	axis.title.y.right	axis.text	axis.text.x	axis.text.x.top	axis.text.x.bottom	axis.text.y	axis.text.y.left	axis.text.y.right	axis.ticks	axis.ticks.x	axis.ticks.x.top	axis.ticks.x.bottom	axis.ticks.y	axis.ticks.y.left	axis.ticks.y.right	axis.ticks.length	axis.line	axis.line.x	axis.line.x.top	axis.line.x.bottom	axis.line.y	axis.line.y.left	axis.line.y.right	legend.background	legend.margin	legend.spacing	legend.spacing.x	legend.spacing.y	legend.key	legend.key.size	legend.key.height	legend.key.width	legend.text	legend.text.align	legend.title	legend.title.align	legend.position	legend.direction	legend.justification	legend.box	legend.box.just	legend.box.margin	legend.box.background	legend.box.spacing	panel.background	panel.border	panel.spacing	panel.spacing.x	panel.spacing.y	panel.grid	panel.grid.major	panel.grid.minor	panel.grid.major.x	panel.grid.major.y	panel.grid.minor.x	panel.grid.minor.y	panel.ontop	plot.background	plot.title	plot.subtitle	plot.caption	plot.tag	plot.tag.position	plot.margin	strip.background	strip.background.x	strip.background.y	strip.placement	strip.text	strip.text.x	strip.text.y	strip.switch.pad.grid	strip.switch.pad.wrap	...

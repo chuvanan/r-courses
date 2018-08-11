@@ -20,8 +20,10 @@ knitr::opts_chunk$set(fig.width=4.25, fig.height=3.5, fig.retina=3, fig.align = 
                       message=FALSE, warning=FALSE, cache = TRUE,
                       autodep = TRUE, hiline=TRUE, dev = "svg")
 library(readr)
+library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(patchwork)
 ```
 
 background-image: url(hex-ggplot2.png)
@@ -31,16 +33,14 @@ background-size: contain
 ---
 class: inverse, center, middle
 
-.h0[1 - Scales]
+.h0[1 - Axis Scales & Transformations]
 
 
 ---
 class: middle
 
-
-.giant[Scales control the mapping from .greenfont[data] to
+.giant[.greenfont[Scales] control the mapping from .greenfont[data] to
 .greenfont[aesthetics]]
-
 
 ---
 class: middle
@@ -52,15 +52,14 @@ class: middle
 .left-code[
 ```{r plot1, eval=FALSE}
 ## position mapping
-ggplot(
-    mpg,
+ggplot(mpg,
     aes(displ, hwy)
-)
+) + geom_point()
 ```
 
 ```r
-x ~ disp
-y ~ hwy
+x ==> disp
+y ==> hwy
 ```
 ]
 
@@ -69,53 +68,21 @@ y ~ hwy
 ```
 ]
 
----
-
-```{r, include=FALSE}
-mpg$cyl <- factor(mpg$cyl)
-```
-
-.left-code[
-```{r plot2, eval=FALSE}
-## position mapping +
-## color mapping
-ggplot(
-    mpg,
-    aes(displ, hwy,
-        color = cyl)
-) + geom_point()
-```
-
-```r
-x ~ disp
-y ~ hwy
-color ~ cyl
-```
-
-]
-
-.right-plot[
-```{r plot2-out, ref.label="plot2", echo=FALSE, out.width="100%", fig.align='right'}
-```
-]
 
 ---
 
 # What actually happens:
 
-```{r, eval=FALSE}
-
-ggplot(mpg, aes(displ, hwy, color = cyl)) +
+```r
+ggplot(mpg, aes(displ, hwy)) +
     geom_point() +
     scale_x_continuous() +
-    scale_y_continuous() +
-    scale_color_discrete()
+    scale_y_continuous()
 
 ## the mappings now are obivious:
 
-x = disp ~ scale_x_continuous()
-y = hwy ~ scale_y_continuous()
-color = cyl ~ scale_color_discrete()
+disp ==> scale_x_continuous()
+hwy ==> scale_y_continuous()
 
 ```
 
@@ -127,79 +94,291 @@ scale.
 
 ---
 
-# Scales control:
-
-- .huge[Visual aesthetics (`position`, `color`, `size`, `shape`)]
-
-- .huge[The axes (`limits`, `breaks`, `labels`, `...`)]
-
-- .huge[The legends (`title`, `key`, `...`)]
-
----
-
-# Scales syntax:
-
-```r
-scale_<name_of_aesthetics>_<name_of_scales>
-
-## examples:
-scale_color_continuous()
-scale_shape_discrete()
-...
-```
-
-
----
-class: middle
-
-.giant[How do I know .greenfont[what scales are available?]]
-
----
-
-# Position scales (x & y)
+# Axis scales <= types of data
 
 ```r
 ## for continuous data
 scale_x/y_continuous()
-scale_x/y_log10()
-scale_x/y_reverse()
-scale_x/y_sqrt()
 
 ## for discrete data
 scale_x/y_discrete()
 
-## for date/time data
+## for date/datetime/time data
 scale_x/y_date()
 scale_x/y_datetime()
 scale_x/y_time()
 ```
 
----
-
-.enormous[Position scales - example 1]
 
 ---
 
-.enormous[Position scales - example 2]
+# Common options
+
+
+```yaml
+name   : name of scale
+
+breaks : control the breaks in the axis
+
+labels : labels of axis tick marks
+
+limits : control x or y axis limits
+
+trans  : axis transformations ('log2', 'log10', ...)
+```
+
+---
+
+.left-code[
+
+# Naming axis
+
+```{r plot2, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + geom_point() +
+  scale_x_continuous(
+    name = "Engine displacement (L)"
+  ) + 
+  scale_y_continuous(
+    name = "Highway MPG"
+  )
+```
+]
+
+.right-plot[
+```{r plot2-out, ref.label="plot2", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+
+# Naming axis
+
+```{r plot3, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+labs(
+x = "Engine displacement (L)",
+y = "Highway MPG"
+)
+```
+]
+
+.right-plot[
+```{r plot3-out, ref.label="plot3", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
 
 
 ---
 
-.enormous[Position scales - example 3]
+.left-code[
+
+# Setting axis breaks
+
+```{r plot4, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+scale_x_continuous(
+breaks = seq(2, 7, 0.5)
+)
+```
+]
+
+.right-plot[
+```{r plot4-out, ref.label="plot4", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+
+# Setting axis labels
+
+```{r plot5, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+scale_x_continuous(
+breaks = seq(2, 7, 2),
+labels = c("two", "four", "six")
+)
+```
+]
+
+.right-plot[
+```{r plot5-out, ref.label="plot5", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+
+# Setting axis limits
+
+```{r plot6, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+scale_y_continuous(
+limits = c(10, 40)
+)
+```
+]
+
+.right-plot[
+```{r plot6-out, ref.label="plot6", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+
+
+---
+
+.left-code[
+
+# Setting axis limits
+
+```{r plot7, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+ylim(10, 40)
+```
+
+```r
+# xlim()
+```
+
+]
+
+.right-plot[
+```{r plot7-out, ref.label="plot7", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+
+# Transformations
+
+```{r plot8, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+scale_y_continuous(
+trans = "reverse"
+)
+```
+
+```r
+# Others:
+# trans = "log10"
+# trans = "log2"
+# trans = "sqrt"
+```
+
+
+]
+
+.right-plot[
+```{r plot8-out, ref.label="plot8", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+
+# Transformations
+
+```{r plot9, eval=FALSE}
+ggplot(mpg,
+    aes(displ, hwy)
+) + 
+geom_point() +
+scale_y_reverse()
+
+```
+
+```r
+# Others:
+# scale_y_log10()
+# scale_y_log2()
+# scale_y_sqrt()
+```
+]
+
+.right-plot[
+```{r plot9-out, ref.label="plot9", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+
+---
+class: middle, center
+
+
+.h0[Critique by redesign]
 
 ---
 background-image: url(cpi.png)
 background-size: contain
 
----
-
-.enormous[Your turn]
-
 
 ---
 
-.enormous[Solution]
+```{r plot10, echo=FALSE, out.width="65%", fig.align='center'}
+cpi <- data.frame(
+    year = 2010:2017,
+    cpi = c(8.25, 12.79, 15.95, 6.91, 4.83, 0.74, 1.25, 4.96)
+)
 
+ggplot(cpi, aes(year, cpi)) +
+    geom_line(size = 1, color = "#40655e") +
+    geom_point(size = 2, color = "#40655e") +
+    labs(title = "CPI quý I/2017 tăng cao nhất trong 3 năm") +
+    scale_x_continuous(name = NULL,
+                       breaks = 2010:2017,
+                       labels = c("Q1/2010", paste0("'", 11:17))) +
+    scale_y_continuous(name = NULL,
+                       breaks = cpi$cpi,
+                       labels = paste0(cpi$cpi, "%")) +
+    theme(panel.grid.minor.y = element_blank(),
+          panel.grid.minor.x = element_blank())
+```
+
+---
+
+# Solution
+
+```{r, eval=FALSE}
+ggplot(cpi, aes(year, cpi)) +
+    geom_line(size = 1, color = "#40655e") +
+    geom_point(size = 2, color = "#40655e") +
+    labs(title = "CPI quý I/2017 tăng cao nhất trong 3 năm qua") +
+    scale_x_continuous(name = NULL,
+                       breaks = 2010:2017,
+                       labels = c("Q1/2010", 
+                                  paste0("'", 11:17))) +
+    scale_y_continuous(name = NULL,
+                       breaks = cpi$cpi,
+                       labels = paste0(cpi$cpi, "%"))
+```
 
 ---
 background-image: url(health-bar-chart.png)
@@ -207,12 +386,55 @@ background-size: contain
 
 ---
 
-.enormous[Your turn]
+```{r plot11, echo=FALSE, out.width="100%", fig.align='center', fig.asp=9/17}
+health_index <- data.frame(
+    country = c("Italy", "Iceland", "Thụy Sĩ", "Singapore", "Australia",
+                "Tây Ban Nha", "Nhật Bản", "Thụy Điển", "Isarel", "Luxembourg"),
+    score = c(93.11, 91.21, 90.75, 90.23, 89.24, 89.19, 89.15, 88.92, 88.14, 87.87),
+    stringsAsFactors = FALSE
+)
+
+health_index <- health_index %>%
+    mutate(country = forcats::fct_reorder(country, score))
+
+ggplot(health_index,
+       aes(country, score)) +
+    geom_col() +
+    labs(x = NULL, y = NULL,
+         title = "Truncated axis") +
+    theme_gray(base_size = 7) +
+    coord_flip(ylim = c(87, 94)) -> none_zero_baseline
+
+ggplot(health_index,
+       aes(country, score)) +
+    geom_col() +
+    labs(x = NULL, y = NULL,
+         title = "Full-scale axis") +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) +
+    theme_gray(base_size = 7) +
+    coord_flip() -> zero_baseline
+
+none_zero_baseline + zero_baseline
+```
+
 
 
 ---
 
-.enormous[Solution]
+# Solution
+
+```{r, eval=FALSE}
+ggplot(health_index, aes(country, score)) +
+    geom_col() +
+    labs(x = NULL, y = NULL, title = "Truncated axis") +
+    coord_flip(ylim = c(87, 94)) -> none_zero_baseline
+
+ggplot(health_index,
+       aes(country, score)) +
+    geom_col() +
+    labs(x = NULL, y = NULL, title = "Full-scale axis") +
+    coord_flip() -> zero_baseline
+```
 
 ---
 class: middle
@@ -221,19 +443,197 @@ class: middle
 
 ---
 
-.enormous[Your turn]
+```{r plot12, echo=FALSE, out.width="95%", fig.align='center', fig.asp=9/17}
+gasoline_price <- data.frame(
+    date = c("2016-09-20", "2016-10-05", "2016-10-20", "2016-11-04", "2016-11-19",
+             "2016-12-20", "2017-02-18", "2017-03-06", "2017-03-21", "2017-04-05"),
+    price = c(16232, 16404, 16845, 16892, 16374, 17594, 18098, 18018, 17314, 17234),
+    stringsAsFactors = FALSE
+)
+
+gasoline_price$date <- as.Date(gasoline_price$date)
+
+ggplot(gasoline_price, aes(date, price)) +
+    geom_point() +
+    geom_step() +
+    labs(title = "Biểu đồ giá xăng") +
+    scale_x_date(name = NULL,
+                 breaks = gasoline_price$date) +
+    scale_y_continuous(name = NULL,
+                       breaks = seq(16500, 18000, 500),
+                       labels = c("16,500", "17,000", "17,500", "(VND)\n18,000")) +
+    theme_gray(base_size = 6) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
+          panel.grid.minor = element_blank())
+```
+
+
+
+---
+
+# Solution
+
+```{r, eval=FALSE}
+ggplot(gasoline_price, aes(date, price)) +
+    geom_point() +
+    geom_step() +
+    labs(title = "Biểu đồ giá xăng") +
+    scale_x_date(name = NULL,
+                 breaks = gasoline_price$date) +
+    scale_y_continuous(name = NULL,
+                       breaks = seq(16500, 18000, 500),
+                       labels = c("16,500", "17,000", 
+                                  "17,500", "(VND)\n18,000"))
+```
 
 
 ---
 background-image: url(thue-moi-truong.jpg)
 background-size: contain
 
+---
+
+.huge[Lie factor = Size-of-effect-shown-in-graphic / Size-of-effect-in-data]
+
+<img src="lie-factor.png" height="500" width="800" class="center">
+
+---
+class: middle, center
+
+.enormous[Size of effect in graphic = (5.3 - 0.6) / 0.6 = 7.83]
+
+.enormous[Size of effect in data = (27.5 - 18) / 18 = 0.52]
+
+.enormous[Lie factor = 7.83 / 0.52 = 15]
 
 
 
 ---
 
-# Color scales (color & fill)
+```{r plot13, echo=FALSE, out.width="95%", fig.align='center', fig.asp=9/16}
+env_tax <- data.frame(
+    year = 2012:2016,
+    revenue = c(11.2, 11.5, 11.9, 27, 41.9),
+    spending = c(9, 9.7, 9.9, 11.4, 12.3)
+)
+
+env_tax <- env_tax %>%
+    gather(type, amount, -year)
+
+ggplot(env_tax, aes(year, amount, color = type)) +
+    geom_line() +
+    geom_point() +
+    labs(x = NULL, y = NULL,
+         title = "Thu và Chi Thuế Bảo Vệ Môi Trường",
+         subtitle = "Đơn vị: nghìn tỷ đồng",
+         caption = "Nguồn dữ liệu: Vnexpress/Infographics") +
+    scale_color_manual(name = NULL, values = c("#9c954d", "#b067a3")) +
+    theme_gray(base_size = 7)
+```
+
+
+---
+class: middle, center
+
+.enormous[Size of effect in graphic = (10 - 4) / 4 = 1.5]
+
+.enormous[Size of effect in data = (41.9 - 12.3) / 12.3 = 2.4]
+
+.enormous[Lie factor = 1.5 / 2.4 = 0.6]
+
+
+---
+
+# Solution
+
+```{r, eval=FALSE}
+env_tax <- env_tax %>%
+    gather(type, amount, -year)
+
+ggplot(env_tax, aes(year, amount, color = type)) +
+    geom_line() +
+    geom_point() +
+    labs(x = NULL, y = NULL,
+         title = "Thu và Chi Thuế Bảo Vệ Môi Trường",
+         subtitle = "Đơn vị: nghìn tỷ đồng",
+         caption = "Nguồn dữ liệu: Vnexpress/Infographics")
+```
+
+
+
+---
+class: inverse, center, middle
+
+
+.h0[2 - Color Scales]
+
+
+---
+
+# Choosing color is hard
+
+--
+
+.huge[R has:]
+
+--
+
+- .huge[657 named colors (run: `colors()`)]
+
+--
+
+- .huge[7 default color sets (`rainbow()`, `heat.colors()`, `terrain.colors()`,
+`topo.colors()`, `cm.colors()`, `gray.colors()`)]
+
+--
+
+- .huge[and a bunch of color packages (`viridis`, `RColorBrewer`,
+`colorspace`, ...)]
+
+
+---
+
+# When choosing color:
+
+<br>
+
+<br>
+
+<br>
+
+> .center[.h9[Above all, do no harm.]]
+
+> .right[.huge[Edward R. Tufte]]
+
+
+---
+
+# Think carefully what you are using color for
+
+
+.huge[Fundamental use of color in visualization:]
+
+- .huge[to label (color as noun)]
+
+- .huge[to measure (color as quantity)]
+
+- .huge[to represent and imitate reality (color as representation)]
+
+- .huge[to decorate (color as beauty)]
+
+
+---
+background-image: url(remix-rosling.png)
+background-size: contain
+
+???
+
+http://truth-and-beauty.net/projects/remixing-rosling
+
+
+---
+
+# Color scales
 
 ```r
 ## continuous colour scales
@@ -253,27 +653,40 @@ scale_color/fill_grey()
 
 ---
 
-# Color scales (color & fill)
+# Color scales
 
 ```r
-## sequential, diverging and qualitative colour scales
-## from colorbrewer.org
+## color for map from colorbrewer.org
 scale_color/fill_brewer()
 scale_color/fill_distiller()
 
 ## viridis colour scales from viridisLite
 scale_color/fill_viridis_d()
 scale_color/fill_viridis_c()
+
+## pick your own colors
+scale_color/fill_manual()
 ```
 
----
-
-.enormous[Color scales - example 1]
-
 
 ---
 
-.enormous[Color scales - example 2]
+
+
+
+
+---
+background-image: url(gii-color.png)
+background-size: contain
+
+???
+
+https://infographics.vn/chi-so-doi-moi-sang-tao-cua-viet-nam-tiep-tuc-tang/10590.vna
+
+
+---
+background-image: url(pci.png)
+background-size: contain
 
 
 ---
@@ -291,89 +704,21 @@ scale_color/fill_viridis_c()
 .enormous[Color scales - Your turn 2]
 
 
----
-
-# Alpha transparency scales
-
-```r
-scale_alpha_continuous()
-scale_alpha_discrete()
-scale_alpha_ordinal()
-scale_alpha_date()
-scale_alpha_datetime()
-```
-
----
-
-.enormous[Alpha transparency scales - example 1]
-
----
-
-.enormous[Alpha transparency scales - example 2]
-
-
----
-
-.enormous[Alpha transparency scales - Your turn 1]
-
----
-
-.enormous[Alpha transparency scales - Your turn 2]
-
-
----
-
-# Shape scales
-
-```r
-scale_shape_continuous()
-scale_shape_discrete()
-scale_shape_ordinal()
-```
-
-# Size scales
-
-```r
-scale_size_continuous()
-scale_size_discrete()
-scale_size_ordinal()
-scale_size_date()
-scale_size_datetime()
-```
-
----
-
-.enormous[Shape scales - example 1]
-
-
----
-
-.enormous[Size scales - example 1]
-
----
-
-.enormous[Shape scales - Your turn 1]
-
----
-
-.enormous[Shape scales - Your turn 2]
-
----
-
-.enormous[Wrap-up]
-
-
 
 ---
 class: inverse, center, middle
 
 
-.h0[2 - Legends]
-
+.h0[3 - Positions]
 
 ---
-background-image: url(pci.png)
-background-size: contain
+class: inverse, center, middle
+
+
+.h0[4 - Legends]
+
+
+
 
 
 ---
@@ -388,21 +733,6 @@ background-size: contain
 
 
 
-
-
----
-class: inverse, center, middle
-
-
-.h0[3 - Positions]
-
----
-class: inverse, center, middle
-
-
-.h0[4 - Colors]
-
-
 ---
 class: inverse, center, middle
 
@@ -413,9 +743,132 @@ class: inverse, center, middle
 ---
 class: inverse, center, middle
 
-
 .h0[6 - Themes]
 
+---
+
+# Built-in themes
+
+```r
+theme_gray() # default
+theme_bw()
+theme_linedraw()
+theme_light()
+theme_dark()
+theme_minimal()
+theme_classic()
+theme_void()
+theme_test() 
+```
+
+---
+
+.left-code[
+```{r plot60, eval=FALSE}
+p <- ggplot(
+  mpg, aes(displ, hwy)
+) + geom_point()
+
+p + theme_gray()
+```
+
+]
+
+.right-plot[
+```{r plot60-out, ref.label="plot60", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+```{r plot61, eval=FALSE}
+p <- ggplot(
+  mpg, aes(displ, hwy)
+) + geom_point()
+
+p + theme_minimal()
+```
+
+]
+
+.right-plot[
+```{r plot61-out, ref.label="plot61", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+.left-code[
+```{r plot62, eval=FALSE}
+p <- ggplot(
+  mpg, aes(displ, hwy)
+) + geom_point()
+
+p + theme_bw()
+```
+
+]
+
+.right-plot[
+```{r plot62-out, ref.label="plot62", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+
+---
+
+.left-code[
+```{r plot63, eval=FALSE}
+p <- ggplot(
+  mpg, aes(displ, hwy)
+) + geom_point()
+
+p + theme_classic()
+```
+
+]
+
+.right-plot[
+```{r plot63-out, ref.label="plot63", echo=FALSE, out.width="100%", fig.align='right'}
+```
+]
+
+---
+
+# Modify components of a theme
+
+```{r, eval=FALSE}
+theme() # there's a ton of components
+```
+
+```{r, eval=FALSE}
+theme(line, rect, text, title, aspect.ratio, axis.title, axis.title.x,
+  axis.title.x.top, axis.title.x.bottom, axis.title.y, axis.title.y.left,
+  axis.title.y.right, axis.text, axis.text.x, axis.text.x.top,
+  axis.text.x.bottom, axis.text.y, axis.text.y.left, axis.text.y.right,
+  axis.ticks, axis.ticks.x, axis.ticks.x.top, axis.ticks.x.bottom, axis.ticks.y,
+  axis.ticks.y.left, axis.ticks.y.right, axis.ticks.length, axis.line,
+  axis.line.x, axis.line.x.top, axis.line.x.bottom, axis.line.y,
+  axis.line.y.left, axis.line.y.right, legend.background, legend.margin,
+  legend.spacing, legend.spacing.x, legend.spacing.y, legend.key,
+  legend.key.size, legend.key.height, legend.key.width, legend.text,
+  legend.text.align, legend.title, legend.title.align, legend.position,
+  legend.direction, legend.justification, legend.box, legend.box.just,
+  legend.box.margin, legend.box.background, legend.box.spacing,
+  panel.background, panel.border, panel.spacing, panel.spacing.x,
+  panel.spacing.y, panel.grid, panel.grid.major, panel.grid.minor,
+  panel.grid.major.x, panel.grid.major.y, panel.grid.minor.x,
+  panel.grid.minor.y, panel.ontop, plot.background, plot.title, plot.subtitle,
+  plot.caption, plot.tag, plot.tag.position, plot.margin, strip.background,
+  strip.background.x, strip.background.y, strip.placement, strip.text,
+  strip.text.x, strip.text.y, strip.switch.pad.grid, strip.switch.pad.wrap, ...,
+  complete = FALSE, validate = TRUE)
+```
+
+???
+
+https://ggplot2.tidyverse.org/reference/theme.html
 
 ---
 class: inverse, center, middle
