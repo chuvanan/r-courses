@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>.giant[Solving .redfont[7] Visualisation Challenges]</title>
+    <title>.giant[Solving Visualisation Challenges]</title>
     <meta charset="utf-8">
     <meta name="author" content=".superhuge[ An Chu]" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# .giant[Solving .redfont[7] Visualisation Challenges]
+# .giant[Solving Visualisation Challenges]
 ## .giant[with ggplot2]
 ### .superhuge[<br>An Chu]
 ### .superhuge[<br>07/2018]
@@ -25,11 +25,15 @@ class: center, middle, inverse, title-slide
 background-image: url(hex-ggplot2.png)
 background-size: contain
 
+---
+class: middle, center
+
+.superenormous[https://tinyurl.com/data-vis-class]
 
 ---
 class: inverse, center, middle
 
-.h0[1 - Axis Scales &amp; Transformations]
+.h0[Axis Scales &amp; Transformations]
 
 
 ---
@@ -239,7 +243,6 @@ limits = c(10, 40)
 ]
 
 
-
 ---
 
 .left-code[
@@ -288,7 +291,6 @@ trans = "reverse"
 # trans = "log2"
 # trans = "sqrt"
 ```
-
 
 ]
 
@@ -386,6 +388,79 @@ ggplot(health_index,
     coord_flip() -&gt; zero_baseline
 ```
 
+
+
+---
+
+# Zooming the plot
+
+&lt;br&gt;
+
+.enormous[with scales]
+
+&lt;br&gt;
+
+.enormous[with coordinate systems]
+
+
+---
+
+.left-code[
+
+
+```r
+p &lt;- ggplot(
+  mtcars, 
+  aes(disp, wt)) +
+  geom_point() +
+  geom_smooth()
+p
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot9a-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+
+---
+
+.left-code[
+
+# With scales
+
+
+```r
+p + scale_x_continuous(
+  limits = c(325, 500)
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot9b-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+# With coordinates
+
+
+```r
+p + coord_cartesian(
+  xlim = c(325, 500)
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot9c-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+
+
 ---
 class: middle
 
@@ -436,10 +511,9 @@ class: middle, center
 .enormous[Lie factor = 7.83 / 0.52 = 15]
 
 
-
 ---
 
-&lt;img src="visualization_ggplot2_files/figure-html/plot13-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
@@ -459,7 +533,11 @@ class: middle, center
 
 ```r
 env_tax &lt;- env_tax %&gt;%
-    gather(type, amount, -year)
+    gather(type, amount, -year) %&gt;% 
+    mutate(type = case_when(
+          type == "revenue" ~ "Thu",
+          type == "spending" ~ "Chi",
+    ))
 
 ggplot(env_tax, aes(year, amount, color = type)) +
     geom_line() +
@@ -476,7 +554,7 @@ ggplot(env_tax, aes(year, amount, color = type)) +
 class: inverse, center, middle
 
 
-.h0[2 - Color Scales]
+.h0[Color Scales]
 
 
 ---
@@ -534,12 +612,37 @@ class: inverse, center, middle
 
 
 ---
-background-image: url(remix-rosling.png)
+background-image: url(rainfall.png)
 background-size: contain
 
-???
 
-http://truth-and-beauty.net/projects/remixing-rosling
+---
+background-image: url(rta.png)
+background-size: 60%
+
+
+---
+
+.left-code[
+
+```r
+## color mapping
+ggplot(mpg,
+    aes(displ, hwy,
+  color = factor(cyl))
+) + geom_point()
+```
+
+```r
+x ==&gt; disp
+y ==&gt; hwy
+color ==&gt; cyl
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot200a-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 
 ---
@@ -579,11 +682,127 @@ scale_color/fill_viridis_c()
 scale_color/fill_manual()
 ```
 
+---
+background-image: url(iwanthue.png)
+background-size: 70%
+
 
 ---
 
+.left-code[
+
+```r
+ggplot(iris,
+  aes(Sepal.Length,
+      Sepal.Width,
+      color = Species)
+) + geom_point()
+```
+
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot201-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+```r
+ggplot(iris,
+  aes(Sepal.Length,
+      Sepal.Width,
+      color = Species)
+) + geom_point() +
+  scale_color_manual(
+  values = c("#ffb921",
+             "#4e5ae1",
+             "#00b67e")
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot202-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+```r
+ggplot(iris,
+  aes(Sepal.Length,
+      Sepal.Width,
+      color = Species)
+) + geom_point() +
+  scale_color_manual(
+  values = c("#82aeff",
+             "#86bb06",
+             "#b10024")
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot203-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 
+---
+background-image: url(color-brewer.png)
+background-size: 70%
+
+---
+
+.left-code[
+
+```r
+ggplot(iris,
+  aes(Sepal.Length,
+      Sepal.Width,
+      color = Species)
+) + geom_point() +
+  scale_color_manual(
+  values = c("#1b9e77",
+             "#d95f02",
+             "#7570b3")
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot204-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+```r
+ggplot(iris,
+  aes(Sepal.Length,
+      Sepal.Width,
+      color = Species)
+) + geom_point() +
+  scale_color_manual(
+  values = c("#e41a1c",
+             "#377eb8",
+             "#4daf4a")
+  )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot205-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+class: middle, center
+
+
+.h0[Critique by redesign]
 
 
 ---
@@ -596,46 +815,8 @@ https://infographics.vn/chi-so-doi-moi-sang-tao-cua-viet-nam-tiep-tuc-tang/10590
 
 
 ---
-background-image: url(pci.png)
-background-size: contain
 
-
----
-
-.enormous[Color scales - example 3]
-
-
----
-
-.enormous[Color scales - Your turn 1]
-
-
----
-
-.enormous[Color scales - Your turn 2]
-
-
-
----
-class: inverse, center, middle
-
-
-.h0[3 - Positions]
-
----
-class: inverse, center, middle
-
-
-.h0[4 - Legends]
-
-
-
-
-
----
-
-# Your turn
-
+&lt;img src="visualization_ggplot2_files/figure-html/plot207-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -643,20 +824,152 @@ class: inverse, center, middle
 # Solution
 
 
+```r
+gii_index &lt;- readr::read_csv("gii-index.csv")
+gii_index &lt;- gii_index %&gt;%
+    mutate(criteria = forcats::fct_reorder(criteria, score))
+
+ggplot(gii_index, aes(criteria, score,
+                      color = factor(year))) +
+    geom_point(size = 2) +
+    labs(x = NULL, y =NULL,
+         title = "Chỉ số đổi mới sáng tạo toàn cầu",
+         subtitle = "Kết quả 2018 và mục tiêu 2020") +
+    scale_color_manual(name = NULL,
+                       values = c("#b067a3",
+                                 "#9c954d")) +
+    coord_flip()
+```
+
+
+---
+background-image: url(pci.png)
+background-size: contain
+
+
+---
+
+&lt;img src="visualization_ggplot2_files/figure-html/plot208-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+pci &lt;- gather(pci, city, rank, -year) %&gt;%
+    mutate(city = case_when(
+        city == "cantho" ~ "Cần Thơ",
+        city == "danang" ~ "Đà Nẵng",
+        city == "haiphong" ~ "Hải Phòng",
+        city == "hanoi" ~ "Hà Nội",
+        city == "saigon" ~ "Sài Gòn",
+    ))
+
+ggplot(pci, aes(year, rank, color = city)) +
+    geom_point() + geom_line() + 
+    labs(x = NULL, y = NULL,
+         title = "Thứ hạng PCI của 5 thành phố trực thuộc TW",
+         caption = "Nguồn: VCCI") +
+    scale_y_reverse() +
+    scale_color_viridis_d(name = NULL)
+```
+
+
+---
+background-image: url(bad_chart3.png)
+background-size: 50%
+
+???
+
+https://news.zing.vn/gia-nha-chung-cu-ha-noi-giam-manh-25-chi-sau-5-nam-post721075.html
+
+
+---
+
+&lt;img src="visualization_ggplot2_files/figure-html/plot209-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Solution
+
+
+```r
+apart_price &lt;- apart_price %&gt;%
+    mutate(q012016 = q012016 - 100,
+           q042015 = q042015 - 100) %&gt;%
+    mutate(district = forcats::fct_reorder(district, q012016))
+
+apart_price &lt;- apart_price %&gt;%
+    gather(year, rate, -district) %&gt;%
+    mutate(year = case_when(
+        year == "q012016" ~ "Q01/2016",
+        year == "q042015" ~ "Q04/2015",
+    ))
+```
+
+---
+
+# Solution (cont.)
+
+
+```r
+ggplot(apart_price, aes(district, rate)) +
+    geom_point(aes(fill = year, alpha = year), 
+               shape = 21, size = 5, color = "white") +
+    scale_fill_manual(name = NULL, 
+                      values = c("red4", "gray80")) +
+    scale_alpha_manual(values = c(1, 0.8), guide = FALSE) +
+    scale_y_continuous(limits = c(-28, 0),
+                       labels = scales::percent_format(scale = 1)) +
+    labs(x = NULL, y = NULL,
+         title = "Gía nhà chung cư Hà Nội giảm mạnh sau 5 năm",
+         subtitle = "Thời điểm gốc: Quý 1/2011") +
+    theme_minimal()
+```
+
+
+
 
 ---
 class: inverse, center, middle
+exclude: true
 
 
-.h0[5 - Fonts]
+.h0[4 - Legends]
+
+
+
+
+---
+exclude: true
+
+# Your turn
+
+
+
+---
+exclude: true
+
+# Solution
+
+
 
 
 ---
 class: inverse, center, middle
+exclude: true
 
-.h0[6 - Themes]
+.h0[5 - Themes]
+
+
 
 ---
+class: middle, center
+exclude: true
+
+.giant[It's all about .greenfont[details]]
+
+---
+exclude: true
 
 # Built-in themes
 
@@ -673,6 +986,7 @@ theme_test()
 ```
 
 ---
+exclude: true
 
 .left-code[
 
@@ -691,6 +1005,7 @@ p + theme_gray()
 ]
 
 ---
+exclude: true
 
 .left-code[
 
@@ -709,6 +1024,7 @@ p + theme_minimal()
 ]
 
 ---
+exclude: true
 
 .left-code[
 
@@ -728,6 +1044,7 @@ p + theme_bw()
 
 
 ---
+exclude: true
 
 .left-code[
 
@@ -746,6 +1063,7 @@ p + theme_classic()
 ]
 
 ---
+exclude: true
 
 # Modify components of a theme
 
@@ -779,14 +1097,330 @@ theme(line, rect, text, title, aspect.ratio, axis.title, axis.title.x,
   complete = FALSE, validate = TRUE)
 ```
 
+???
 
-
-
+https://ggplot2.tidyverse.org/reference/theme.html
 
 ---
 class: inverse, center, middle
 
-.h0[7 - Layout]
+.h0[Layout]
+
+
+---
+
+
+# Two approaches
+
+
+.enormous[`gridExtra`: flexible]
+
+
+```r
+# install.packages("gridExtra")
+```
+
+.enormous[`patchwork`: simple]
+
+```r
+# install.packages("devtools")
+# devtools::install_github("thomasp85/patchwork")
+```
+
+---
+class: middle, center
+
+.h0[patchwork]
+
+
+---
+
+
+```r
+p1 &lt;- ggplot(mtcars) + 
+  geom_point(aes(mpg, disp))
+p2 &lt;- ggplot(mtcars) + 
+  geom_boxplot(aes(gear, disp, group = gear))
+p3 &lt;- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
+p4 &lt;- ggplot(mtcars) + geom_bar(aes(carb))
+```
+
+---
+exclude: true
+
+.left-code18[
+
+
+
+```r
+p1 + p2
+```
+]
+
+.right-plot80[
+&lt;img src="visualization_ggplot2_files/figure-html/plot80-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+exclude: true
+
+.left-code[
+
+
+
+```r
+p1 + p2 +
+  plot_layout(
+    ncol = 1
+    )
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot81-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+exclude: true
+
+.left-code[
+
+
+
+```r
+p1 + p2 - p3 + 
+  plot_layout(ncol = 1)
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot82-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+exclude: true
+
+.left-code[
+
+
+
+```r
+p1 + p2 + p3 + 
+  plot_layout(ncol = 2)
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot83-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+exclude: true
+
+.left-code[
+
+
+
+```r
+p1 | p2 / p3
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot84-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+
+.left-code[
+
+
+
+```r
+p1 | p2
+```
+]
+
+--
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot85-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+
+
+```r
+p1 / p2
+```
+]
+
+--
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot86-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+
+
+```r
+(p1 | p2) / p3
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot87-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+
+
+```r
+p1 | (p2 / p3)
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot88-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+
+
+```r
+p1 / (p2 | p3) / p4
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot89-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+.left-code[
+
+
+
+```r
+p1 / (p2 | (p3 / p4))
+```
+]
+
+.right-plot[
+&lt;img src="visualization_ggplot2_files/figure-html/plot90-out-1.svg" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+
+---
+background-image: url(topxe.jpg)
+background-size: contain
+
+???
+
+https://vnexpress.net/infographics/oto-xe-may/top-xe-ban-chay-nhat-thang-2-tai-viet-nam-toyota-chiem-lai-3-ngoi-dau-3552446.html
+
+---
+
+&lt;img src="visualization_ggplot2_files/figure-html/unnamed-chunk-12-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Solution
+
+
+```r
+car_sales &lt;- readr::read_csv("top_sales.csv")
+
+car_sales &lt;- car_sales %&gt;%
+    group_by(auto) %&gt;%
+    mutate(total_sales = sum(sales)) %&gt;%
+    ungroup() %&gt;%
+    mutate(auto = forcats::fct_reorder(auto, total_sales))
+```
+
+---
+
+# Solution (cont.)
+
+
+```r
+pall &lt;- ggplot(car_sales, aes(auto, sales, fill = region)) +
+    geom_col(show.legend = FALSE) +
+    labs(x = NULL, y = NULL,
+         title = "10 ôtô bán chạy nhất Việt Nam 02/2017") +
+    scale_fill_manual(values = c("#cb6751",
+                                 "#7aa457",
+                                 "#9e6ebd")) +
+    coord_flip() +
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank())
+pall
+```
+
+---
+
+# Solution (cont.)
+
+
+```r
+south &lt;- ggplot(filter(car_sales, region == "South")) +
+    geom_col(aes(forcats::fct_reorder(auto, sales), sales),
+             fill = "#9e6ebd") +
+    labs(x = NULL, y = NULL, title = "Miền Nam") +
+    coord_flip() +
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank())
+south
+```
+
+---
+
+# Solution (cont.)
+
+
+```r
+central &lt;- ggplot(filter(car_sales, region == "Central")) +
+    geom_col(aes(forcats::fct_reorder(auto, sales), sales),
+             fill = "#cb6751") +
+    labs(x = NULL, y = NULL, title = "Miền Trung") +
+    coord_flip() +
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank())
+central
+```
+
+---
+
+# Solution (cont.)
+
+
+```r
+north &lt;- ggplot(filter(car_sales, region == "North")) +
+    geom_col(aes(forcats::fct_reorder(auto, sales), sales),
+             fill = "#7aa457") +
+    labs(x = NULL, y = NULL, title = "Miền Bắc") +
+    coord_flip() +
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank())
+north
+
+(south | north | central) / pall
+```
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

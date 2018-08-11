@@ -19,11 +19,11 @@ plot8	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous
 plot8-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_continuous
 plot9	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_reverse
 plot9-out	ggplot	mpg	aes	displ	hwy	geom_point	scale_y_reverse
-plot10	cpi	data.frame	c	ggplot	aes	year	geom_line	geom_point	labs	scale_x_continuous	paste0	scale_y_continuous	theme	element_blank
+plot10	cpi	data.frame	c	plot_a1	ggplot	aes	year	geom_line	geom_point	labs	scale_x_continuous	paste0	scale_y_continuous	theme	element_blank
 plot11	health_index	data.frame	c	%>%	mutate	fct_reorder	country	score	ggplot	aes	geom_col	labs	theme_gray	coord_flip	none_zero_baseline	scale_y_continuous	zero_baseline
-plot12	gasoline_price	data.frame	c	date	as.Date	ggplot	aes	price	geom_point	geom_step	labs	scale_x_date	scale_y_continuous	seq	theme_gray	theme	element_text	element_blank
-plot13	env_tax	data.frame	c	%>%	gather	type	amount	year	ggplot	aes	geom_line	geom_point	labs	scale_color_manual	theme_gray
-unnamed-chunk-4	env_tax	%>%	gather	type	amount	year	ggplot	aes	geom_line	geom_point	labs
+plot12	gasoline_price	data.frame	c	date	as.Date	plot_a2	ggplot	aes	price	geom_point	geom_step	labs	scale_x_date	scale_y_continuous	seq	theme_gray	theme	element_text	element_blank
+plot13	env_tax	data.frame	c	%>%	gather	type	amount	year	mutate	case_when	plot_a3	ggplot	aes	geom_line	geom_point	rel	labs	scale_color_manual	theme_gray
+unnamed-chunk-4	env_tax	%>%	gather	type	amount	year	mutate	case_when	ggplot	aes	geom_line	geom_point	labs
 plot60	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_gray
 plot60-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_gray
 plot61	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_minimal
@@ -32,5 +32,73 @@ plot62	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_bw
 plot62-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_bw
 plot63	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_classic
 plot63-out	p	ggplot	mpg	aes	displ	hwy	geom_point	theme_classic
-unnamed-chunk-5	theme
-unnamed-chunk-6	theme	line	rect	text	title	aspect.ratio	axis.title	axis.title.x	axis.title.x.top	axis.title.x.bottom	axis.title.y	axis.title.y.left	axis.title.y.right	axis.text	axis.text.x	axis.text.x.top	axis.text.x.bottom	axis.text.y	axis.text.y.left	axis.text.y.right	axis.ticks	axis.ticks.x	axis.ticks.x.top	axis.ticks.x.bottom	axis.ticks.y	axis.ticks.y.left	axis.ticks.y.right	axis.ticks.length	axis.line	axis.line.x	axis.line.x.top	axis.line.x.bottom	axis.line.y	axis.line.y.left	axis.line.y.right	legend.background	legend.margin	legend.spacing	legend.spacing.x	legend.spacing.y	legend.key	legend.key.size	legend.key.height	legend.key.width	legend.text	legend.text.align	legend.title	legend.title.align	legend.position	legend.direction	legend.justification	legend.box	legend.box.just	legend.box.margin	legend.box.background	legend.box.spacing	panel.background	panel.border	panel.spacing	panel.spacing.x	panel.spacing.y	panel.grid	panel.grid.major	panel.grid.minor	panel.grid.major.x	panel.grid.major.y	panel.grid.minor.x	panel.grid.minor.y	panel.ontop	plot.background	plot.title	plot.subtitle	plot.caption	plot.tag	plot.tag.position	plot.margin	strip.background	strip.background.x	strip.background.y	strip.placement	strip.text	strip.text.x	strip.text.y	strip.switch.pad.grid	strip.switch.pad.wrap	...
+unnamed-chunk-5	gii_index	read_csv	%>%	mutate	fct_reorder	criteria	score	ggplot	aes	factor	year	geom_point	labs	scale_color_manual	c	coord_flip
+unnamed-chunk-6	pci	gather	city	rank	year	%>%	mutate	case_when	ggplot	aes	geom_point	geom_line	labs	scale_y_reverse	scale_color_viridis_d
+plot201	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point
+plot201-out	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point
+plot202	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot202-out	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot203	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot203-out	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot204	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot204-out	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot205	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot205-out	ggplot	iris	aes	Sepal.Length	Sepal.Width	Species	geom_point	scale_color_manual	c
+plot206	gii_index	read_csv	%>%	mutate	fct_reorder	criteria	score	ggplot	aes	factor	year	geom_point	labs	scale_color_manual	c	coord_flip	theme_gray
+plot207	gii_index	read_csv	%>%	mutate	fct_reorder	criteria	score	plot_a4	ggplot	aes	factor	year	geom_point	rel	labs	scale_color_manual	c	coord_flip	theme_gray
+unnamed-chunk-7	apart_price	%>%	mutate	q012016	q042015	fct_reorder	district	gather	year	rate	case_when
+plot208	pci	data.frame	c	%>%	gather	city	rank	year	mutate	case_when	plot_a5	ggplot	aes	geom_point	rel	geom_line	labs	scale_y_reverse	scale_color_viridis_d	theme_gray
+unnamed-chunk-8	ggplot	apart_price	aes	district	rate	geom_point	year	scale_fill_manual	c	scale_alpha_manual	scale_y_continuous	percent_format	labs	theme_minimal
+plot209	apart_price	data.frame	c	%>%	mutate	q012016	q042015	fct_reorder	district	gather	year	rate	case_when	plot_a6	ggplot	aes	geom_point	rel	scale_fill_manual	scale_alpha_manual	scale_y_continuous	percent_format	labs	theme_minimal	theme	element_blank
+unnamed-chunk-9	theme
+unnamed-chunk-10	theme	line	rect	text	title	aspect.ratio	axis.title	axis.title.x	axis.title.x.top	axis.title.x.bottom	axis.title.y	axis.title.y.left	axis.title.y.right	axis.text	axis.text.x	axis.text.x.top	axis.text.x.bottom	axis.text.y	axis.text.y.left	axis.text.y.right	axis.ticks	axis.ticks.x	axis.ticks.x.top	axis.ticks.x.bottom	axis.ticks.y	axis.ticks.y.left	axis.ticks.y.right	axis.ticks.length	axis.line	axis.line.x	axis.line.x.top	axis.line.x.bottom	axis.line.y	axis.line.y.left	axis.line.y.right	legend.background	legend.margin	legend.spacing	legend.spacing.x	legend.spacing.y	legend.key	legend.key.size	legend.key.height	legend.key.width	legend.text	legend.text.align	legend.title	legend.title.align	legend.position	legend.direction	legend.justification	legend.box	legend.box.just	legend.box.margin	legend.box.background	legend.box.spacing	panel.background	panel.border	panel.spacing	panel.spacing.x	panel.spacing.y	panel.grid	panel.grid.major	panel.grid.minor	panel.grid.major.x	panel.grid.major.y	panel.grid.minor.x	panel.grid.minor.y	panel.ontop	plot.background	plot.title	plot.subtitle	plot.caption	plot.tag	plot.tag.position	plot.margin	strip.background	strip.background.x	strip.background.y	strip.placement	strip.text	strip.text.x	strip.text.y	strip.switch.pad.grid	strip.switch.pad.wrap	...
+plot200a	ggplot	mpg	aes	displ	hwy	factor	cyl	geom_point
+plot200a-out	ggplot	mpg	aes	displ	hwy	factor	cyl	geom_point
+plot9a	p	ggplot	mtcars	aes	disp	wt	geom_point	geom_smooth
+plot9a-out	p	ggplot	mtcars	aes	disp	wt	geom_point	geom_smooth
+plot9b	p	scale_x_continuous	c
+plot9b-out	p	scale_x_continuous	c
+plot9c	p	coord_cartesian	c
+plot9c-out	p	coord_cartesian	c
+unnamed-chunk-11	p1	ggplot	mtcars	geom_point	aes	mpg	disp	p2	geom_boxplot	gear	p3	geom_smooth	qsec	p4	geom_bar	carb
+plot80	p1	p2	theme_gray
+plot80-out	p1	p2	theme_gray
+plot80t	p1	p2
+plot81	p1	p2	plot_layout	theme_gray
+plot81t	p1	p2	plot_layout
+plot81-out	p1	p2	plot_layout	theme_gray
+plot82	p1	p2	p3	plot_layout	theme_gray
+plot82t	p1	p2	p3	plot_layout
+plot82-out	p1	p2	p3	plot_layout	theme_gray
+plot83	p1	p2	p3	plot_layout	theme_gray
+plot83t	p1	p2	p3	plot_layout
+plot83-out	p1	p2	p3	plot_layout	theme_gray
+plot84	p1	p2	p3	theme_gray
+plot84t	p1	p2	p3
+plot84-out	p1	p2	p3	theme_gray
+plot85	p1	p2	theme_gray
+plot85t	p1	p2
+plot85-out	p1	p2	theme_gray
+plot86	p1	p2	theme_gray
+plot86t	p1	p2
+plot86-out	p1	p2	theme_gray
+plot87	p1	p2	p3	theme_gray
+plot87t	p1	p2	p3
+plot87-out	p1	p2	p3	theme_gray
+plot88	p1	p2	p3	theme_gray
+plot88t	p1	p2	p3
+plot88-out	p1	p2	p3	theme_gray
+plot89	p1	p2	p3	p4	theme_gray
+plot89t	p1	p2	p3	p4
+plot89-out	p1	p2	p3	p4	theme_gray
+plot90	p1	p2	p3	p4	theme_gray
+plot90t	p1	p2	p3	p4
+plot90-out	p1	p2	p3	p4	theme_gray
+plot91	lay	rbind	grid.arrange	list	p1	p2
+plot91-out	lay	cbind	grid.arrange	list	p1	p2
+unnamed-chunk-12	car_sales	read_csv	%>%	group_by	auto	mutate	sum	sales	ungroup	fct_reorder	total_sales	pall	ggplot	aes	region	geom_col	labs	scale_fill_manual	c	coord_flip	theme_minimal	theme	element_blank	south	filter	central	north
+unnamed-chunk-13	car_sales	read_csv	%>%	group_by	auto	mutate	sum	sales	ungroup	fct_reorder	total_sales
+unnamed-chunk-14	pall	ggplot	car_sales	aes	auto	sales	region	geom_col	labs	scale_fill_manual	c	coord_flip	theme_minimal	theme	element_blank
+unnamed-chunk-15	south	ggplot	filter	car_sales	region	geom_col	aes	fct_reorder	auto	sales	labs	coord_flip	theme_minimal	theme	element_blank
+unnamed-chunk-16	central	ggplot	filter	car_sales	region	geom_col	aes	fct_reorder	auto	sales	labs	coord_flip	theme_minimal	theme	element_blank
+unnamed-chunk-17	north	ggplot	filter	car_sales	region	geom_col	aes	fct_reorder	auto	sales	labs	coord_flip	theme_minimal	theme	element_blank	south	central	pall

@@ -20,10 +20,10 @@ plot8
 plot8-out	
 plot9	
 plot9-out	
-plot10	cpi
+plot10	cpi	plot_a1
 plot11	health_index	none_zero_baseline	zero_baseline
-plot12	gasoline_price
-plot13	env_tax
+plot12	gasoline_price	plot_a2
+plot13	env_tax	plot_a3
 plot60	
 plot60-out	p
 plot61	
@@ -34,3 +34,71 @@ plot63
 plot63-out	p
 unnamed-chunk-5	
 unnamed-chunk-6	
+plot201	
+plot201-out	
+plot202	
+plot202-out	
+plot203	
+plot203-out	
+plot204	
+plot204-out	
+plot205	
+plot205-out	
+plot206	gii_index
+plot207	gii_index	plot_a4
+unnamed-chunk-7	
+plot208	pci	plot_a5
+unnamed-chunk-8	
+plot209	apart_price	plot_a6
+unnamed-chunk-9	
+unnamed-chunk-10	
+plot200a	
+plot200a-out	
+plot9a	
+plot9a-out	p
+plot9b	
+plot9b-out	
+plot9c	
+plot9c-out	
+unnamed-chunk-11	p1	p2	p3	p4
+plot80	
+plot80-out	
+plot80t	
+plot81	
+plot81t	
+plot81-out	
+plot82	
+plot82t	
+plot82-out	
+plot83	
+plot83t	
+plot83-out	
+plot84	
+plot84t	
+plot84-out	
+plot85	
+plot85t	
+plot85-out	
+plot86	
+plot86t	
+plot86-out	
+plot87	
+plot87t	
+plot87-out	
+plot88	
+plot88t	
+plot88-out	
+plot89	
+plot89t	
+plot89-out	
+plot90	
+plot90t	
+plot90-out	
+plot91	
+plot91-out	lay
+unnamed-chunk-12	car_sales	central	north	pall	south
+unnamed-chunk-13	
+unnamed-chunk-14	
+unnamed-chunk-15	
+unnamed-chunk-16	
+unnamed-chunk-17	
