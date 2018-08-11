@@ -24,6 +24,3 @@ available in R to perform commonly used data analyses.
 
 
 ## Further Reading
-
-
-

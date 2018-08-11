@@ -23,6 +23,8 @@ navbar:
           href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
           href: ./data_types/data_types.html
+        - text: "Customizing ggplot2"
+          href: ./visualization_ggplot2/visualization_ggplot2.html
 
 output:
   html_document:
