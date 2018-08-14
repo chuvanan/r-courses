@@ -140,7 +140,7 @@ ggplot(mpg,
 ) + geom_point() +
   scale_x_continuous(
     name = "Engine displacement (L)"
-  ) + 
+  ) +
   scale_y_continuous(
     name = "Highway MPG"
   )
@@ -161,7 +161,7 @@ ggplot(mpg,
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 labs(
 x = "Engine displacement (L)",
@@ -185,7 +185,7 @@ y = "Highway MPG"
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 scale_x_continuous(
 breaks = seq(2, 7, 0.5)
@@ -207,7 +207,7 @@ breaks = seq(2, 7, 0.5)
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 scale_x_continuous(
 breaks = seq(2, 7, 2),
@@ -230,7 +230,7 @@ labels = c("two", "four", "six")
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 scale_y_continuous(
 limits = c(10, 40)
@@ -253,7 +253,7 @@ limits = c(10, 40)
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 ylim(10, 40)
 ```
@@ -278,7 +278,7 @@ ylim(10, 40)
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 scale_y_continuous(
 trans = "reverse"
@@ -308,7 +308,7 @@ trans = "reverse"
 ```r
 ggplot(mpg,
     aes(displ, hwy)
-) + 
+) +
 geom_point() +
 scale_y_reverse()
 ```
@@ -353,7 +353,7 @@ ggplot(cpi, aes(year, cpi)) +
     labs(title = "CPI quý I/2017 tăng cao nhất trong 3 năm qua") +
     scale_x_continuous(name = NULL,
                        breaks = 2010:2017,
-                       labels = c("Q1/2010", 
+                       labels = c("Q1/2010",
                                   paste0("'", 11:17))) +
     scale_y_continuous(name = NULL,
                        breaks = cpi$cpi,
@@ -410,7 +410,7 @@ ggplot(health_index,
 
 ```r
 p &lt;- ggplot(
-  mtcars, 
+  mtcars,
   aes(disp, wt)) +
   geom_point() +
   geom_smooth()
@@ -486,7 +486,7 @@ ggplot(gasoline_price, aes(date, price)) +
                  breaks = gasoline_price$date) +
     scale_y_continuous(name = NULL,
                        breaks = seq(16500, 18000, 500),
-                       labels = c("16,500", "17,000", 
+                       labels = c("16,500", "17,000",
                                   "17,500", "(VND)\n18,000"))
 ```
 
@@ -513,7 +513,7 @@ class: middle, center
 
 ---
 
-
+&lt;img src="visualization_ggplot2_files/figure-html/plot13-1.svg" width="95%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -533,7 +533,7 @@ class: middle, center
 
 ```r
 env_tax &lt;- env_tax %&gt;%
-    gather(type, amount, -year) %&gt;% 
+    gather(type, amount, -year) %&gt;%
     mutate(type = case_when(
           type == "revenue" ~ "Thu",
           type == "spending" ~ "Chi",
@@ -865,7 +865,7 @@ pci &lt;- gather(pci, city, rank, -year) %&gt;%
     ))
 
 ggplot(pci, aes(year, rank, color = city)) +
-    geom_point() + geom_line() + 
+    geom_point() + geom_line() +
     labs(x = NULL, y = NULL,
          title = "Thứ hạng PCI của 5 thành phố trực thuộc TW",
          caption = "Nguồn: VCCI") +
@@ -913,9 +913,9 @@ apart_price &lt;- apart_price %&gt;%
 
 ```r
 ggplot(apart_price, aes(district, rate)) +
-    geom_point(aes(fill = year, alpha = year), 
+    geom_point(aes(fill = year, alpha = year),
                shape = 21, size = 5, color = "white") +
-    scale_fill_manual(name = NULL, 
+    scale_fill_manual(name = NULL,
                       values = c("red4", "gray80")) +
     scale_alpha_manual(values = c(1, 0.8), guide = FALSE) +
     scale_y_continuous(limits = c(-28, 0),
@@ -982,7 +982,7 @@ theme_dark()
 theme_minimal()
 theme_classic()
 theme_void()
-theme_test() 
+theme_test()
 ```
 
 ---
@@ -1137,9 +1137,9 @@ class: middle, center
 
 
 ```r
-p1 &lt;- ggplot(mtcars) + 
+p1 &lt;- ggplot(mtcars) +
   geom_point(aes(mpg, disp))
-p2 &lt;- ggplot(mtcars) + 
+p2 &lt;- ggplot(mtcars) +
   geom_boxplot(aes(gear, disp, group = gear))
 p3 &lt;- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
 p4 &lt;- ggplot(mtcars) + geom_bar(aes(carb))
@@ -1188,7 +1188,7 @@ exclude: true
 
 
 ```r
-p1 + p2 - p3 + 
+p1 + p2 - p3 +
   plot_layout(ncol = 1)
 ```
 ]
@@ -1205,7 +1205,7 @@ exclude: true
 
 
 ```r
-p1 + p2 + p3 + 
+p1 + p2 + p3 +
   plot_layout(ncol = 2)
 ```
 ]
