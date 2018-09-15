@@ -10,21 +10,13 @@ navbar:
     - text: "Curriculum"
       menu:
         - text: "Foundations"
-          href: ./foundations/foundations.html
         - text: "Data Import"
-          href: ./data_import/data_import.html
         - text: "Getting Started with R Markdown"
-          href: ./rmarkdown_intro/rmarkdown_intro.html
         - text: "Data Manipulation with dplyr"
-          href: ./data_manipulation/data_manipulation.html
         - text: "Data Tidying with tidyr"
-          href: ./data_tidying/data_tidying.html
         - text: "Data Visualisation with ggplot2"
-          href: ./data_visualisation/data_visualisation.html
         - text: "Data Structures"
-          href: ./data_types/data_types.html
         - text: "Customizing ggplot2"
-          href: ./visualization_ggplot2/visualization_ggplot2.html
 
 output:
   html_document:
